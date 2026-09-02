@@ -14,193 +14,199 @@ export default function LoginPage() {
 
   return (
     <main className="min-h-screen flex flex-col lg:flex-row bg-[#f4f6fa] text-[#0a192f]">
-      {/* LEFT COLUMN: HERO & TRUST SECTION */}
-      <section className="lg:w-[52%] xl:w-[50%] bg-white flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-100">
-        <div className="p-6 sm:p-10 lg:p-12 xl:p-14 flex flex-col flex-1">
-          {/* Brand Header */}
-          <div className="flex items-center gap-3">
-            <div className="relative w-8 h-8 sm:w-9 sm:h-9">
-              <Image
-                src="/logo.png"
-                alt="HOMIQ Logo"
-                fill
-                sizes="36px"
-                className="object-contain"
-                priority
-              />
-            </div>
-            <span className="text-2xl sm:text-[26px] font-black tracking-wider text-[#0a192f]">
-              HOMIQ
-            </span>
+      {/* LEFT COLUMN: HERO HOUSE ENVIRONMENT & TRUST OVERLAY */}
+      <section className="relative lg:w-[50%] xl:w-[50%] flex flex-col justify-between bg-[#0b1a30] overflow-hidden">
+        {/* Top Region with House Background */}
+        <div className="relative w-full flex-1 flex flex-col justify-between min-h-[460px] sm:min-h-[520px] lg:min-h-[580px]">
+          {/* Full House Image covering top region down to the card overlap */}
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/images/login-page/left-side-house-environment.png"
+              alt="Modern Architecture Real Estate"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover object-top"
+              priority
+            />
+            {/* Soft gradient at top for clean text legibility */}
+            <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-white/70 via-white/20 to-transparent pointer-events-none" />
           </div>
 
-          {/* Headline & Subtitle */}
-          <div className="mt-8 sm:mt-10">
-            <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#0a192f] tracking-tight leading-[1.15]">
-              Smarter Real Estate
-              <br />
-              Management
-            </h1>
-            <p className="mt-3.5 text-slate-500 text-sm sm:text-base font-normal max-w-lg leading-relaxed">
-              HOMIQ helps you buy, sell, and manage properties with confidence.
-            </p>
-          </div>
-
-          {/* Hero Visual & Floating Feature Card Container */}
-          <div className="mt-8 sm:mt-10 relative flex-1 flex flex-col justify-end">
-            {/* House Environment Image */}
-            <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] rounded-2xl overflow-hidden shadow-sm">
-              <Image
-                src="/images/login-page/left-side-house-environment.png"
-                alt="Modern Architecture Real Estate"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-                priority
-              />
-            </div>
-
-            {/* Floating 4-Feature Pillars Card */}
-            <div className="mt-4 sm:-mt-14 relative z-10 mx-auto w-full bg-white/95 backdrop-blur-md rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100 p-4 sm:p-5">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 divide-y md:divide-y-0 md:divide-x divide-slate-100">
-                {/* Feature 1 */}
-                <div className="flex flex-col items-center text-center p-2 pt-0 md:pt-2">
-                  <div className="relative w-9 h-9 sm:w-10 sm:h-10 mb-2">
-                    <Image
-                      src="/icons/login-page/bank-level-secuirty-icon.png"
-                      alt="Bank-level Security"
-                      fill
-                      sizes="40px"
-                      className="object-contain"
-                    />
-                  </div>
-                  <h4 className="text-xs sm:text-[13px] font-bold text-[#0a192f] leading-snug">
-                    Bank-level Security
-                  </h4>
-                  <p className="text-[11px] text-slate-500 leading-tight mt-1">
-                    Your data is encrypted and protected.
-                  </p>
-                </div>
-
-                {/* Feature 2 */}
-                <div className="flex flex-col items-center text-center p-2 pt-0 md:pt-2">
-                  <div className="relative w-9 h-9 sm:w-10 sm:h-10 mb-2">
-                    <Image
-                      src="/icons/login-page/trusted-by-icon.png"
-                      alt="Trusted by Professionals"
-                      fill
-                      sizes="40px"
-                      className="object-contain"
-                    />
-                  </div>
-                  <h4 className="text-xs sm:text-[13px] font-bold text-[#0a192f] leading-snug">
-                    Trusted by Professionals
-                  </h4>
-                  <p className="text-[11px] text-slate-500 leading-tight mt-1">
-                    Join 18,000+ agents and managers.
-                  </p>
-                </div>
-
-                {/* Feature 3 */}
-                <div className="flex flex-col items-center text-center p-2 pt-3 md:pt-2">
-                  <div className="relative w-9 h-9 sm:w-10 sm:h-10 mb-2">
-                    <Image
-                      src="/icons/login-page/uptime-icon.png"
-                      alt="99.9% Uptime Guarantee"
-                      fill
-                      sizes="40px"
-                      className="object-contain"
-                    />
-                  </div>
-                  <h4 className="text-xs sm:text-[13px] font-bold text-[#0a192f] leading-snug">
-                    99.9% Uptime Guarantee
-                  </h4>
-                  <p className="text-[11px] text-slate-500 leading-tight mt-1">
-                    Reliable platform when you need it.
-                  </p>
-                </div>
-
-                {/* Feature 4 */}
-                <div className="flex flex-col items-center text-center p-2 pt-3 md:pt-2">
-                  <div className="relative w-9 h-9 sm:w-10 sm:h-10 mb-2">
-                    <Image
-                      src="/icons/login-page/supoort-icon.png"
-                      alt="24/7 Expert Support"
-                      fill
-                      sizes="40px"
-                      className="object-contain"
-                    />
-                  </div>
-                  <h4 className="text-xs sm:text-[13px] font-bold text-[#0a192f] leading-snug">
-                    24/7 Expert Support
-                  </h4>
-                  <p className="text-[11px] text-slate-500 leading-tight mt-1">
-                    Real humans, real solutions.
-                  </p>
-                </div>
+          {/* Top Brand Logo & Headings */}
+          <div className="relative z-10 p-6 sm:p-10 lg:p-12 xl:p-14">
+            {/* Brand Header */}
+            <div className="flex items-center gap-3">
+              <div className="relative w-8 h-8 sm:w-9 sm:h-9">
+                <Image
+                  src="/logo.png"
+                  alt="HOMIQ Logo"
+                  fill
+                  sizes="36px"
+                  className="object-contain"
+                  priority
+                />
               </div>
+              <span className="text-2xl sm:text-[26px] font-black tracking-wider text-[#0a192f]">
+                HOMIQ
+              </span>
+            </div>
+
+            {/* Headline & Subtitle */}
+            <div className="mt-8 sm:mt-10">
+              <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#0a192f] tracking-tight leading-[1.15]">
+                Smarter Real Estate
+                <br />
+                Management
+              </h1>
+              <p className="mt-3.5 text-slate-700 font-medium text-sm sm:text-base max-w-md leading-relaxed">
+                HOMIQ helps you buy, sell, and manage properties with confidence.
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Left Dark Trust & Compliance Bottom Bar */}
-        <div className="bg-[#0b1a30] text-white px-6 sm:px-10 lg:px-12 py-4 flex flex-col sm:flex-row items-center justify-between gap-4 mt-6">
-          {/* Privacy Note */}
-          <div className="flex items-center gap-3">
-            <div className="relative w-5 h-5 flex-shrink-0">
-              <Image
-                src="/icons/login-page/privacy-icon.png"
-                alt="Privacy Security Lock"
-                fill
-                sizes="20px"
-                className="object-contain"
-              />
-            </div>
-            <div>
-              <p className="text-xs font-semibold text-white leading-tight">
-                Your privacy is our priority.
-              </p>
-              <p className="text-[11px] text-slate-400 leading-tight mt-0.5">
-                We never share your personal information.
-              </p>
+        {/* Bottom Dark Navy Section with Overlapping Floating Card & Compliance Badges */}
+        <div className="relative z-10 bg-[#0b1a30] px-5 sm:px-8 lg:px-10 xl:px-12 pb-6 pt-0">
+          {/* Floating 4-Feature Pillars Card (Overlapping half on house image and half on dark navy background) */}
+          <div className="-mt-16 sm:-mt-20 lg:-mt-24 mb-6 bg-white rounded-3xl shadow-2xl shadow-black/25 border border-slate-100 p-5 sm:p-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+              {/* Feature 1 */}
+              <div className="flex flex-col items-center text-center p-2 pt-0 md:pt-2">
+                <div className="relative w-9 h-9 sm:w-10 sm:h-10 mb-2">
+                  <Image
+                    src="/icons/login-page/bank-level-secuirty-icon.png"
+                    alt="Bank-level Security"
+                    fill
+                    sizes="40px"
+                    className="object-contain"
+                  />
+                </div>
+                <h4 className="text-xs sm:text-[13px] font-bold text-[#0a192f] leading-snug">
+                  Bank-level Security
+                </h4>
+                <p className="text-[11px] text-slate-500 leading-tight mt-1">
+                  Your data is encrypted and protected.
+                </p>
+              </div>
+
+              {/* Feature 2 */}
+              <div className="flex flex-col items-center text-center p-2 pt-0 md:pt-2">
+                <div className="relative w-9 h-9 sm:w-10 sm:h-10 mb-2">
+                  <Image
+                    src="/icons/login-page/trusted-by-icon.png"
+                    alt="Trusted by Professionals"
+                    fill
+                    sizes="40px"
+                    className="object-contain"
+                  />
+                </div>
+                <h4 className="text-xs sm:text-[13px] font-bold text-[#0a192f] leading-snug">
+                  Trusted by Professionals
+                </h4>
+                <p className="text-[11px] text-slate-500 leading-tight mt-1">
+                  Join 18,000+ agents and managers.
+                </p>
+              </div>
+
+              {/* Feature 3 */}
+              <div className="flex flex-col items-center text-center p-2 pt-3 md:pt-2">
+                <div className="relative w-9 h-9 sm:w-10 sm:h-10 mb-2">
+                  <Image
+                    src="/icons/login-page/uptime-icon.png"
+                    alt="99.9% Uptime Guarantee"
+                    fill
+                    sizes="40px"
+                    className="object-contain"
+                  />
+                </div>
+                <h4 className="text-xs sm:text-[13px] font-bold text-[#0a192f] leading-snug">
+                  99.9% Uptime Guarantee
+                </h4>
+                <p className="text-[11px] text-slate-500 leading-tight mt-1">
+                  Reliable platform when you need it.
+                </p>
+              </div>
+
+              {/* Feature 4 */}
+              <div className="flex flex-col items-center text-center p-2 pt-3 md:pt-2">
+                <div className="relative w-9 h-9 sm:w-10 sm:h-10 mb-2">
+                  <Image
+                    src="/icons/login-page/supoort-icon.png"
+                    alt="24/7 Expert Support"
+                    fill
+                    sizes="40px"
+                    className="object-contain"
+                  />
+                </div>
+                <h4 className="text-xs sm:text-[13px] font-bold text-[#0a192f] leading-snug">
+                  24/7 Expert Support
+                </h4>
+                <p className="text-[11px] text-slate-500 leading-tight mt-1">
+                  Real humans, real solutions.
+                </p>
+              </div>
             </div>
           </div>
 
-          {/* Compliance Badges */}
-          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-            <div className="relative w-10 h-10">
-              <Image
-                src="/icons/login-page/soc2-icon.png"
-                alt="SOC 2 COMPLIANT"
-                fill
-                sizes="40px"
-                className="object-contain"
-              />
+          {/* Left Dark Trust & Compliance Bottom Bar */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-1">
+            {/* Privacy Note */}
+            <div className="flex items-center gap-3">
+              <div className="relative w-6 h-6 flex-shrink-0">
+                <Image
+                  src="/icons/login-page/privacy-icon.png"
+                  alt="Privacy Security Lock"
+                  fill
+                  sizes="24px"
+                  className="object-contain"
+                />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-white leading-tight">
+                  Your privacy is our priority.
+                </p>
+                <p className="text-[11px] text-slate-400 leading-tight mt-0.5">
+                  We never share your personal information.
+                </p>
+              </div>
             </div>
-            <div className="relative w-10 h-10">
-              <Image
-                src="/icons/login-page/gdpr-icon.png"
-                alt="GDPR COMPLIANT"
-                fill
-                sizes="40px"
-                className="object-contain"
-              />
-            </div>
-            <div className="relative w-10 h-10">
-              <Image
-                src="/icons/login-page/ccpa-icon.png"
-                alt="CCPA READY"
-                fill
-                sizes="40px"
-                className="object-contain"
-              />
+
+            {/* Compliance Badges */}
+            <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+              <div className="relative w-10 h-10">
+                <Image
+                  src="/icons/login-page/soc2-icon.png"
+                  alt="SOC 2 COMPLIANT"
+                  fill
+                  sizes="40px"
+                  className="object-contain"
+                />
+              </div>
+              <div className="relative w-10 h-10">
+                <Image
+                  src="/icons/login-page/gdpr-icon.png"
+                  alt="GDPR COMPLIANT"
+                  fill
+                  sizes="40px"
+                  className="object-contain"
+                />
+              </div>
+              <div className="relative w-10 h-10">
+                <Image
+                  src="/icons/login-page/ccpa-icon.png"
+                  alt="CCPA READY"
+                  fill
+                  sizes="40px"
+                  className="object-contain"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* RIGHT COLUMN: LOGIN FORM SECTION */}
-      <section className="lg:w-[48%] xl:w-[50%] flex flex-col items-center justify-center p-6 sm:p-10 lg:p-12 xl:p-16">
+      <section className="lg:w-[50%] xl:w-[50%] flex flex-col items-center justify-center p-6 sm:p-10 lg:p-12 xl:p-16">
         <div className="w-full max-w-[500px]">
           {/* Main White Login Card */}
           <div className="bg-white rounded-3xl shadow-sm border border-slate-100 p-7 sm:p-10">
@@ -225,7 +231,7 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setSelectedRole("buyer")}
-                  className={`flex flex-col items-center text-center p-3 sm:p-4 rounded-xl border transition-all duration-150 cursor-pointer ${
+                  className={`flex flex-col items-center text-center p-3 sm:p-4 rounded-lg border transition-all duration-150 cursor-pointer ${
                     selectedRole === "buyer"
                       ? "border-[#d99738] bg-[#fffcf7] ring-1 ring-[#d99738]"
                       : "border-slate-200 bg-white hover:border-slate-300"
@@ -252,7 +258,7 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setSelectedRole("agent")}
-                  className={`flex flex-col items-center text-center p-3 sm:p-4 rounded-xl border transition-all duration-150 cursor-pointer ${
+                  className={`flex flex-col items-center text-center p-3 sm:p-4 rounded-lg border transition-all duration-150 cursor-pointer ${
                     selectedRole === "agent"
                       ? "border-[#d99738] bg-[#fffcf7] ring-1 ring-[#d99738]"
                       : "border-slate-200 bg-white hover:border-slate-300"
@@ -279,7 +285,7 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setSelectedRole("manager")}
-                  className={`flex flex-col items-center text-center p-3 sm:p-4 rounded-xl border transition-all duration-150 cursor-pointer ${
+                  className={`flex flex-col items-center text-center p-3 sm:p-4 rounded-lg border transition-all duration-150 cursor-pointer ${
                     selectedRole === "manager"
                       ? "border-[#d99738] bg-[#fffcf7] ring-1 ring-[#d99738]"
                       : "border-slate-200 bg-white hover:border-slate-300"
@@ -311,7 +317,7 @@ export default function LoginPage() {
                 <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                   Email address
                 </label>
-                <div className="relative flex items-center border border-slate-200 rounded-xl px-3.5 py-2.5 bg-white focus-within:border-[#0a192f] focus-within:ring-1 focus-within:ring-[#0a192f] transition">
+                <div className="relative flex items-center border border-slate-200 rounded-lg px-3.5 py-2.5 bg-white focus-within:border-[#0a192f] focus-within:ring-1 focus-within:ring-[#0a192f] transition">
                   <div className="relative w-4 h-4 flex-shrink-0 mr-2.5">
                     <Image
                       src="/icons/login-page/email-icon.png"
@@ -336,7 +342,7 @@ export default function LoginPage() {
                 <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                   Password
                 </label>
-                <div className="relative flex items-center border border-slate-200 rounded-xl px-3.5 py-2.5 bg-white focus-within:border-[#0a192f] focus-within:ring-1 focus-within:ring-[#0a192f] transition">
+                <div className="relative flex items-center border border-slate-200 rounded-lg px-3.5 py-2.5 bg-white focus-within:border-[#0a192f] focus-within:ring-1 focus-within:ring-[#0a192f] transition">
                   <div className="relative w-4 h-4 flex-shrink-0 mr-2.5">
                     <Image
                       src="/icons/login-page/password-icon.png"
@@ -402,7 +408,7 @@ export default function LoginPage() {
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full bg-[#0a192f] hover:bg-[#071325] text-white text-sm font-semibold py-3 px-4 rounded-xl shadow transition duration-150 cursor-pointer"
+                  className="w-full bg-[#0A192F] hover:bg-[#071325] text-white text-sm font-semibold py-3 px-4 rounded-lg shadow transition duration-150 cursor-pointer"
                 >
                   Sign in
                 </button>
@@ -421,7 +427,7 @@ export default function LoginPage() {
             {/* Continue with Google Button */}
             <button
               type="button"
-              className="w-full border border-slate-200 hover:bg-slate-50 text-slate-700 text-sm font-semibold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2.5 transition duration-150 cursor-pointer"
+              className="w-full border border-slate-200 hover:bg-slate-50 text-slate-700 text-sm font-semibold py-2.5 px-4 rounded-lg flex items-center justify-center gap-2.5 transition duration-150 cursor-pointer"
             >
               {/* Google Multi-Color SVG Icon */}
               <svg className="w-4 h-4" viewBox="0 0 24 24">
