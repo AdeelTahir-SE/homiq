@@ -1206,8 +1206,8 @@ export default function MessagesPage() {
           </div>
 
           {/* Message / Note Composer Box */}
-          <div className="p-3 sm:p-4 bg-white  shrink-0">
-            <div className="bg-white border border-slate-200 rounded-md p-3 sm:p-3.5 shadow-2xs space-y-3">
+          <div className="p-3 sm:p-4 bg-white shrink-0 min-w-0">
+            <div className="bg-white border border-slate-200 rounded-md p-3 sm:p-3.5 shadow-2xs space-y-3 min-w-0">
               {/* Tabs: Message / Note */}
               <div className="flex items-center gap-6 border-b border-slate-100 pb-2 px-1">
                 <button
@@ -1250,30 +1250,30 @@ export default function MessagesPage() {
               </div>
 
               {/* Bottom Action Bar */}
-              <div className="flex items-center justify-between gap-2 sm:gap-4 pt-0.5 min-w-0">
+              <div className="flex items-center justify-between gap-2.5 sm:gap-4 pt-0.5 min-w-0 flex-wrap">
                 {/* Left Attachment Buttons */}
-                <div className="flex items-center gap-3 sm:gap-4.5 text-xs font-medium text-slate-600 min-w-0">
+                <div className="flex items-center gap-2.5 sm:gap-4 text-xs font-medium text-slate-600 flex-wrap min-w-0">
                   {/* Attach File */}
-                  <label className="flex items-center gap-1 sm:gap-1.5 hover:text-[#0B244A] transition cursor-pointer select-none flex-shrink-0">
+                  <label className="flex items-center gap-1 sm:gap-1.5 hover:text-[#0B244A] transition cursor-pointer select-none shrink-0">
                     <input type="file" className="hidden" onChange={(e) => {
                       if (e.target.files?.[0]) {
                         setMessageInput((prev) => `${prev} [Attachment: ${e.target.files![0].name}]`);
                       }
                     }} />
-                    <svg className="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <svg className="w-4 h-4 text-slate-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
                     </svg>
                     <span>Attach</span>
                   </label>
 
                   {/* Image */}
-                  <label className="flex items-center gap-1 sm:gap-1.5 hover:text-[#0B244A] transition cursor-pointer select-none flex-shrink-0">
+                  <label className="flex items-center gap-1 sm:gap-1.5 hover:text-[#0B244A] transition cursor-pointer select-none shrink-0">
                     <input type="file" accept="image/*" className="hidden" onChange={(e) => {
                       if (e.target.files?.[0]) {
                         setMessageInput((prev) => `${prev} [Image: ${e.target.files![0].name}]`);
                       }
                     }} />
-                    <svg className="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <svg className="w-4 h-4 text-slate-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                     <span>Image</span>
@@ -1283,9 +1283,9 @@ export default function MessagesPage() {
                   <button
                     type="button"
                     onClick={() => setShowScheduleModal(true)}
-                    className="flex items-center gap-1 sm:gap-1.5 hover:text-[#0B244A] transition cursor-pointer select-none flex-shrink-0"
+                    className="flex items-center gap-1 sm:gap-1.5 hover:text-[#0B244A] transition cursor-pointer select-none shrink-0"
                   >
-                    <svg className="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <svg className="w-4 h-4 text-slate-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                     <span>Schedule</span>
@@ -1293,13 +1293,13 @@ export default function MessagesPage() {
                 </div>
 
                 {/* Right Send Button */}
-                <div className="flex items-center rounded-md bg-[#0B244A] hover:bg-[#071933] text-white shadow-xs overflow-hidden transition flex-shrink-0 ml-auto">
+                <div className="flex items-center rounded-md bg-[#0B244A] hover:bg-[#071933] text-white shadow-xs overflow-hidden transition shrink-0 ml-auto">
                   <button
                     type="button"
                     onClick={handleSendMessage}
                     className="px-3 sm:px-3.5 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold flex items-center gap-1.5 sm:gap-2 cursor-pointer transition hover:bg-white/10"
                   >
-                    <svg className="w-3.5 h-3.5 fill-current text-white -rotate-45 flex-shrink-0" viewBox="0 0 24 24">
+                    <svg className="w-3.5 h-3.5 fill-current text-white -rotate-45 shrink-0" viewBox="0 0 24 24">
                       <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
                     </svg>
                     <span>Send</span>
