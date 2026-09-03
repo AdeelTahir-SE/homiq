@@ -8,9 +8,19 @@ interface NavbarProps {
   activeTab?: string;
   showSearch?: boolean;
   searchPlaceholder?: string;
+  favoriteCount?: number;
+  notificationCount?: number;
+  userName?: string;
 }
 
-export default function Navbar({ activeTab = "Buy", showSearch = false, searchPlaceholder = "Search properties, clients, or messages..." }: NavbarProps) {
+export default function Navbar({
+  activeTab = "Buy",
+  showSearch = false,
+  searchPlaceholder = "Search properties, clients, or messages...",
+  favoriteCount = 2,
+  notificationCount = 3,
+  userName = "Olivia",
+}: NavbarProps) {
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -167,9 +177,11 @@ export default function Navbar({ activeTab = "Buy", showSearch = false, searchPl
                 className="object-contain"
               />
             </div>
-            <span className="absolute top-1 right-1 w-4 h-4 bg-[#d99738] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-              3
-            </span>
+            {notificationCount > 0 && (
+              <span className="absolute top-1 right-1 w-4 h-4 bg-[#d99738] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                {notificationCount}
+              </span>
+            )}
           </button>
 
           {/* Favorites Heart */}
@@ -187,9 +199,11 @@ export default function Navbar({ activeTab = "Buy", showSearch = false, searchPl
                 className="object-contain"
               />
             </div>
-            <span className="absolute top-1 right-1 w-4 h-4 bg-[#d99738] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-              2
-            </span>
+            {favoriteCount > 0 && (
+              <span className="absolute top-1 right-1 w-4 h-4 bg-[#d99738] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                {favoriteCount}
+              </span>
+            )}
           </button>
 
           {/* User Profile */}
@@ -203,7 +217,7 @@ export default function Navbar({ activeTab = "Buy", showSearch = false, searchPl
               <div className="relative w-8 h-8 rounded-full overflow-hidden border border-slate-200">
                 <Image
                   src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80"
-                  alt="Olivia User Avatar"
+                  alt={`${userName} User Avatar`}
                   fill
                   sizes="32px"
                   className="object-cover"
@@ -211,7 +225,7 @@ export default function Navbar({ activeTab = "Buy", showSearch = false, searchPl
               </div>
 
               <span className="text-sm font-semibold text-[#0a192f] hidden sm:inline">
-                Hi, Olivia
+                Hi, {userName}
               </span>
 
               <svg
