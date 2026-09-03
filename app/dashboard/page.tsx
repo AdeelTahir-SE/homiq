@@ -484,7 +484,7 @@ export default function DashboardPage() {
         </header>
 
         {/* Dashboard Main Scrollable Area */}
-        <main className="p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-7 overflow-y-auto">
+        <main className="p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-7 overflow-y-auto no-scrollbar">
           {/* Welcome Title */}
           <div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0a192f] tracking-tight">
@@ -497,9 +497,9 @@ export default function DashboardPage() {
 
           {/* 1. TOP STATS ROW (Single Unified Card) */}
           <div className="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 shadow-2xs">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-slate-100 gap-y-4 sm:gap-y-0">
+            <div className="overflow-x-auto lg:overflow-x-visible flex lg:grid lg:grid-cols-5 divide-x divide-slate-100 no-scrollbar">
               {/* Active Listings */}
-              <div className="flex items-center gap-3.5 px-3 sm:px-4 lg:px-5 first:pl-0">
+              <div className="flex items-center gap-3.5 px-4 lg:px-5 first:pl-0 min-w-[190px] sm:min-w-[205px] lg:min-w-0 flex-1 shrink-0">
                 <div className="relative w-12 h-12 rounded-md bg-[#FCF6EF] flex items-center justify-center flex-shrink-0 p-2.5">
                   <Image
                     src="/icons/dashboard/active-listings-icon.png"
@@ -519,7 +519,7 @@ export default function DashboardPage() {
               </div>
 
               {/* Total Leads */}
-              <div className="flex items-center gap-3.5 px-3 sm:px-4 lg:px-5 pt-4 sm:pt-0">
+              <div className="flex items-center gap-3.5 px-4 lg:px-5 min-w-[190px] sm:min-w-[205px] lg:min-w-0 flex-1 shrink-0">
                 <div className="relative w-12 h-12 rounded-md bg-[#FCF6EF] flex items-center justify-center flex-shrink-0 p-2.5">
                   <Image
                     src="/icons/dashboard/total-leads-icon.png"
@@ -539,7 +539,7 @@ export default function DashboardPage() {
               </div>
 
               {/* Under Contract */}
-              <div className="flex items-center gap-3.5 px-3 sm:px-4 lg:px-5 pt-4 sm:pt-0">
+              <div className="flex items-center gap-3.5 px-4 lg:px-5 min-w-[190px] sm:min-w-[205px] lg:min-w-0 flex-1 shrink-0">
                 <div className="relative w-12 h-12 rounded-md bg-[#FCF6EF] flex items-center justify-center flex-shrink-0 p-2.5">
                   <Image
                     src="/icons/dashboard/under-contract-icon.png"
@@ -559,7 +559,7 @@ export default function DashboardPage() {
               </div>
 
               {/* Closed (YTD) */}
-              <div className="flex items-center gap-3.5 px-3 sm:px-4 lg:px-5 pt-4 sm:pt-0">
+              <div className="flex items-center gap-3.5 px-4 lg:px-5 min-w-[190px] sm:min-w-[205px] lg:min-w-0 flex-1 shrink-0">
                 <div className="relative w-12 h-12 rounded-md bg-[#FCF6EF] flex items-center justify-center flex-shrink-0 p-2.5">
                   <Image
                     src="/icons/dashboard/closed-icon.png"
@@ -579,7 +579,7 @@ export default function DashboardPage() {
               </div>
 
               {/* Total Sales (YTD) */}
-              <div className="flex items-center gap-3.5 px-3 sm:px-4 lg:px-5 last:pr-0 pt-4 sm:pt-0">
+              <div className="flex items-center gap-3.5 px-4 lg:px-5 last:pr-0 min-w-[190px] sm:min-w-[205px] lg:min-w-0 flex-1 shrink-0">
                 <div className="relative w-12 h-12 rounded-md bg-[#FCF6EF] flex items-center justify-center flex-shrink-0 p-2.5">
                   <Image
                     src="/icons/dashboard/total-sales-icon.png"
