@@ -145,20 +145,20 @@ export default function SearchHousePage() {
   );
 
   return (
-    <div className="fixed inset-0 flex flex-col bg-white text-[#0a192f] overflow-hidden">
+    <div className="min-h-screen flex flex-col bg-white text-[#0a192f]">
       {/* 1. Global Navigation Bar */}
       <Navbar activeTab="Buy" />
 
       {/* 2. Main 3-Column Split Content Layout */}
-      <div className="flex-1 flex flex-row overflow-hidden min-h-0 w-full h-full">
+      <div className="flex-1 flex flex-row min-h-0 w-full" style={{ height: 'calc(100vh - 64px)' }}>
         {/* ========================================================= */}
         {/* LEFT COLUMN: FILTERS SIDEBAR (~260px) - Fixed to bottom */}
         {/* ========================================================= */}
-        <aside className="w-[250px] xl:w-[265px] flex-shrink-0 border-r border-slate-200 bg-white flex flex-col h-full overflow-hidden">
+        <aside className="w-[250px] xl:w-[265px] flex-shrink-0 border-r border-slate-200 bg-white flex flex-col overflow-hidden">
           <div className="p-4 space-y-4 flex-1 overflow-y-auto min-h-0">
             {/* Location Input */}
             <div>
-              <label className="text-[11px] font-bold text-[#0a192f] block mb-1.5">
+              <label className="text-xs font-bold text-[#0a192f] block mb-1.5">
                 Location
               </label>
               <div className="relative flex items-center border border-slate-200 rounded-md px-2.5 py-1.5 bg-white focus-within:border-[#0a192f] focus-within:ring-1 focus-within:ring-[#0a192f] transition">
@@ -176,7 +176,7 @@ export default function SearchHousePage() {
                   value={locationQuery}
                   onChange={(e) => setLocationQuery(e.target.value)}
                   placeholder="City, neighborhood, or ZIP"
-                  className="w-full text-[11px] text-slate-800 placeholder-slate-400 bg-transparent outline-none"
+                  className="w-full text-xs text-slate-800 placeholder-slate-400 bg-transparent outline-none"
                 />
               </div>
             </div>
@@ -184,7 +184,7 @@ export default function SearchHousePage() {
             {/* Price Range */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-[11px] font-bold text-[#0a192f]">
+                <span className="text-xs font-bold text-[#0a192f]">
                   Price Range
                 </span>
               </div>
@@ -198,7 +198,7 @@ export default function SearchHousePage() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between text-[10px] font-semibold text-slate-700">
+              <div className="flex items-center justify-between text-[11px] font-semibold text-slate-700">
                 <span>$250,000</span>
                 <span>$2,000,000+</span>
               </div>
@@ -207,12 +207,12 @@ export default function SearchHousePage() {
             {/* Property Type */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-[11px] font-bold text-[#0a192f]">
+                <span className="text-xs font-bold text-[#0a192f]">
                   Property Type
                 </span>
                 <button
                   type="button"
-                  className="text-[10px] font-medium text-slate-500 hover:text-[#0a192f] transition cursor-pointer"
+                  className="text-[11px] font-medium text-slate-500 hover:text-[#0a192f] transition cursor-pointer"
                 >
                   See all
                 </button>
@@ -229,7 +229,7 @@ export default function SearchHousePage() {
                       : "border-slate-200 bg-white hover:border-slate-300"
                   }`}
                 >
-                  <div className="relative w-4 h-4 mb-1">
+                  <div className="relative w-5 h-5 mb-1">
                     <Image
                       src="/icons/search-house/all-types-icon.png"
                       alt="All Types"
@@ -238,7 +238,7 @@ export default function SearchHousePage() {
                       className="object-contain"
                     />
                   </div>
-                  <span className="text-[9px] font-bold text-[#0a192f] leading-tight">
+                  <span className="text-[10px] font-bold text-[#0a192f] leading-tight">
                     All Types
                   </span>
                 </button>
@@ -253,7 +253,7 @@ export default function SearchHousePage() {
                       : "border-slate-200 bg-white hover:border-slate-300"
                   }`}
                 >
-                  <div className="relative w-4 h-4 mb-1">
+                  <div className="relative w-5 h-5 mb-1">
                     <Image
                       src="/icons/search-house/house-icon.png"
                       alt="House"
@@ -262,7 +262,7 @@ export default function SearchHousePage() {
                       className="object-contain"
                     />
                   </div>
-                  <span className="text-[9px] font-bold text-[#0a192f] leading-tight">
+                  <span className="text-[10px] font-bold text-[#0a192f] leading-tight">
                     House
                   </span>
                 </button>
@@ -277,7 +277,7 @@ export default function SearchHousePage() {
                       : "border-slate-200 bg-white hover:border-slate-300"
                   }`}
                 >
-                  <div className="relative w-4 h-4 mb-1">
+                  <div className="relative w-5 h-5 mb-1">
                     <Image
                       src="/icons/search-house/condo-icon.png"
                       alt="Condo"
@@ -286,7 +286,7 @@ export default function SearchHousePage() {
                       className="object-contain"
                     />
                   </div>
-                  <span className="text-[9px] font-bold text-[#0a192f] leading-tight">
+                  <span className="text-[10px] font-bold text-[#0a192f] leading-tight">
                     Condo
                   </span>
                 </button>
@@ -301,7 +301,7 @@ export default function SearchHousePage() {
                       : "border-slate-200 bg-white hover:border-slate-300"
                   }`}
                 >
-                  <div className="relative w-4 h-4 mb-1">
+                  <div className="relative w-5 h-5 mb-1">
                     <Image
                       src="/icons/search-house/townhouse-icon.png"
                       alt="Townhome"
@@ -310,7 +310,7 @@ export default function SearchHousePage() {
                       className="object-contain"
                     />
                   </div>
-                  <span className="text-[9px] font-bold text-[#0a192f] leading-tight">
+                  <span className="text-[10px] font-bold text-[#0a192f] leading-tight">
                     Townhome
                   </span>
                 </button>
@@ -319,7 +319,7 @@ export default function SearchHousePage() {
 
             {/* Beds */}
             <div>
-              <span className="text-[11px] font-bold text-[#0a192f] block mb-1.5">
+              <span className="text-xs font-bold text-[#0a192f] block mb-1.5">
                 Beds
               </span>
               <div className="grid grid-cols-5 gap-1">
@@ -328,7 +328,7 @@ export default function SearchHousePage() {
                     key={option}
                     type="button"
                     onClick={() => setSelectedBeds(option)}
-                    className={`h-7 text-[10px] font-semibold rounded-md border text-center transition cursor-pointer flex items-center justify-center ${
+                    className={`h-7 text-[11px] font-semibold rounded-md border text-center transition cursor-pointer flex items-center justify-center ${
                       selectedBeds === option
                         ? "border-[#d99738] bg-[#fffdf7] text-[#0a192f] ring-1 ring-[#d99738]"
                         : "border-slate-200 bg-white text-slate-700 hover:border-slate-300"
@@ -342,7 +342,7 @@ export default function SearchHousePage() {
 
             {/* Baths */}
             <div>
-              <span className="text-[11px] font-bold text-[#0a192f] block mb-1.5">
+              <span className="text-xs font-bold text-[#0a192f] block mb-1.5">
                 Baths
               </span>
               <div className="grid grid-cols-5 gap-1">
@@ -351,7 +351,7 @@ export default function SearchHousePage() {
                     key={option}
                     type="button"
                     onClick={() => setSelectedBaths(option)}
-                    className={`h-7 text-[10px] font-semibold rounded-md border text-center transition cursor-pointer flex items-center justify-center ${
+                    className={`h-7 text-[11px] font-semibold rounded-md border text-center transition cursor-pointer flex items-center justify-center ${
                       selectedBaths === option
                         ? "border-[#d99738] bg-[#fffdf7] text-[#0a192f] ring-1 ring-[#d99738]"
                         : "border-slate-200 bg-white text-slate-700 hover:border-slate-300"
@@ -365,7 +365,7 @@ export default function SearchHousePage() {
 
             {/* More Filters Accordions */}
             <div className="pt-1 border-t border-slate-100">
-              <span className="text-[11px] font-bold text-[#0a192f] block mb-2">
+              <span className="text-xs font-bold text-[#0a192f] block mb-2">
                 More Filters
               </span>
 
@@ -379,7 +379,7 @@ export default function SearchHousePage() {
                       <button
                         type="button"
                         onClick={() => toggleAccordion(filter)}
-                        className="w-full flex items-center justify-between text-[10px] font-semibold text-slate-700 hover:text-[#0a192f] transition cursor-pointer py-1"
+                        className="w-full flex items-center justify-between text-[11px] font-semibold text-slate-700 hover:text-[#0a192f] transition cursor-pointer py-1.5"
                       >
                         <span>{filter}</span>
                         <svg
@@ -412,17 +412,17 @@ export default function SearchHousePage() {
           </div>
 
           {/* Bottom Sidebar Action Buttons - Fixed at bottom */}
-          <div className="p-3 border-t border-slate-200 bg-white flex items-center gap-2 flex-shrink-0">
+          <div className="p-3.5 border-t border-slate-200 bg-white flex items-center gap-2.5 flex-shrink-0">
             <button
               type="button"
               onClick={clearAllTags}
-              className="px-2.5 py-1.5 text-[10px] font-medium text-slate-700 hover:text-[#0a192f] border border-slate-200 rounded-md hover:bg-slate-50 transition cursor-pointer"
+              className="px-3 py-2 text-[11px] font-medium text-slate-700 hover:text-[#0a192f] border border-slate-200 rounded-lg hover:bg-slate-50 transition cursor-pointer"
             >
               Clear All
             </button>
             <button
               type="button"
-              className="flex-1 bg-[#0A192F] hover:bg-[#071325] text-white text-[10px] font-semibold py-1.5 px-3 rounded-md shadow transition duration-150 cursor-pointer text-center"
+              className="flex-1 bg-[#0A192F] hover:bg-[#071325] text-white text-[11px] font-semibold py-2 px-3 rounded-lg shadow transition duration-150 cursor-pointer text-center"
             >
               Show 128 Results
             </button>
@@ -432,7 +432,7 @@ export default function SearchHousePage() {
         {/* ========================================================= */}
         {/* RIGHT MAIN CONTENT AREA: FULL WIDTH TOP BAR + SPLIT VIEW */}
         {/* ========================================================= */}
-        <main className="flex-1 flex flex-col h-full overflow-hidden min-w-0 bg-white">
+        <main className="flex-1 flex flex-col overflow-hidden min-w-0 bg-white">
           {/* Top Full-Width Results Header & Filter Tags Bar */}
           <div className="px-6 py-4 border-b border-slate-100 flex-shrink-0 bg-white">
             <div className="flex items-center justify-between gap-4">
@@ -483,7 +483,7 @@ export default function SearchHousePage() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
-                      d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                      d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
                     />
                   </svg>
                   <span>{isSaved ? "Saved" : "Save Search"}</span>
@@ -496,16 +496,18 @@ export default function SearchHousePage() {
               {activeTags.map((tag) => (
                 <span
                   key={tag}
-                  className="inline-flex items-center gap-1.5 bg-[#FDF4E1] text-[#7d5312] text-xs font-semibold px-2.5 py-1 rounded-md select-none"
+                  className="inline-flex items-center gap-1.5 bg-[#FDF4E1] text-[#7d5312] text-xs font-medium px-3 py-1.5 rounded-full select-none"
                 >
                   {tag}
                   <button
                     type="button"
                     onClick={() => removeTag(tag)}
-                    className="text-[#7d5312] hover:text-black cursor-pointer font-bold leading-none"
+                    className="text-[#7d5312]/70 hover:text-[#7d5312] cursor-pointer leading-none ml-0.5"
                     aria-label={`Remove filter ${tag}`}
                   >
-                    &times;
+                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
                   </button>
                 </span>
               ))}
@@ -523,9 +525,9 @@ export default function SearchHousePage() {
           </div>
 
           {/* Split Content: Property Cards List on Left + Map on Right */}
-          <div className="flex-1 flex flex-row overflow-hidden min-h-0 w-full h-full">
+          <div className="flex-1 flex flex-row min-h-0 w-full">
             {/* Property Cards Column - THE ONLY SCROLLABLE AREA */}
-            <div className="w-[470px] xl:w-[500px] flex-shrink-0 border-r border-slate-200 bg-white h-full overflow-y-auto p-4 space-y-3.5">
+            <div className="w-[470px] xl:w-[500px] flex-shrink-0 border-r border-slate-200 bg-white h-full overflow-y-auto p-4 space-y-3.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {properties.map((item) => (
                 <div
                   key={item.id}
@@ -537,12 +539,12 @@ export default function SearchHousePage() {
                   }`}
                 >
                   {/* Image Container on Left */}
-                  <div className="relative w-[150px] sm:w-[165px] min-h-[125px] flex-shrink-0 rounded-lg overflow-hidden bg-slate-100">
+                  <div className="relative w-[170px] sm:w-[185px] min-h-[140px] flex-shrink-0 rounded-lg overflow-hidden bg-slate-100">
                     <Image
                       src={item.imageUrl}
                       alt={item.title}
                       fill
-                      sizes="(max-width: 768px) 150px, 165px"
+                      sizes="(max-width: 768px) 170px, 185px"
                       className="object-cover"
                     />
 
@@ -550,12 +552,12 @@ export default function SearchHousePage() {
                     {item.badge && (
                       <div className="absolute top-2 left-2 z-10">
                         <span
-                          className={`text-[9px] font-bold px-2 py-0.5 rounded text-white shadow-sm ${
+                          className={`text-[10px] font-bold px-2.5 py-1 rounded text-white shadow-sm ${
                             item.badge.type === "new"
                               ? "bg-[#0A192F]"
                               : item.badge.type === "open"
                               ? "bg-[#059669]"
-                              : "bg-[#0A192F]"
+                              : "bg-[#d99738]"
                           }`}
                         >
                           {item.badge.text}
@@ -568,35 +570,35 @@ export default function SearchHousePage() {
                   <div className="flex-1 flex flex-col justify-between min-w-0 pr-6">
                     {/* Address */}
                     <div>
-                      <h3 className="text-xs font-bold text-[#0a192f] leading-snug truncate">
+                      <h3 className="text-sm font-bold text-[#0a192f] leading-snug truncate">
                         {item.title}
                       </h3>
-                      <p className="text-[11px] text-slate-500 mt-0.5 truncate">
+                      <p className="text-xs text-slate-500 mt-0.5 truncate">
                         {item.cityZip}
                       </p>
                     </div>
 
                     {/* Price */}
                     <div className="mt-1">
-                      <span className="text-sm font-black text-[#0a192f]">
+                      <span className="text-base font-black text-[#0a192f]">
                         {item.price}
                       </span>
                       {item.oldPrice && (
-                        <span className="text-[10px] text-slate-400 line-through ml-1.5">
+                        <span className="text-xs text-slate-400 line-through ml-2">
                           {item.oldPrice}
                         </span>
                       )}
                     </div>
 
                     {/* Spec Row (Beds, Baths, Sqft) */}
-                    <div className="flex items-center gap-3 text-[11px] font-semibold text-slate-700 mt-1">
+                    <div className="flex items-center gap-3.5 text-xs font-semibold text-slate-600 mt-1.5">
                       <div className="flex items-center gap-1">
-                        <div className="relative w-3.5 h-3.5">
+                        <div className="relative w-4 h-4">
                           <Image
                             src="/icons/search-house/bed-icon.png"
                             alt="Beds"
                             fill
-                            sizes="14px"
+                            sizes="16px"
                             className="object-contain"
                           />
                         </div>
@@ -604,12 +606,12 @@ export default function SearchHousePage() {
                       </div>
 
                       <div className="flex items-center gap-1">
-                        <div className="relative w-3.5 h-3.5">
+                        <div className="relative w-4 h-4">
                           <Image
                             src="/icons/search-house/bathtub-icon.png"
                             alt="Baths"
                             fill
-                            sizes="14px"
+                            sizes="16px"
                             className="object-contain"
                           />
                         </div>
@@ -617,12 +619,12 @@ export default function SearchHousePage() {
                       </div>
 
                       <div className="flex items-center gap-1">
-                        <div className="relative w-3.5 h-3.5">
+                        <div className="relative w-4 h-4">
                           <Image
                             src="/icons/search-house/sqft-icon.png"
                             alt="Square Feet"
                             fill
-                            sizes="14px"
+                            sizes="16px"
                             className="object-contain"
                           />
                         </div>
@@ -631,13 +633,13 @@ export default function SearchHousePage() {
                     </div>
 
                     {/* Property Type */}
-                    <p className="text-[10px] text-slate-500 mt-1">
+                    <p className="text-xs text-slate-500 mt-1.5">
                       {item.propertyType}
                     </p>
 
                     {/* Footer Timestamp & Agent */}
-                    <div className="text-[10px] text-slate-500 mt-1">
-                      <span>{item.listedTime} &bull; By </span>
+                    <div className="text-[11px] text-slate-400 mt-1.5">
+                      <span>{item.listedTime}  ·  By </span>
                       <span className="text-[#d99738] font-semibold">
                         {item.agent}
                       </span>
@@ -651,14 +653,14 @@ export default function SearchHousePage() {
                       e.stopPropagation();
                       toggleFavorite(item.id);
                     }}
-                    className="absolute top-2.5 right-2.5 p-1 text-slate-400 hover:text-red-500 transition cursor-pointer"
+                    className="absolute top-3 right-3 p-1 text-slate-400 hover:text-red-500 transition cursor-pointer"
                     aria-label="Favorite property"
                   >
                     <svg
-                      className={`w-4 h-4 ${
+                      className={`w-5 h-5 ${
                         item.isFavorite
                           ? "fill-red-500 text-red-500"
-                          : "fill-none text-slate-600 hover:text-slate-900"
+                          : "fill-none text-slate-500 hover:text-slate-700"
                       }`}
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -675,8 +677,8 @@ export default function SearchHousePage() {
               ))}
             </div>
 
-            {/* Interactive Leaflet Map on Right - STRETCHES FULLY TO BOTTOM */}
-            <div className="flex-1 h-full min-w-0 relative overflow-hidden bg-slate-100">
+            {/* Interactive Leaflet Map on Right - STRETCHES FULLY */}
+            <div className="flex-1 min-w-0 min-h-[500px] relative bg-slate-100">
               <LeafletMap
                 selectedHouseId={selectedHouseId}
                 onSelectHouse={(id) => setSelectedHouseId(id)}

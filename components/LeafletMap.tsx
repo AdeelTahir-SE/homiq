@@ -114,10 +114,10 @@ export default function LeafletMap({
         className="w-full h-full z-0"
         style={{ height: "100%", width: "100%", position: "absolute", inset: 0 }}
       >
-        {/* Clean OpenStreetMap Tile Layer without watermark */}
+        {/* Carto Voyager Light Tile Layer */}
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
         />
 
         {/* Custom Zoom Controls inside map context */}
