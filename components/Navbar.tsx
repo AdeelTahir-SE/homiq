@@ -35,7 +35,7 @@ export default function Navbar({ activeTab = "Buy", showSearch = false, searchPl
                 priority
               />
             </div>
-            <span className="text-xl sm:text-2xl font-black tracking-wider text-[#0a192f]">
+            <span className="text-xl sm:text-2xl font-semibold tracking-wide text-[#0a192f]">
               HOMIQ
             </span>
           </Link>

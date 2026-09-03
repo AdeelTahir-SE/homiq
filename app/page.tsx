@@ -59,7 +59,7 @@ export default function LoginPage() {
                   priority
                 />
               </div>
-              <span className="text-2xl sm:text-[26px] font-black tracking-wider text-[#0a192f]">
+              <span className="text-2xl sm:text-[26px] font-semibold tracking-wide text-[#0a192f]">
                 HOMIQ
               </span>
             </div>
