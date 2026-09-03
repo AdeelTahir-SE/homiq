@@ -2,15 +2,28 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 type RoleType = "buyer" | "agent" | "manager";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [selectedRole, setSelectedRole] = useState<RoleType>("buyer");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (selectedRole === "manager") {
+      router.push("/property-manager-overview");
+    } else if (selectedRole === "agent") {
+      router.push("/dashboard");
+    } else {
+      router.push("/search-house");
+    }
+  };
 
   return (
     <main className="min-h-screen flex flex-col lg:flex-row bg-[#f4f6fa] text-[#0a192f]">
@@ -311,7 +324,7 @@ export default function LoginPage() {
             </div>
 
             {/* Sign In Form */}
-            <form onSubmit={(e) => e.preventDefault()} className="mt-6 space-y-4">
+            <form onSubmit={handleSubmit} className="mt-6 space-y-4">
               {/* Email Address */}
               <div>
                 <label className="text-xs font-semibold text-slate-700 block mb-1.5">
