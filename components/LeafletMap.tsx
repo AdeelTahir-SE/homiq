@@ -103,7 +103,7 @@ export default function LeafletMap({
   const [searchAsMove, setSearchAsMove] = useState(true);
 
   return (
-    <div className="relative w-full h-full min-h-[400px] overflow-hidden bg-slate-100 flex-1">
+    <div className="relative w-full h-full flex-1 overflow-hidden bg-slate-100">
       {/* React Leaflet Map Container */}
       <MapContainer
         center={[30.2672, -97.7431]}
@@ -111,8 +111,8 @@ export default function LeafletMap({
         scrollWheelZoom={true}
         zoomControl={false}
         attributionControl={false}
-        className="w-full h-full min-h-[400px] z-0"
-        style={{ height: "100%", width: "100%", minHeight: "400px" }}
+        className="w-full h-full z-0"
+        style={{ height: "100%", width: "100%", position: "absolute", inset: 0 }}
       >
         {/* Clean OpenStreetMap Tile Layer without watermark */}
         <TileLayer

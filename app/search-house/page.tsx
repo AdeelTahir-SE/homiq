@@ -145,17 +145,17 @@ export default function SearchHousePage() {
   );
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-[#0a192f]">
+    <div className="fixed inset-0 flex flex-col bg-white text-[#0a192f] overflow-hidden">
       {/* 1. Global Navigation Bar */}
       <Navbar activeTab="Buy" />
 
       {/* 2. Main 3-Column Split Content Layout */}
-      <div className="flex-1 flex flex-col lg:flex-row h-[calc(100vh-64px)] overflow-hidden">
+      <div className="flex-1 flex flex-row overflow-hidden min-h-0 w-full h-full">
         {/* ========================================================= */}
-        {/* LEFT COLUMN: FILTERS SIDEBAR (~260px) */}
+        {/* LEFT COLUMN: FILTERS SIDEBAR (~260px) - Fixed to bottom */}
         {/* ========================================================= */}
-        <aside className="w-full lg:w-[250px] xl:w-[265px] flex-shrink-0 border-r border-slate-200 bg-white flex flex-col h-full overflow-y-auto">
-          <div className="p-4 space-y-4 flex-1">
+        <aside className="w-[250px] xl:w-[265px] flex-shrink-0 border-r border-slate-200 bg-white flex flex-col h-full overflow-hidden">
+          <div className="p-4 space-y-4 flex-1 overflow-y-auto min-h-0">
             {/* Location Input */}
             <div>
               <label className="text-[11px] font-bold text-[#0a192f] block mb-1.5">
@@ -411,8 +411,8 @@ export default function SearchHousePage() {
             </div>
           </div>
 
-          {/* Bottom Sidebar Action Buttons */}
-          <div className="p-3 border-t border-slate-200 bg-white flex items-center gap-2">
+          {/* Bottom Sidebar Action Buttons - Fixed at bottom */}
+          <div className="p-3 border-t border-slate-200 bg-white flex items-center gap-2 flex-shrink-0">
             <button
               type="button"
               onClick={clearAllTags}
@@ -523,9 +523,9 @@ export default function SearchHousePage() {
           </div>
 
           {/* Split Content: Property Cards List on Left + Map on Right */}
-          <div className="flex-1 flex flex-col lg:flex-row overflow-hidden min-h-0">
-            {/* Property Cards Column */}
-            <div className="w-full lg:w-[470px] xl:w-[500px] flex-shrink-0 border-r border-slate-200 bg-white overflow-y-auto p-4 space-y-3.5">
+          <div className="flex-1 flex flex-row overflow-hidden min-h-0 w-full h-full">
+            {/* Property Cards Column - THE ONLY SCROLLABLE AREA */}
+            <div className="w-[470px] xl:w-[500px] flex-shrink-0 border-r border-slate-200 bg-white h-full overflow-y-auto p-4 space-y-3.5">
               {properties.map((item) => (
                 <div
                   key={item.id}
@@ -675,8 +675,8 @@ export default function SearchHousePage() {
               ))}
             </div>
 
-            {/* Interactive Leaflet Map on Right */}
-            <div className="flex-1 h-full min-h-[400px] lg:min-h-0 min-w-0 relative overflow-hidden bg-slate-100">
+            {/* Interactive Leaflet Map on Right - STRETCHES FULLY TO BOTTOM */}
+            <div className="flex-1 h-full min-w-0 relative overflow-hidden bg-slate-100">
               <LeafletMap
                 selectedHouseId={selectedHouseId}
                 onSelectHouse={(id) => setSelectedHouseId(id)}
