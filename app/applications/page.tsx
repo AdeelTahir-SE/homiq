@@ -259,7 +259,7 @@ export default function ApplicationsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-[#0a192f] flex flex-col font-sans selection:bg-slate-200">
+    <div className="min-h-screen bg-white text-[#0a192f] flex flex-col font-sans selection:bg-slate-200">
       {/* Top Navbar */}
       <Navbar activeTab="Buy" showSearch={true} searchPlaceholder="Search properties, neighborhoods..." />
 
@@ -521,8 +521,8 @@ export default function ApplicationsPage() {
                 </div>
 
                 {/* Documents Table / List */}
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse">
+                <div className="overflow-x-auto -mx-1 sm:mx-0">
+                  <table className="w-full text-left border-collapse min-w-[580px]">
                     <thead>
                       <tr className="border-b border-slate-100 text-[11px] uppercase tracking-wider text-slate-400 font-semibold">
                         <th className="pb-3 font-semibold pl-2">Document</th>
