@@ -18,7 +18,7 @@ export default function Navbar({ activeTab = "Buy" }: NavbarProps) {
     <header className="w-full bg-white border-b border-slate-200 sticky top-0 z-50">
       <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand Logo & Main Nav */}
-        <div className="flex items-center gap-8 lg:gap-12">
+        <div className="flex items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5">
             <div className="relative w-8 h-8 flex-shrink-0">
@@ -36,8 +36,8 @@ export default function Navbar({ activeTab = "Buy" }: NavbarProps) {
             </span>
           </Link>
 
-          {/* Navigation Links */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+          {/* Navigation Links moved more to the right */}
+          <nav className="hidden md:flex items-center gap-7 lg:gap-9 ml-12 lg:ml-16">
             {navItems.map((item) => {
               const isActive = activeTab === item;
               if (item === "Resources") {
@@ -46,9 +46,9 @@ export default function Navbar({ activeTab = "Buy" }: NavbarProps) {
                     <button
                       type="button"
                       onClick={() => setIsResourcesOpen(!isResourcesOpen)}
-                      className={`flex items-center gap-1.5 text-sm font-medium transition-colors cursor-pointer ${
+                      className={`flex items-center gap-2 text-sm font-medium transition-colors cursor-pointer ${
                         isActive
-                          ? "text-[#0a192f] font-bold"
+                          ? "text-[#0a192f] font-semibold"
                           : "text-slate-600 hover:text-[#0a192f]"
                       }`}
                     >
@@ -100,9 +100,9 @@ export default function Navbar({ activeTab = "Buy" }: NavbarProps) {
                 <Link
                   key={item}
                   href="/search-house"
-                  className={`text-sm font-medium relative py-1 transition-colors ${
+                  className={`text-sm font-medium py-1 transition-colors ${
                     isActive
-                      ? "text-[#0a192f] font-bold after:absolute after:bottom-[-20px] after:left-0 after:right-0 after:h-[2px] after:bg-[#0a192f]"
+                      ? "text-[#0a192f] font-semibold"
                       : "text-slate-600 hover:text-[#0a192f]"
                   }`}
                 >
