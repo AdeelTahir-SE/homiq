@@ -13,6 +13,7 @@ interface NavbarProps {
 export default function Navbar({ activeTab = "Buy", showSearch = false, searchPlaceholder = "Search properties, clients, or messages..." }: NavbarProps) {
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = showSearch 
     ? ["Buy", "Rent", "Sell", "Resources"] 
@@ -22,7 +23,25 @@ export default function Navbar({ activeTab = "Buy", showSearch = false, searchPl
     <header className="w-full bg-white border-b border-slate-200 sticky top-0 z-50">
       <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand Logo & Main Nav */}
-        <div className="flex items-center">
+        <div className="flex items-center gap-3">
+          {/* Mobile Hamburger Toggle */}
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-1.5 -ml-1 text-slate-700 hover:text-[#0a192f] hover:bg-slate-100 rounded-lg transition cursor-pointer"
+            aria-label="Toggle navigation menu"
+          >
+            {isMobileMenuOpen ? (
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
+
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5">
             <div className="relative w-8 h-8 flex-shrink-0">
@@ -52,7 +71,7 @@ export default function Navbar({ activeTab = "Buy", showSearch = false, searchPl
                       onClick={() => setIsResourcesOpen(!isResourcesOpen)}
                       className={`flex items-center gap-1.5 text-sm font-medium transition-colors cursor-pointer ${
                         isActive
-                          ? "text-[#0a192f]"
+                          ? "text-slate-600"
                           : "text-slate-600 hover:text-[#0a192f]"
                       }`}
                     >
@@ -106,7 +125,7 @@ export default function Navbar({ activeTab = "Buy", showSearch = false, searchPl
                   href="/search-house"
                   className={`text-sm font-medium py-1 transition-colors ${
                     isActive
-                      ? "text-[#0a192f]"
+                      ? "text-slate-600"
                       : "text-slate-600 hover:text-[#0a192f]"
                   }`}
                 >
@@ -244,6 +263,80 @@ export default function Navbar({ activeTab = "Buy", showSearch = false, searchPl
           </div>
         </div>
       </div>
+
+      {/* Mobile Navigation Dropdown */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden border-t border-slate-200 bg-white px-4 py-3 shadow-lg">
+          <nav className="flex flex-col space-y-1">
+            {navItems.map((item) => {
+              const isActive = activeTab === item;
+              if (item === "Resources") {
+                return (
+                  <div key={item} className="pt-1">
+                    <button
+                      type="button"
+                      onClick={() => setIsResourcesOpen(!isResourcesOpen)}
+                      className="w-full flex items-center justify-between px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-lg transition"
+                    >
+                      <span>{item}</span>
+                      <svg
+                        className={`w-4 h-4 text-slate-500 transition-transform ${
+                          isResourcesOpen ? "rotate-180" : ""
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    {isResourcesOpen && (
+                      <div className="pl-4 pr-2 py-1 space-y-1 bg-slate-50 rounded-lg mt-1">
+                        <Link
+                          href="#"
+                          className="block px-3 py-1.5 text-xs text-slate-600 hover:text-[#0a192f]"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          Market Trends
+                        </Link>
+                        <Link
+                          href="#"
+                          className="block px-3 py-1.5 text-xs text-slate-600 hover:text-[#0a192f]"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          Mortgage Calculator
+                        </Link>
+                        <Link
+                          href="#"
+                          className="block px-3 py-1.5 text-xs text-slate-600 hover:text-[#0a192f]"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          Guides & Articles
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
+              return (
+                <Link
+                  key={item}
+                  href="/search-house"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`px-3 py-2 text-sm font-medium rounded-lg transition ${
+                    isActive
+                      ? "bg-slate-100 text-[#0a192f]"
+                      : "text-slate-600 hover:bg-slate-50 hover:text-[#0a192f]"
+                  }`}
+                >
+                  {item}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
