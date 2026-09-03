@@ -10,7 +10,7 @@ interface NavbarProps {
   searchPlaceholder?: string;
 }
 
-export default function Navbar({ activeTab = "Buy", showSearch = false, searchPlaceholder = "Search properties, clients, or messages..." }: NavbarProps) {
+export default function Navbar({ activeTab = "none", showSearch = false, searchPlaceholder = "Search properties, clients, or messages..." }: NavbarProps) {
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
@@ -40,8 +40,8 @@ export default function Navbar({ activeTab = "Buy", showSearch = false, searchPl
             </span>
           </Link>
 
-          {/* Navigation Links moved more to the right */}
-          <nav className="hidden md:flex items-center gap-7 lg:gap-8 ml-10 lg:ml-12">
+          {/* Navigation Links moved more to the right, slightly left of center */}
+          <nav className="hidden md:flex items-center gap-7 lg:gap-8 ml-16 md:ml-24 lg:ml-32 xl:ml-40">
             {navItems.map((item) => {
               const isActive = activeTab === item;
               if (item === "Resources") {

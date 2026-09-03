@@ -146,7 +146,7 @@ export default function SearchHousePage() {
   );
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-[#0a192f]">
+    <div className="min-h-screen flex flex-col bg-white text-[#0C2346]">
       {/* 1. Global Navigation Bar */}
       <Navbar activeTab="Buy" />
 
@@ -159,10 +159,10 @@ export default function SearchHousePage() {
           <div className="p-4 space-y-4 flex-1 overflow-y-auto min-h-0">
             {/* Location Input */}
             <div>
-              <label className="text-xs font-bold text-[#0a192f] block mb-1.5">
+              <label className="text-xs font-bold text-[#0C2346] block mb-1.5">
                 Location
               </label>
-              <div className="relative flex items-center border border-slate-200 rounded-md px-2.5 py-1.5 bg-white focus-within:border-[#0a192f] focus-within:ring-1 focus-within:ring-[#0a192f] transition">
+              <div className="relative flex items-center border border-slate-200 rounded-md px-2.5 py-1.5 bg-white focus-within:border-[#0C2346] focus-within:ring-1 focus-within:ring-[#0C2346] transition">
                 <div className="relative w-3.5 h-3.5 mr-2 text-slate-400 flex-shrink-0">
                   <Image
                     src="/icons/search-house/location-icon.png"
@@ -185,7 +185,7 @@ export default function SearchHousePage() {
             {/* Price Range */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-xs font-bold text-[#0a192f]">
+                <span className="text-xs font-bold text-[#0C2346]">
                   Price Range
                 </span>
               </div>
@@ -208,12 +208,12 @@ export default function SearchHousePage() {
             {/* Property Type */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-xs font-bold text-[#0a192f]">
+                <span className="text-xs font-bold text-[#0C2346]">
                   Property Type
                 </span>
                 <button
                   type="button"
-                  className="text-[11px] font-medium text-slate-500 hover:text-[#0a192f] transition cursor-pointer"
+                  className="text-[11px] font-medium text-slate-500 hover:text-[#0C2346] transition cursor-pointer"
                 >
                   See all
                 </button>
@@ -226,7 +226,7 @@ export default function SearchHousePage() {
                   onClick={() => setSelectedPropertyType("all")}
                   className={`aspect-square flex flex-col items-center justify-center rounded-lg border text-center transition cursor-pointer ${
                     selectedPropertyType === "all"
-                      ? "border-[#d99738] bg-[#fffdf7] ring-1 ring-[#d99738]"
+                      ? "border-[#d99738] bg-[#fffdf7]"
                       : "border-slate-200 bg-white hover:border-slate-300"
                   }`}
                 >
@@ -239,7 +239,7 @@ export default function SearchHousePage() {
                       className="object-contain"
                     />
                   </div>
-                  <span className="text-[9px] font-bold text-[#0a192f] leading-tight">
+                  <span className="text-[9px] font-bold text-[#0C2346] leading-tight">
                     All Types
                   </span>
                 </button>
@@ -250,7 +250,7 @@ export default function SearchHousePage() {
                   onClick={() => setSelectedPropertyType("house")}
                   className={`aspect-square flex flex-col items-center justify-center rounded-lg border text-center transition cursor-pointer ${
                     selectedPropertyType === "house"
-                      ? "border-[#d99738] bg-[#fffdf7] ring-1 ring-[#d99738]"
+                      ? "border-[#d99738] bg-[#fffdf7]"
                       : "border-slate-200 bg-white hover:border-slate-300"
                   }`}
                 >
@@ -263,7 +263,7 @@ export default function SearchHousePage() {
                       className="object-contain"
                     />
                   </div>
-                  <span className="text-[9px] font-bold text-[#0a192f] leading-tight">
+                  <span className="text-[9px] font-bold text-[#0C2346] leading-tight">
                     House
                   </span>
                 </button>
@@ -274,7 +274,7 @@ export default function SearchHousePage() {
                   onClick={() => setSelectedPropertyType("condo")}
                   className={`aspect-square flex flex-col items-center justify-center rounded-lg border text-center transition cursor-pointer ${
                     selectedPropertyType === "condo"
-                      ? "border-[#d99738] bg-[#fffdf7] ring-1 ring-[#d99738]"
+                      ? "border-[#d99738] bg-[#fffdf7]"
                       : "border-slate-200 bg-white hover:border-slate-300"
                   }`}
                 >
@@ -287,7 +287,7 @@ export default function SearchHousePage() {
                       className="object-contain"
                     />
                   </div>
-                  <span className="text-[9px] font-bold text-[#0a192f] leading-tight">
+                  <span className="text-[9px] font-bold text-[#0C2346] leading-tight">
                     Condo
                   </span>
                 </button>
@@ -298,7 +298,7 @@ export default function SearchHousePage() {
                   onClick={() => setSelectedPropertyType("townhome")}
                   className={`aspect-square flex flex-col items-center justify-center rounded-lg border text-center transition cursor-pointer ${
                     selectedPropertyType === "townhome"
-                      ? "border-[#d99738] bg-[#fffdf7] ring-1 ring-[#d99738]"
+                      ? "border-[#d99738] bg-[#fffdf7]"
                       : "border-slate-200 bg-white hover:border-slate-300"
                   }`}
                 >
@@ -311,7 +311,7 @@ export default function SearchHousePage() {
                       className="object-contain"
                     />
                   </div>
-                  <span className="text-[9px] font-bold text-[#0a192f] leading-tight">
+                  <span className="text-[9px] font-bold text-[#0C2346] leading-tight">
                     Townhome
                   </span>
                 </button>
@@ -320,7 +320,7 @@ export default function SearchHousePage() {
 
             {/* Beds */}
             <div>
-              <span className="text-xs font-bold text-[#0a192f] block mb-1.5">
+              <span className="text-xs font-bold text-[#0C2346] block mb-1.5">
                 Beds
               </span>
               <div className="grid grid-cols-5 gap-1">
@@ -331,7 +331,7 @@ export default function SearchHousePage() {
                     onClick={() => setSelectedBeds(option)}
                     className={`h-7 text-[11px] font-semibold rounded-md border text-center transition cursor-pointer flex items-center justify-center ${
                       selectedBeds === option
-                        ? "border-[#d99738] bg-[#fffdf7] text-[#0a192f] ring-1 ring-[#d99738]"
+                        ? "border-[#d99738] bg-[#fffdf7] text-[#0C2346]"
                         : "border-slate-200 bg-white text-slate-700 hover:border-slate-300"
                     }`}
                   >
@@ -343,7 +343,7 @@ export default function SearchHousePage() {
 
             {/* Baths */}
             <div>
-              <span className="text-xs font-bold text-[#0a192f] block mb-1.5">
+              <span className="text-xs font-bold text-[#0C2346] block mb-1.5">
                 Baths
               </span>
               <div className="grid grid-cols-5 gap-1">
@@ -354,7 +354,7 @@ export default function SearchHousePage() {
                     onClick={() => setSelectedBaths(option)}
                     className={`h-7 text-[11px] font-semibold rounded-md border text-center transition cursor-pointer flex items-center justify-center ${
                       selectedBaths === option
-                        ? "border-[#d99738] bg-[#fffdf7] text-[#0a192f] ring-1 ring-[#d99738]"
+                        ? "border-[#d99738] bg-[#fffdf7] text-[#0C2346]"
                         : "border-slate-200 bg-white text-slate-700 hover:border-slate-300"
                     }`}
                   >
@@ -366,7 +366,7 @@ export default function SearchHousePage() {
 
             {/* More Filters Accordions */}
             <div className="pt-1 border-t border-slate-100">
-              <span className="text-xs font-bold text-[#0a192f] block mb-2">
+              <span className="text-xs font-bold text-[#0C2346] block mb-2">
                 More Filters
               </span>
 
@@ -380,7 +380,7 @@ export default function SearchHousePage() {
                       <button
                         type="button"
                         onClick={() => toggleAccordion(filter)}
-                        className="w-full flex items-center justify-between text-[11px] font-semibold text-slate-700 hover:text-[#0a192f] transition cursor-pointer py-1.5"
+                        className="w-full flex items-center justify-between text-[11px] font-semibold text-slate-700 hover:text-[#0C2346] transition cursor-pointer py-1.5"
                       >
                         <span>{filter}</span>
                         <svg
@@ -413,17 +413,17 @@ export default function SearchHousePage() {
           </div>
 
           {/* Bottom Sidebar Action Buttons - Fixed at bottom */}
-          <div className="p-3.5 border-t border-slate-200 bg-white flex items-center gap-2.5 flex-shrink-0">
+          <div className="p-3.5  bg-white flex items-center gap-2.5 flex-shrink-0">
             <button
               type="button"
               onClick={clearAllTags}
-              className="px-3 py-2 text-[11px] font-medium text-slate-700 hover:text-[#0a192f] border border-slate-200 rounded-lg hover:bg-slate-50 transition cursor-pointer"
+              className="px-3 py-2 text-[11px] font-medium text-slate-700 hover:text-[#0C2346] border border-slate-200 rounded-lg hover:bg-slate-50 transition cursor-pointer"
             >
               Clear All
             </button>
             <button
               type="button"
-              className="flex-1 bg-[#0A192F] hover:bg-[#071325] text-white text-[11px] font-semibold py-2 px-3 rounded-lg shadow transition duration-150 cursor-pointer text-center"
+              className="flex-1 bg-[#0C2346] hover:bg-[#091b37] text-white text-[11px] font-semibold py-2 px-3 rounded-lg shadow transition duration-150 cursor-pointer text-center"
             >
               Show 128 Results
             </button>
@@ -435,26 +435,28 @@ export default function SearchHousePage() {
         {/* ========================================================= */}
         <main className="flex-1 flex flex-col overflow-hidden min-w-0 bg-white">
           {/* Top Full-Width Results Header & Filter Tags Bar */}
-          <div className="px-6 py-4 border-b border-slate-100 flex-shrink-0 bg-white">
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <h1 className="text-xl sm:text-2xl font-bold text-[#0a192f] tracking-tight">
-                  Homes for Sale
-                </h1>
-                <p className="text-xs text-slate-500 mt-0.5">128 results</p>
-              </div>
+          <div className="px-6 py-4 flex-shrink-0 bg-white">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-6 sm:gap-8 flex-wrap">
+                <div>
+                  <h1 className="text-xl sm:text-2xl font-bold text-[#0C2346] tracking-tight">
+                    Homes for Sale
+                  </h1>
+                  <p className="text-xs text-slate-500 mt-0.5">128 results</p>
+                </div>
 
-              <div className="flex items-center gap-3 flex-shrink-0">
-                {/* Sort Dropdown */}
-                <div className="relative">
-                  <select className="text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-lg py-2 px-3.5 pr-8 appearance-none outline-none cursor-pointer shadow-sm hover:border-slate-300">
+                
+          
+              </div>
+              <div className="relative">
+                  <select className="text-xs font-semibold text-[#0C2346] bg-white border border-slate-200 rounded-lg py-2.5 pl-4 pr-10 appearance-none outline-none cursor-pointer shadow-sm hover:border-slate-300">
                     <option>Sort by: Newest</option>
                     <option>Price: Low to High</option>
                     <option>Price: High to Low</option>
                     <option>Square Feet</option>
                   </select>
                   <svg
-                    className="w-3.5 h-3.5 text-slate-500 absolute right-2.5 top-3 pointer-events-none"
+                    className="w-3.5 h-3.5 text-slate-500 absolute right-3 top-3.5 pointer-events-none"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -468,28 +470,27 @@ export default function SearchHousePage() {
                   </svg>
                 </div>
 
-                {/* Save Search Button */}
-                <button
-                  type="button"
-                  onClick={() => setIsSaved(!isSaved)}
-                  className="bg-[#0A192F] hover:bg-[#071325] text-white text-xs font-semibold py-2 px-4 rounded-lg flex items-center gap-2 shadow-sm transition duration-150 cursor-pointer flex-shrink-0"
+              {/* Save Search Button */}
+              <button
+                type="button"
+                onClick={() => setIsSaved(!isSaved)}
+                className="bg-[#0C2346] hover:bg-[#091b37] text-white text-xs font-semibold py-2.5 px-6 rounded-lg flex items-center gap-2 shadow-sm transition duration-150 cursor-pointer flex-shrink-0"
+              >
+                <svg
+                  className="w-3.5 h-3.5 flex-shrink-0"
+                  fill={isSaved ? "currentColor" : "none"}
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  <svg
-                    className="w-3.5 h-3.5 flex-shrink-0"
-                    fill={isSaved ? "currentColor" : "none"}
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                    />
-                  </svg>
-                  <span>{isSaved ? "Saved" : "Save Search"}</span>
-                </button>
-              </div>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                  />
+                </svg>
+                <span>{isSaved ? "Saved" : "Save Search"}</span>
+              </button>
             </div>
 
             {/* Active Filter Tags Bar (#FDF4E1 background, no border) */}
@@ -497,7 +498,7 @@ export default function SearchHousePage() {
               {activeTags.map((tag) => (
                 <span
                   key={tag}
-                  className="inline-flex items-center gap-1.5 bg-[#FDF4E1] text-[#7d5312] text-xs font-medium px-3 py-1.5 rounded-full select-none"
+                  className="inline-flex items-center gap-1.5 bg-[#FDF4E1] text-[#7d5312] text-xs font-medium px-3 py-1.5 rounded-md select-none"
                 >
                   {tag}
                   <button
@@ -528,14 +529,14 @@ export default function SearchHousePage() {
           {/* Split Content: Property Cards List on Left + Map on Right */}
           <div className="flex-1 flex flex-row min-h-0 w-full">
             {/* Property Cards Column - THE ONLY SCROLLABLE AREA */}
-            <div className="w-[470px] xl:w-[500px] flex-shrink-0 border-r border-slate-200 bg-white h-full overflow-y-auto p-4 space-y-3.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="w-[470px] xl:w-[500px] flex-shrink-0  bg-white h-full overflow-y-auto px-4 space-y-3.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {properties.map((item) => (
                 <div
                   key={item.id}
                   onClick={() => setSelectedHouseId(item.id)}
                   className={`bg-white rounded-xl border p-2.5 flex flex-row gap-3.5 items-stretch transition-all duration-150 cursor-pointer relative ${
                     selectedHouseId === item.id
-                      ? "border-[#0a192f] ring-1 ring-[#0a192f]/20 shadow-sm"
+                      ? "border-[#0C2346] ring-1 ring-[#0C2346]/20 shadow-sm"
                       : "border-slate-200 hover:border-slate-300"
                   }`}
                 >
@@ -555,7 +556,7 @@ export default function SearchHousePage() {
                         <span
                           className={`text-[10px] font-bold px-2.5 py-1 rounded text-white shadow-sm ${
                             item.badge.type === "new"
-                              ? "bg-[#0A192F]"
+                              ? "bg-[#0C2346]"
                               : item.badge.type === "open"
                               ? "bg-[#059669]"
                               : "bg-[#d99738]"
@@ -573,7 +574,7 @@ export default function SearchHousePage() {
                     <div>
                       <Link
                         href="/house-detail"
-                        className="text-sm font-bold text-[#0a192f] hover:text-[#d99738] leading-snug truncate block transition-colors"
+                        className="text-sm font-bold text-[#0C2346] hover:text-[#d99738] leading-snug truncate block transition-colors"
                       >
                         {item.title}
                       </Link>
@@ -584,7 +585,7 @@ export default function SearchHousePage() {
 
                     {/* Price */}
                     <div className="mt-1">
-                      <span className="text-base font-black text-[#0a192f]">
+                      <span className="text-base font-black text-[#0C2346]">
                         {item.price}
                       </span>
                       {item.oldPrice && (
