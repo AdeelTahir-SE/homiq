@@ -135,7 +135,7 @@ export default function AgentSidebar({
   onUpgradePro,
 }: AgentSidebarProps) {
   return (
-    <aside className="w-60 flex-shrink-0 bg-[#F9F6F4] border-r border-[#ece5de] min-h-screen flex flex-col justify-between p-4 select-none">
+    <aside className="w-60 flex-shrink-0 bg-[#FAF7F6] border-r border-[#ece5de] min-h-screen flex flex-col justify-between p-4 select-none">
       {/* Brand Header */}
       <div className="space-y-6">
         <Link href="/dashboard" className="flex items-center gap-2.5 px-3 py-1 group">
@@ -185,7 +185,7 @@ export default function AgentSidebar({
 
       {/* HOMIQ Pro Card */}
       <div className="mt-8 pt-4">
-        <div className="bg-white/80 border border-[#eddcd0] rounded-2xl p-4 text-left relative overflow-hidden shadow-2xs">
+        <div className="bg-[#F8F5F2] border border-[#eddcd0] rounded-2xl p-4 text-left relative overflow-hidden shadow-2xs">
           <div className="flex items-center gap-2">
             <div className="relative w-4 h-4 flex-shrink-0">
               <Image

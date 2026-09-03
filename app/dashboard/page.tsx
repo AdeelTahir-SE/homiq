@@ -365,7 +365,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-[#0a192f] flex font-sans">
+    <div className="min-h-screen bg-white text-[#0a192f] flex font-sans">
       {/* Agent Sidebar */}
       <AgentSidebar activeItem="Dashboard" />
 
@@ -385,7 +385,7 @@ export default function DashboardPage() {
               placeholder="Search leads, properties, or clients..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-hidden focus:border-slate-300 focus:ring-1 focus:ring-slate-200 transition"
+              className="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-md text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-hidden focus:border-slate-300 focus:ring-1 focus:ring-slate-200 transition"
             />
           </div>
 
@@ -449,171 +449,172 @@ export default function DashboardPage() {
             </p>
           </div>
 
-          {/* 1. TOP STATS ROW (5 Cards) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            {/* Active Listings */}
-            <div className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-2xs flex items-center gap-4">
-              <div className="relative w-12 h-12 rounded-xl bg-[#fdf8f0] flex items-center justify-center flex-shrink-0 p-2.5">
-                <Image
-                  src="/icons/dashboard/active-listings-icon.png"
-                  alt="Active Listings"
-                  fill
-                  sizes="48px"
-                  className="object-contain p-2"
-                />
+          {/* 1. TOP STATS ROW (Single Unified Card) */}
+          <div className="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 shadow-2xs">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-slate-100 gap-y-4 sm:gap-y-0">
+              {/* Active Listings */}
+              <div className="flex items-center gap-3.5 px-3 sm:px-4 lg:px-5 first:pl-0">
+                <div className="relative w-12 h-12 rounded-md bg-[#FCF6EF] flex items-center justify-center flex-shrink-0 p-2.5">
+                  <Image
+                    src="/icons/dashboard/active-listings-icon.png"
+                    alt="Active Listings"
+                    fill
+                    sizes="48px"
+                    className="object-contain p-2"
+                  />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-slate-500">Active Listings</p>
+                  <h3 className="text-2xl font-black text-[#0a192f] mt-0.5">28</h3>
+                  <p className="text-[11px] font-semibold text-emerald-600 mt-0.5 flex items-center gap-1">
+                    <span>▲ 12%</span> <span className="text-slate-400 font-normal">vs last month</span>
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-xs font-semibold text-slate-500">Active Listings</p>
-                <h3 className="text-2xl font-black text-[#0a192f] mt-0.5">28</h3>
-                <p className="text-[11px] font-semibold text-emerald-600 mt-0.5 flex items-center gap-1">
-                  <span>▲ 12%</span> <span className="text-slate-400 font-normal">vs last month</span>
-                </p>
-              </div>
-            </div>
 
-            {/* Total Leads */}
-            <div className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-2xs flex items-center gap-4">
-              <div className="relative w-12 h-12 rounded-xl bg-[#f0f9ff] flex items-center justify-center flex-shrink-0 p-2.5">
-                <Image
-                  src="/icons/dashboard/total-leads-icon.png"
-                  alt="Total Leads"
-                  fill
-                  sizes="48px"
-                  className="object-contain p-2"
-                />
+              {/* Total Leads */}
+              <div className="flex items-center gap-3.5 px-3 sm:px-4 lg:px-5 pt-4 sm:pt-0">
+                <div className="relative w-12 h-12 rounded-md bg-[#FCF6EF] flex items-center justify-center flex-shrink-0 p-2.5">
+                  <Image
+                    src="/icons/dashboard/total-leads-icon.png"
+                    alt="Total Leads"
+                    fill
+                    sizes="48px"
+                    className="object-contain p-2"
+                  />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-slate-500">Total Leads</p>
+                  <h3 className="text-2xl font-black text-[#0a192f] mt-0.5">152</h3>
+                  <p className="text-[11px] font-semibold text-emerald-600 mt-0.5 flex items-center gap-1">
+                    <span>▲ 18%</span> <span className="text-slate-400 font-normal">vs last month</span>
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-xs font-semibold text-slate-500">Total Leads</p>
-                <h3 className="text-2xl font-black text-[#0a192f] mt-0.5">152</h3>
-                <p className="text-[11px] font-semibold text-emerald-600 mt-0.5 flex items-center gap-1">
-                  <span>▲ 18%</span> <span className="text-slate-400 font-normal">vs last month</span>
-                </p>
-              </div>
-            </div>
 
-            {/* Under Contract */}
-            <div className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-2xs flex items-center gap-4">
-              <div className="relative w-12 h-12 rounded-xl bg-[#fdf2f8] flex items-center justify-center flex-shrink-0 p-2.5">
-                <Image
-                  src="/icons/dashboard/under-contract-icon.png"
-                  alt="Under Contract"
-                  fill
-                  sizes="48px"
-                  className="object-contain p-2"
-                />
+              {/* Under Contract */}
+              <div className="flex items-center gap-3.5 px-3 sm:px-4 lg:px-5 pt-4 sm:pt-0">
+                <div className="relative w-12 h-12 rounded-md bg-[#FCF6EF] flex items-center justify-center flex-shrink-0 p-2.5">
+                  <Image
+                    src="/icons/dashboard/under-contract-icon.png"
+                    alt="Under Contract"
+                    fill
+                    sizes="48px"
+                    className="object-contain p-2"
+                  />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-slate-500">Under Contract</p>
+                  <h3 className="text-2xl font-black text-[#0a192f] mt-0.5">7</h3>
+                  <p className="text-[11px] font-semibold text-emerald-600 mt-0.5 flex items-center gap-1">
+                    <span>▲ 8%</span> <span className="text-slate-400 font-normal">vs last month</span>
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-xs font-semibold text-slate-500">Under Contract</p>
-                <h3 className="text-2xl font-black text-[#0a192f] mt-0.5">7</h3>
-                <p className="text-[11px] font-semibold text-emerald-600 mt-0.5 flex items-center gap-1">
-                  <span>▲ 8%</span> <span className="text-slate-400 font-normal">vs last month</span>
-                </p>
-              </div>
-            </div>
 
-            {/* Closed (YTD) */}
-            <div className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-2xs flex items-center gap-4">
-              <div className="relative w-12 h-12 rounded-xl bg-[#f0fdf4] flex items-center justify-center flex-shrink-0 p-2.5">
-                <Image
-                  src="/icons/dashboard/closed-icon.png"
-                  alt="Closed YTD"
-                  fill
-                  sizes="48px"
-                  className="object-contain p-2"
-                />
+              {/* Closed (YTD) */}
+              <div className="flex items-center gap-3.5 px-3 sm:px-4 lg:px-5 pt-4 sm:pt-0">
+                <div className="relative w-12 h-12 rounded-md bg-[#FCF6EF] flex items-center justify-center flex-shrink-0 p-2.5">
+                  <Image
+                    src="/icons/dashboard/closed-icon.png"
+                    alt="Closed YTD"
+                    fill
+                    sizes="48px"
+                    className="object-contain p-2"
+                  />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-slate-500">Closed (YTD)</p>
+                  <h3 className="text-2xl font-black text-[#0a192f] mt-0.5">24</h3>
+                  <p className="text-[11px] font-semibold text-emerald-600 mt-0.5 flex items-center gap-1">
+                    <span>▲ 26%</span> <span className="text-slate-400 font-normal">vs last year</span>
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-xs font-semibold text-slate-500">Closed (YTD)</p>
-                <h3 className="text-2xl font-black text-[#0a192f] mt-0.5">24</h3>
-                <p className="text-[11px] font-semibold text-emerald-600 mt-0.5 flex items-center gap-1">
-                  <span>▲ 26%</span> <span className="text-slate-400 font-normal">vs last year</span>
-                </p>
-              </div>
-            </div>
 
-            {/* Total Sales (YTD) */}
-            <div className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-2xs flex items-center gap-4">
-              <div className="relative w-12 h-12 rounded-xl bg-[#fefce8] flex items-center justify-center flex-shrink-0 p-2.5">
-                <Image
-                  src="/icons/dashboard/total-sales-icon.png"
-                  alt="Total Sales"
-                  fill
-                  sizes="48px"
-                  className="object-contain p-2"
-                />
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-slate-500">Total Sales (YTD)</p>
-                <h3 className="text-2xl font-black text-[#0a192f] mt-0.5">$14.2M</h3>
-                <p className="text-[11px] font-semibold text-emerald-600 mt-0.5 flex items-center gap-1">
-                  <span>▲ 31%</span> <span className="text-slate-400 font-normal">vs last year</span>
-                </p>
+              {/* Total Sales (YTD) */}
+              <div className="flex items-center gap-3.5 px-3 sm:px-4 lg:px-5 last:pr-0 pt-4 sm:pt-0">
+                <div className="relative w-12 h-12 rounded-md bg-[#FCF6EF] flex items-center justify-center flex-shrink-0 p-2.5">
+                  <Image
+                    src="/icons/dashboard/total-sales-icon.png"
+                    alt="Total Sales"
+                    fill
+                    sizes="48px"
+                    className="object-contain p-2"
+                  />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-slate-500">Total Sales (YTD)</p>
+                  <h3 className="text-2xl font-black text-[#0a192f] mt-0.5">$14.2M</h3>
+                  <p className="text-[11px] font-semibold text-emerald-600 mt-0.5 flex items-center gap-1">
+                    <span>▲ 31%</span> <span className="text-slate-400 font-normal">vs last year</span>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* 2. MIDDLE SPLIT SECTION: LEAD PIPELINE (LEFT) & TODAY'S TASKS/SHOWINGS (RIGHT) */}
-          <div className="grid grid-cols-1 xl:grid-cols-12 gap-7">
-            {/* Left 8 Cols: LEAD PIPELINE KANBAN */}
-            <div className="xl:col-span-8 bg-white rounded-2xl border border-slate-200/90 p-6 shadow-2xs space-y-5">
-              {/* Pipeline Header */}
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <h2 className="text-lg font-bold text-[#0a192f]">Lead Pipeline</h2>
+          {/* 2. MAIN 2-COLUMN SECTION: LEFT (PIPELINE + 3 CARDS ROW) & RIGHT (TASKS + SHOWINGS) */}
+          <div className="flex flex-col xl:flex-row gap-6 items-start">
+            {/* Column 1 (Left - Full Flexible Width): LEAD PIPELINE & 3 SUMMARY CARDS ROW */}
+            <div className="flex-1 min-w-0 w-full space-y-6">
+              {/* Lead Pipeline Kanban Card */}
+              <div className="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-2xs space-y-5">
+                {/* Pipeline Header */}
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <h2 className="text-lg font-bold text-[#0a192f]">Lead Pipeline</h2>
 
-                <div className="flex items-center gap-3">
-                  {/* Filter Dropdown */}
-                  <div className="relative">
-                    <select
-                      value={pipelineFilter}
-                      onChange={(e) => setPipelineFilter(e.target.value)}
-                      className="bg-white border border-slate-200 text-xs font-semibold text-slate-700 rounded-xl px-3 py-2 pr-7 cursor-pointer focus:outline-hidden"
-                    >
-                      <option>All Pipelines</option>
-                      <option>Buyers Pipeline</option>
-                      <option>Sellers Pipeline</option>
-                    </select>
-                    <svg className="w-3.5 h-3.5 text-slate-500 absolute right-2.5 top-3 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </div>
-
-                  {/* Add Lead Button */}
-                  <button
-                    type="button"
-                    onClick={() => handleOpenAddLead("new")}
-                    className="bg-[#0a192f] hover:bg-[#071325] text-white text-xs font-semibold px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-xs transition cursor-pointer"
-                  >
-                    <span className="text-sm leading-none">+</span>
-                    <span>Add Lead</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* 5 Kanban Columns */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 items-start">
-                {pipeline.map((col) => (
-                  <div key={col.id} className="space-y-3">
-                    {/* Column Header Pill */}
-                    <div className={`flex items-center justify-between px-3 py-2 rounded-xl border border-slate-200/70 ${col.badgeBg}`}>
-                      <span className={`text-xs font-bold ${col.badgeText}`}>
-                        {col.title}
-                      </span>
-                      <span className={`text-[11px] font-black px-1.5 py-0.5 rounded-md bg-white/80 ${col.badgeText}`}>
-                        {col.count}
-                      </span>
+                  <div className="flex items-center gap-3">
+                    {/* Filter Dropdown */}
+                    <div className="relative">
+                      <select
+                        value={pipelineFilter}
+                        onChange={(e) => setPipelineFilter(e.target.value)}
+                        className="bg-white border border-slate-200 text-xs font-semibold text-slate-700 rounded-md px-3 py-2 pr-7 cursor-pointer focus:outline-hidden"
+                      >
+                        <option>All Pipelines</option>
+                        <option>Buyers Pipeline</option>
+                        <option>Sellers Pipeline</option>
+                      </select>
+                    
                     </div>
 
-                    {/* Column Lead Cards */}
-                    <div className="space-y-2.5">
-                      {col.leads.map((lead) => (
-                        <div
-                          key={lead.id}
-                          className="bg-white border border-slate-200 rounded-xl p-3 shadow-2xs hover:border-slate-300 transition-all duration-150 space-y-2"
-                        >
-                          {/* Lead Top: Avatar & Name */}
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                              <div className="relative w-6 h-6 rounded-full overflow-hidden border border-slate-100 flex-shrink-0">
+                    {/* Add Lead Button */}
+                    <button
+                      type="button"
+                      onClick={() => handleOpenAddLead("new")}
+                      className="bg-[#0a192f] hover:bg-[#071325] text-white text-xs font-semibold px-3.5 py-2 rounded-md flex items-center gap-1.5 shadow-xs transition cursor-pointer"
+                    >
+                      <span className="text-sm leading-none">+</span>
+                      <span>Add Lead</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* 5 Kanban Columns */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 items-start">
+                  {pipeline.map((col) => (
+                    <div key={col.id} className="space-y-2.5 min-w-0">
+                      {/* Column Header Pill */}
+                      <div className={`flex items-center justify-between px-2.5 py-1.5 rounded-md border border-slate-200/70 ${col.badgeBg}`}>
+                        <span className={`text-[11.5px] font-bold ${col.badgeText} truncate`}>
+                          {col.title}
+                        </span>
+                        <span className={`text-[10px] font-black px-1.5 py-0.5 rounded-md bg-white/80 ${col.badgeText} shrink-0`}>
+                          {col.count}
+                        </span>
+                      </div>
+
+                      {/* Column Lead Cards */}
+                      <div className="space-y-2">
+                        {col.leads.map((lead) => (
+                          <div
+                            key={lead.id}
+                            className="bg-white border border-slate-200/90 rounded-md p-2.5 shadow-2xs hover:border-slate-300 transition-all duration-150 space-y-1.5"
+                          >
+                            {/* Lead Top: Avatar & Name */}
+                            <div className="flex items-center gap-2 min-w-0">
+                              <div className="relative w-6 h-6 rounded-full overflow-hidden border border-slate-100 shrink-0">
                                 {lead.avatar ? (
                                   <Image
                                     src={lead.avatar}
@@ -628,100 +629,331 @@ export default function DashboardPage() {
                                   </div>
                                 )}
                               </div>
-                              <div className="min-w-0">
-                                <h4 className="text-xs font-bold text-[#0a192f] truncate leading-tight">
+                              <div className="min-w-0 flex-1">
+                                <h4 className="text-[11.5px] font-bold text-[#0a192f] truncate leading-tight">
                                   {lead.name}
                                 </h4>
-                                <p className="text-[10px] text-slate-400">
+                                <p className="text-[9.5px] text-slate-400 truncate leading-tight">
                                   {lead.role}
                                 </p>
                               </div>
                             </div>
+
+                            {/* Price & Location */}
+                            <div className="text-[11px] leading-tight">
+                              <span className="font-bold text-[#0a192f] block truncate">
+                                {lead.priceRange}
+                              </span>
+                              <span className="text-slate-400 block text-[9.5px] truncate">
+                                {lead.location}
+                              </span>
+                            </div>
+
+                            {/* Card Footer: Status or Action icon */}
+                            <div className="flex items-center justify-between pt-1 border-t border-slate-50 text-[9.5px]">
+                              {/* Status tag */}
+                              {lead.badgeType === "offer" ? (
+                                <span className="text-purple-600 font-semibold truncate">
+                                  {lead.statusInfo}
+                                </span>
+                              ) : lead.badgeType === "negotiating" ? (
+                                <span className="text-indigo-600 font-semibold truncate">
+                                  {lead.statusInfo}
+                                </span>
+                              ) : lead.badgeType === "closed" ? (
+                                <span className="text-emerald-600 font-semibold truncate">
+                                  {lead.statusInfo}
+                                </span>
+                              ) : (
+                                <span className="text-slate-400 font-medium truncate">
+                                  {lead.statusInfo}
+                                </span>
+                              )}
+
+                              {/* Action Icon */}
+                              {lead.actionType === "phone" && (
+                                <a
+                                  href="tel:5125550100"
+                                  className="text-slate-400 hover:text-[#0a192f] transition p-0.5 shrink-0"
+                                  title="Call Lead"
+                                >
+                                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                  </svg>
+                                </a>
+                              )}
+
+                              {lead.actionType === "email" && (
+                                <a
+                                  href={`mailto:${lead.name.toLowerCase().replace(/\s+/g, ".")}@example.com`}
+                                  className="text-slate-400 hover:text-[#0a192f] transition p-0.5 shrink-0"
+                                  title="Send Email"
+                                >
+                                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                  </svg>
+                                </a>
+                              )}
+
+                              {lead.actionType === "calendar" && (
+                                <span className="text-slate-400 p-0.5 shrink-0">
+                                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                  </svg>
+                                </span>
+                              )}
+                            </div>
                           </div>
+                        ))}
 
-                          {/* Price & Location */}
-                          <div className="text-[11px]">
-                            <span className="font-bold text-[#0a192f] block">
-                              {lead.priceRange}
-                            </span>
-                            <span className="text-slate-400 block text-[10px]">
-                              {lead.location}
-                            </span>
-                          </div>
+                        {/* Add Lead Button at Column Bottom (Matching Header Colors) */}
+                        <button
+                          type="button"
+                          onClick={() => handleOpenAddLead(col.id)}
+                          className={`w-full py-1.5 border border-dashed rounded-md text-[10.5px] font-bold transition cursor-pointer flex items-center justify-center gap-1 ${col.badgeBg} ${col.badgeText} border-current/25 hover:opacity-85`}
+                        >
+                          <span>+ Add Lead</span>
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
-                          {/* Card Footer: Status or Action icon */}
-                          <div className="flex items-center justify-between pt-1 border-t border-slate-50 text-[10px]">
-                            {/* Status tag */}
-                            {lead.badgeType === "offer" ? (
-                              <span className="text-purple-600 font-semibold">
-                                {lead.statusInfo}
-                              </span>
-                            ) : lead.badgeType === "negotiating" ? (
-                              <span className="text-indigo-600 font-semibold">
-                                {lead.statusInfo}
-                              </span>
-                            ) : lead.badgeType === "closed" ? (
-                              <span className="text-emerald-600 font-semibold">
-                                {lead.statusInfo}
-                              </span>
-                            ) : (
-                              <span className="text-slate-400 font-medium">
-                                {lead.statusInfo}
-                              </span>
-                            )}
-
-                            {/* Action Icon */}
-                            {lead.actionType === "phone" && (
-                              <a
-                                href="tel:5125550100"
-                                className="text-slate-400 hover:text-[#0a192f] transition p-0.5"
-                                title="Call Lead"
-                              >
-                                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                                </svg>
-                              </a>
-                            )}
-
-                            {lead.actionType === "email" && (
-                              <a
-                                href={`mailto:${lead.name.toLowerCase().replace(/\s+/g, ".")}@example.com`}
-                                className="text-slate-400 hover:text-[#0a192f] transition p-0.5"
-                                title="Send Email"
-                              >
-                                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                </svg>
-                              </a>
-                            )}
-
-                            {lead.actionType === "calendar" && (
-                              <span className="text-slate-400 p-0.5">
-                                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                      ))}
-
-                      {/* Add Lead Button at Column Bottom */}
-                      <button
-                        type="button"
-                        onClick={() => handleOpenAddLead(col.id)}
-                        className="w-full py-2 border border-dashed border-slate-200 hover:border-slate-300 rounded-xl text-[11px] font-semibold text-slate-500 hover:text-[#0a192f] transition cursor-pointer flex items-center justify-center gap-1"
-                      >
-                        <span>+ Add Lead</span>
-                      </button>
+              {/* Row Under Lead Pipeline: Listings Overview, Recent Activity & Sales Snapshot */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {/* 1. Listings Overview (Donut Chart) */}
+                <div className="bg-white rounded-2xl border border-slate-200/90 p-4 shadow-2xs space-y-3">
+                  <div className="flex flex-row items-start justify-between">
+                    <h3 className="text-xs sm:text-sm font-bold text-[#0a192f]">Listings Overview</h3>
+                    <div className="relative">
+                      <select className="text-[11px] font-semibold text-slate-600 py-1 border border-slate-200 rounded-md px-2  focus:outline-hidden cursor-pointer">
+                        <option>This Month</option>
+                        <option>Last Month</option>
+                        <option>This Year</option>
+                      </select>
                     </div>
                   </div>
-                ))}
+
+                  {/* Donut Chart & Legend */}
+                  <div className="flex items-center gap-3 pt-1">
+                    {/* SVG Donut Chart */}
+                    <div className="relative w-20 h-20 sm:w-22 sm:h-22 shrink-0 flex items-center justify-center">
+                      <svg className="w-full h-full -rotate-90" viewBox="0 0 42 42">
+                        {/* Background Circle */}
+                        <circle
+                          cx="21"
+                          cy="21"
+                          r="15.91549430918954"
+                          fill="none"
+                          stroke="#ffffff"
+                          strokeWidth="6.5"
+                        />
+                        {/* 1. Active: 64% -> Dark Navy */}
+                        <circle
+                          cx="21"
+                          cy="21"
+                          r="15.91549430918954"
+                          fill="none"
+                          stroke="#0D2449"
+                          strokeWidth="6"
+                          strokeDasharray="63.2 36.8"
+                          strokeDashoffset="0"
+                        />
+                        {/* 2. Under Contract: 18% -> Golden Amber */}
+                        <circle
+                          cx="21"
+                          cy="21"
+                          r="15.91549430918954"
+                          fill="none"
+                          stroke="#d99738"
+                          strokeWidth="6"
+                          strokeDasharray="17.2 82.8"
+                          strokeDashoffset="-64"
+                        />
+                        {/* 3. Pending: 11% -> Muted Slate Gray */}
+                        <circle
+                          cx="21"
+                          cy="21"
+                          r="15.91549430918954"
+                          fill="none"
+                          stroke="#9ca3af"
+                          strokeWidth="6"
+                          strokeDasharray="10.2 89.8"
+                          strokeDashoffset="-82"
+                        />
+                        {/* 4. Sold: 7% -> Soft Sage / Mint Green */}
+                        <circle
+                          cx="21"
+                          cy="21"
+                          r="15.91549430918954"
+                          fill="none"
+                          stroke="#a7d7bc"
+                          strokeWidth="6"
+                          strokeDasharray="6.2 93.8"
+                          strokeDashoffset="-93"
+                        />
+                      </svg>
+                      {/* Center Text */}
+                      <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                        <span className="text-base font-black text-[#0D2449] leading-none">28</span>
+                        <span className="text-[9.5px] text-slate-400 font-semibold mt-0.5">Total</span>
+                      </div>
+                    </div>
+
+                    {/* Legend List */}
+                    <div className="space-y-1.5 text-[11px] flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-1.5">
+                        <div className="flex items-center gap-1.5 min-w-0">
+                          <span className="w-2 h-2 rounded-full bg-[#0D2449] shrink-0" />
+                          <span className="text-slate-600 font-medium truncate">Active</span>
+                        </div>
+                        <span className="font-bold text-[#0D2449] whitespace-nowrap shrink-0">18 (64%)</span>
+                      </div>
+
+                      <div className="flex items-center justify-between gap-1.5">
+                        <div className="flex items-center gap-1.5 min-w-0">
+                          <span className="w-2 h-2 rounded-full bg-[#d99738] shrink-0" />
+                          <span className="text-slate-600 font-medium truncate">Under Contract</span>
+                        </div>
+                        <span className="font-bold text-[#0D2449] whitespace-nowrap shrink-0">5 (18%)</span>
+                      </div>
+
+                      <div className="flex items-center justify-between gap-1.5">
+                        <div className="flex items-center gap-1.5 min-w-0">
+                          <span className="w-2 h-2 rounded-full bg-[#9ca3af] shrink-0" />
+                          <span className="text-slate-600 font-medium truncate">Pending</span>
+                        </div>
+                        <span className="font-bold text-[#0D2449] whitespace-nowrap shrink-0">3 (11%)</span>
+                      </div>
+
+                      <div className="flex items-center justify-between gap-1.5">
+                        <div className="flex items-center gap-1.5 min-w-0">
+                          <span className="w-2 h-2 rounded-full bg-[#a7d7bc] shrink-0" />
+                          <span className="text-slate-600 font-medium truncate">Sold</span>
+                        </div>
+                        <span className="font-bold text-[#0D2449] whitespace-nowrap shrink-0">2 (7%)</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. Recent Activity */}
+                <div className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-2xs space-y-4">
+                  <h3 className="text-sm font-bold text-[#0a192f]">Recent Activity</h3>
+
+                  <div className="space-y-3.5 text-xs">
+                    {/* Activity 1 */}
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-md bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-bold text-[#0a192f] leading-snug">
+                          New lead Jessica Martinez was added
+                        </p>
+                        <span className="text-[10px] text-slate-400">5 minutes ago</span>
+                      </div>
+                    </div>
+
+                    {/* Activity 2 */}
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-md bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-bold text-[#0a192f] leading-snug">
+                          Property 1234 Maple Ridge Dr updated
+                        </p>
+                        <span className="text-[10px] text-slate-400">1 hour ago</span>
+                      </div>
+                    </div>
+
+                    {/* Activity 3 */}
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-md bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-bold text-[#0a192f] leading-snug">
+                          Offer accepted on 456 River View Dr
+                        </p>
+                        <span className="text-[10px] text-slate-400">3 hours ago</span>
+                      </div>
+                    </div>
+
+                    {/* Activity 4 */}
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-md bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-bold text-[#0a192f] leading-snug">
+                          New showing scheduled for today at 1:30 PM
+                        </p>
+                        <span className="text-[10px] text-slate-400">4 hours ago</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. Sales Snapshot (YTD) */}
+                <div className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-2xs space-y-4">
+                  <div className="flex flex-row items-start justify-between">
+                    <h3 className="text-sm font-bold text-[#0a192f]">Sales Snapshot (YTD)</h3>
+                    <div className="relative">
+                      <select className="text-xs font-semibold text-slate-600  border border-slate-200 rounded-md px-2.5 py-1 focus:outline-hidden cursor-pointer">
+                        <option>This Year</option>
+                        <option>Last Year</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Total Sales Volume */}
+                  <div>
+                    <span className="text-3xl font-black text-[#0a192f] block">
+                      $14.2M
+                    </span>
+                    <p className="text-xs text-slate-500 font-medium mt-0.5">
+                      Total Sales Volume
+                    </p>
+                    <p className="text-xs font-semibold text-emerald-600 mt-1 flex items-center gap-1">
+                      <span>▲ 31%</span> <span className="text-slate-400 font-normal">vs last year</span>
+                    </p>
+                  </div>
+
+                  {/* 2 Stats Mini Grid */}
+                  <div className="grid grid-cols-2 gap-3 pt-3 border-t border-slate-100">
+                    <div className=" p-3 rounded-md">
+                      <span className="text-xl font-black text-[#0a192f]">24</span>
+                      <p className="text-[11px] text-slate-500 font-medium">Closed Transactions</p>
+                      <p className="text-[10px] font-semibold text-emerald-600 mt-0.5">
+                        ▲ 26% <span className="text-slate-400 font-normal">vs last year</span>
+                      </p>
+                    </div>
+
+                    <div className=" p-3 rounded-md">
+                      <span className="text-xl font-black text-[#0a192f]">$591K</span>
+                      <p className="text-[11px] text-slate-500 font-medium">Average Sale Price</p>
+                      <p className="text-[10px] font-semibold text-emerald-600 mt-0.5">
+                        ▲ 9% <span className="text-slate-400 font-normal">vs last year</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Right 4 Cols: TODAY'S TASKS & TODAY'S SHOWINGS */}
-            <div className="xl:col-span-4 space-y-6">
+            {/* Column 2 (Right - Compact Needed Width): TODAY'S TASKS & TODAY'S SHOWINGS */}
+            <div className="w-full xl:w-[320px] 2xl:w-[340px] flex-shrink-0 space-y-6">
               {/* Today's Tasks */}
               <div className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-2xs space-y-4">
                 <div className="flex items-center justify-between">
@@ -734,11 +966,11 @@ export default function DashboardPage() {
                 </div>
 
                 {/* Tasks List */}
-                <div className="space-y-3">
+                <div className="divide-y divide-slate-100">
                   {tasks.map((task) => (
                     <div
                       key={task.id}
-                      className={`flex items-center justify-between gap-3 text-xs p-1.5 rounded-lg transition ${
+                      className={`flex items-center justify-between gap-3 text-xs py-2.5 first:pt-0 last:pb-0 transition ${
                         task.completed ? "opacity-50 line-through" : ""
                       }`}
                     >
@@ -747,9 +979,9 @@ export default function DashboardPage() {
                           type="checkbox"
                           checked={task.completed}
                           onChange={() => toggleTask(task.id)}
-                          className="w-4 h-4 rounded border-slate-300 text-[#0a192f] focus:ring-[#0a192f] cursor-pointer"
+                          className="w-4 h-4 rounded-sm border-slate-300 text-[#0a192f] focus:ring-[#0a192f] cursor-pointer"
                         />
-                        <span className="font-semibold text-slate-500 whitespace-nowrap text-[11px]">
+                        <span className="font-bold text-[#d99738] whitespace-nowrap text-[11px]">
                           {task.time}
                         </span>
                         <div className="min-w-0">
@@ -797,7 +1029,7 @@ export default function DashboardPage() {
                 <div className="pt-2 border-t border-slate-100 text-center">
                   <Link
                     href="/tasks"
-                    className="text-xs font-bold text-[#0a192f] hover:text-[#d99738] transition"
+                    className="text-xs font-bold text-[#0a192f] hover:text-[#d99738] transition rounded-md"
                   >
                     View All Tasks
                   </Link>
@@ -816,52 +1048,56 @@ export default function DashboardPage() {
                 </div>
 
                 {/* Showings List */}
-                <div className="space-y-3">
+                <div className="divide-y divide-slate-100">
                   {TODAY_SHOWINGS.map((showing) => (
                     <div
                       key={showing.id}
-                      className="flex items-center gap-3 p-2 rounded-xl bg-slate-50/70 border border-slate-200/60 hover:bg-slate-100/70 transition"
+                      className="flex items-start gap-3.5 py-3 first:pt-0 last:pb-0"
                     >
                       {/* House Thumbnail */}
-                      <div className="relative w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 bg-slate-200">
+                      <div className="relative w-16 h-16 rounded-md overflow-hidden flex-shrink-0 bg-slate-100">
                         <Image
                           src={showing.image}
                           alt={showing.title}
                           fill
-                          sizes="56px"
+                          sizes="64px"
                           className="object-cover"
                         />
                       </div>
 
                       {/* Info */}
-                      <div className="flex-1 min-w-0">
-                        <span className="text-[11px] font-bold text-[#b45309] block">
-                          {showing.time}
-                        </span>
-                        <Link
-                          href="/house-detail"
-                          className="text-xs font-bold text-[#0a192f] hover:text-[#d99738] truncate block"
-                        >
-                          {showing.title}
-                        </Link>
-                        <p className="text-[10px] text-slate-500 truncate">
-                          {showing.address}
-                        </p>
-                        <p className="text-[10px] font-medium text-slate-700 mt-0.5">
-                          {showing.client}
-                        </p>
-                      </div>
+                      <div className="flex-1 min-w-0 flex flex-col justify-between">
+                        <div>
+                          <span className="text-xs font-semibold text-[#0a192f] block leading-tight">
+                            {showing.time}
+                          </span>
+                          <Link
+                            href="/house-detail"
+                            className="text-xs font-bold text-[#0a192f] hover:text-[#d99738] truncate block mt-0.5"
+                          >
+                            {showing.title}
+                          </Link>
+                          <p className="text-[11px] text-slate-400 truncate mt-0.5">
+                            {showing.address}
+                          </p>
+                        </div>
 
-                      {/* Phone Icon */}
-                      <a
-                        href={`tel:${showing.phone.replace(/\D/g, "")}`}
-                        className="p-2 text-slate-400 hover:text-[#0a192f] transition"
-                        title={`Call ${showing.client}`}
-                      >
-                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                        </svg>
-                      </a>
+                        {/* Client Name & Phone Icon */}
+                        <div className="flex items-center justify-between mt-1">
+                          <p className="text-[11px] font-medium text-slate-600 truncate">
+                            {showing.client}
+                          </p>
+                          <a
+                            href={`tel:${showing.phone.replace(/\D/g, "")}`}
+                            className="text-slate-400 hover:text-[#0a192f] transition p-0.5 rounded-md"
+                            title={`Call ${showing.client}`}
+                          >
+                            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -869,241 +1105,10 @@ export default function DashboardPage() {
                 <div className="pt-2 border-t border-slate-100 text-center">
                   <Link
                     href="/calendar"
-                    className="text-xs font-bold text-[#0a192f] hover:text-[#d99738] transition"
+                    className="text-xs font-bold text-[#0a192f] hover:text-[#d99738] transition rounded-md"
                   >
                     View Full Calendar
                   </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* 3. BOTTOM ROW: LISTINGS OVERVIEW, RECENT ACTIVITY & SALES SNAPSHOT */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* 1. Listings Overview (Donut Chart) */}
-            <div className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-2xs space-y-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-sm font-bold text-[#0a192f]">Listings Overview</h3>
-                <div className="relative">
-                  <select className="text-xs font-semibold text-slate-600 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1 focus:outline-hidden cursor-pointer">
-                    <option>This Month</option>
-                    <option>Last Month</option>
-                    <option>This Year</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Donut Chart & Legend */}
-              <div className="flex items-center gap-6 pt-2">
-                {/* SVG Donut Chart */}
-                <div className="relative w-32 h-32 flex-shrink-0 flex items-center justify-center">
-                  <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
-                    {/* Background Circle */}
-                    <circle
-                      cx="18"
-                      cy="18"
-                      r="14"
-                      fill="none"
-                      stroke="#f1f5f9"
-                      strokeWidth="4"
-                    />
-                    {/* Active: 64% -> strokeDasharray="56.3 31.7" stroke="#d99738" */}
-                    <circle
-                      cx="18"
-                      cy="18"
-                      r="14"
-                      fill="none"
-                      stroke="#d99738"
-                      strokeWidth="4"
-                      strokeDasharray="56.3 31.7"
-                      strokeDashoffset="0"
-                    />
-                    {/* Under Contract: 18% -> strokeDasharray="15.8 72.2" stroke="#0a192f" */}
-                    <circle
-                      cx="18"
-                      cy="18"
-                      r="14"
-                      fill="none"
-                      stroke="#0a192f"
-                      strokeWidth="4"
-                      strokeDasharray="15.8 72.2"
-                      strokeDashoffset="-56.3"
-                    />
-                    {/* Pending: 11% -> strokeDasharray="9.7 78.3" stroke="#0ea5e9" */}
-                    <circle
-                      cx="18"
-                      cy="18"
-                      r="14"
-                      fill="none"
-                      stroke="#0ea5e9"
-                      strokeWidth="4"
-                      strokeDasharray="9.7 78.3"
-                      strokeDashoffset="-72.1"
-                    />
-                    {/* Sold: 7% -> strokeDasharray="6.2 81.8" stroke="#10b981" */}
-                    <circle
-                      cx="18"
-                      cy="18"
-                      r="14"
-                      fill="none"
-                      stroke="#10b981"
-                      strokeWidth="4"
-                      strokeDasharray="6.2 81.8"
-                      strokeDashoffset="-81.8"
-                    />
-                  </svg>
-                  {/* Center Text */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                    <span className="text-xl font-black text-[#0a192f] leading-none">28</span>
-                    <span className="text-[10px] text-slate-400 font-medium mt-0.5">Total</span>
-                  </div>
-                </div>
-
-                {/* Legend List */}
-                <div className="space-y-2.5 text-xs flex-1">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#d99738]" />
-                      <span className="text-slate-600 font-medium">Active</span>
-                    </div>
-                    <span className="font-bold text-[#0a192f]">18 (64%)</span>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#0a192f]" />
-                      <span className="text-slate-600 font-medium">Under Contract</span>
-                    </div>
-                    <span className="font-bold text-[#0a192f]">5 (18%)</span>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#0ea5e9]" />
-                      <span className="text-slate-600 font-medium">Pending</span>
-                    </div>
-                    <span className="font-bold text-[#0a192f]">3 (11%)</span>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#10b981]" />
-                      <span className="text-slate-600 font-medium">Sold</span>
-                    </div>
-                    <span className="font-bold text-[#0a192f]">2 (7%)</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 2. Recent Activity */}
-            <div className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-2xs space-y-4">
-              <h3 className="text-sm font-bold text-[#0a192f]">Recent Activity</h3>
-
-              <div className="space-y-3.5 text-xs">
-                {/* Activity 1 */}
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-slate-800 leading-snug">
-                      New lead <strong className="font-bold text-[#0a192f]">Jessica Martinez</strong> was added
-                    </p>
-                    <span className="text-[10px] text-slate-400">5 minutes ago</span>
-                  </div>
-                </div>
-
-                {/* Activity 2 */}
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-slate-800 leading-snug">
-                      Property <strong className="font-bold text-[#0a192f]">1234 Maple Ridge Dr</strong> updated
-                    </p>
-                    <span className="text-[10px] text-slate-400">1 hour ago</span>
-                  </div>
-                </div>
-
-                {/* Activity 3 */}
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-slate-800 leading-snug">
-                      Offer accepted on <strong className="font-bold text-[#0a192f]">456 River View Dr</strong>
-                    </p>
-                    <span className="text-[10px] text-slate-400">3 hours ago</span>
-                  </div>
-                </div>
-
-                {/* Activity 4 */}
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-slate-800 leading-snug">
-                      New showing scheduled for today at <strong className="font-bold text-[#0a192f]">1:30 PM</strong>
-                    </p>
-                    <span className="text-[10px] text-slate-400">4 hours ago</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 3. Sales Snapshot (YTD) */}
-            <div className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-2xs space-y-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-sm font-bold text-[#0a192f]">Sales Snapshot (YTD)</h3>
-                <div className="relative">
-                  <select className="text-xs font-semibold text-slate-600 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1 focus:outline-hidden cursor-pointer">
-                    <option>This Year</option>
-                    <option>Last Year</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Total Sales Volume */}
-              <div>
-                <span className="text-3xl font-black text-[#0a192f] block">
-                  $14.2M
-                </span>
-                <p className="text-xs text-slate-500 font-medium mt-0.5">
-                  Total Sales Volume
-                </p>
-                <p className="text-xs font-semibold text-emerald-600 mt-1 flex items-center gap-1">
-                  <span>▲ 31%</span> <span className="text-slate-400 font-normal">vs last year</span>
-                </p>
-              </div>
-
-              {/* 2 Stats Mini Grid */}
-              <div className="grid grid-cols-2 gap-3 pt-3 border-t border-slate-100">
-                <div className="bg-slate-50/70 p-3 rounded-xl">
-                  <span className="text-xl font-black text-[#0a192f]">24</span>
-                  <p className="text-[11px] text-slate-500 font-medium">Closed Transactions</p>
-                  <p className="text-[10px] font-semibold text-emerald-600 mt-0.5">
-                    ▲ 26% <span className="text-slate-400 font-normal">vs last year</span>
-                  </p>
-                </div>
-
-                <div className="bg-slate-50/70 p-3 rounded-xl">
-                  <span className="text-xl font-black text-[#0a192f]">$591K</span>
-                  <p className="text-[11px] text-slate-500 font-medium">Average Sale Price</p>
-                  <p className="text-[10px] font-semibold text-emerald-600 mt-0.5">
-                    ▲ 9% <span className="text-slate-400 font-normal">vs last year</span>
-                  </p>
                 </div>
               </div>
             </div>
@@ -1114,11 +1119,11 @@ export default function DashboardPage() {
       {/* Add Lead Modal */}
       {isAddLeadModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-5 relative animate-scale-up">
+          <div className="bg-white rounded-xl max-w-md w-full p-6 shadow-2xl space-y-5 relative animate-scale-up">
             <button
               type="button"
               onClick={() => setIsAddLeadModalOpen(false)}
-              className="absolute right-4 top-4 text-slate-400 hover:text-slate-700 cursor-pointer p-1"
+              className="absolute right-4 top-4 text-slate-400 hover:text-slate-700 cursor-pointer p-1 rounded-md"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -1143,7 +1148,7 @@ export default function DashboardPage() {
                   placeholder="e.g. Robert Smith"
                   value={newLeadName}
                   onChange={(e) => setNewLeadName(e.target.value)}
-                  className="w-full border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]"
+                  className="w-full border border-slate-300 rounded-md px-3.5 py-2.5 text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]"
                 />
               </div>
 
@@ -1155,7 +1160,7 @@ export default function DashboardPage() {
                   <select
                     value={newLeadRole}
                     onChange={(e) => setNewLeadRole(e.target.value as "Buyer" | "Seller")}
-                    className="w-full border border-slate-300 rounded-xl px-3 py-2.5 text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]"
+                    className="w-full border border-slate-300 rounded-md px-3 py-2.5 text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]"
                   >
                     <option value="Buyer">Buyer</option>
                     <option value="Seller">Seller</option>
@@ -1170,7 +1175,7 @@ export default function DashboardPage() {
                     type="text"
                     value={newLeadPrice}
                     onChange={(e) => setNewLeadPrice(e.target.value)}
-                    className="w-full border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]"
+                    className="w-full border border-slate-300 rounded-md px-3.5 py-2.5 text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]"
                   />
                 </div>
               </div>
@@ -1183,7 +1188,7 @@ export default function DashboardPage() {
                   type="text"
                   value={newLeadLocation}
                   onChange={(e) => setNewLeadLocation(e.target.value)}
-                  className="w-full border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]"
+                  className="w-full border border-slate-300 rounded-md px-3.5 py-2.5 text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]"
                 />
               </div>
 
@@ -1191,13 +1196,13 @@ export default function DashboardPage() {
                 <button
                   type="button"
                   onClick={() => setIsAddLeadModalOpen(false)}
-                  className="px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50 cursor-pointer"
+                  className="px-4 py-2.5 rounded-md border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded-xl bg-[#0a192f] hover:bg-[#071325] text-white text-xs font-semibold shadow-xs cursor-pointer"
+                  className="px-5 py-2.5 rounded-md bg-[#0a192f] hover:bg-[#071325] text-white text-xs font-semibold shadow-xs cursor-pointer"
                 >
                   Add Lead
                 </button>
