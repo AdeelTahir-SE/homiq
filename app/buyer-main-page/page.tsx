@@ -296,7 +296,7 @@ export default function BuyerMainPage() {
           {/* ===================================================================== */}
           {/* FIRST COLUMN (LEFT): Welcome + 4 Stat Cards + Saved Properties + Alerts */}
           {/* ===================================================================== */}
-          <div className="xl:col-span-7 space-y-5 sm:space-y-6">
+          <div className="xl:col-span-8 space-y-5 sm:space-y-6">
             {/* 1. Welcome Header */}
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-[#0a192f] tracking-tight flex items-center gap-2">
@@ -426,10 +426,10 @@ export default function BuyerMainPage() {
                   {savedProperties.map((prop) => (
                     <div
                       key={prop.id}
-                      className="bg-white rounded-md border border-slate-100 overflow-hidden shadow-xs hover:shadow-md transition duration-200 flex flex-col justify-between"
+                      className="bg-white rounded-xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-md transition duration-200 flex flex-col justify-between"
                     >
                       {/* Thumbnail with floating heart */}
-                      <div className="relative w-full h-32 bg-slate-100 overflow-hidden rounded-t-md">
+                      <div className="relative w-full h-36 bg-slate-100 overflow-hidden group">
                         <Image
                           src={prop.imageUrl}
                           alt={prop.title}
@@ -440,12 +440,12 @@ export default function BuyerMainPage() {
                         <button
                           type="button"
                           onClick={() => toggleFavoriteProperty(prop.id)}
-                          className="absolute top-2 right-2 w-6 h-6 rounded-full bg-[#0a192f]/85 hover:bg-[#0a192f] text-white flex items-center justify-center transition shadow-xs cursor-pointer"
+                          className="absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-white hover:bg-slate-300 backdrop-blur-xs text-white flex items-center justify-center transition shadow-xs cursor-pointer"
                           aria-label={prop.isFavorite ? "Unsave property" : "Save property"}
                         >
                           <svg
-                            className={`w-3.5 h-3.5 ${
-                              prop.isFavorite ? "fill-white stroke-white" : "stroke-white fill-none"
+                            className={`w-4 h-4 transition-colors ${
+                              prop.isFavorite ? "fill-[#0D234E] stroke-[#0D234E] text-[#0D234E]" : "stroke-[#0D234E] fill-none"
                             }`}
                             viewBox="0 0 24 24"
                             strokeWidth={2}
@@ -456,61 +456,61 @@ export default function BuyerMainPage() {
                       </div>
 
                       {/* Info */}
-                      <div className="p-3 flex-1 flex flex-col justify-between">
+                      <div className="p-3.5 flex-1 flex flex-col justify-between">
                         <div>
                           <Link href="/house-detail" className="block group/link">
-                            <h3 className="font-bold text-xs text-[#0a192f] truncate group-hover/link:text-[#d99738] transition">
+                            <h3 className="font-bold text-sm text-[#0a192f] truncate group-hover/link:text-[#d99738] transition leading-snug">
                               {prop.title}
                             </h3>
                           </Link>
-                          <p className="text-[11px] text-slate-500 truncate mt-0.5">
+                          <p className="text-xs text-slate-500 truncate mt-0.5">
                             {prop.cityZip}
                           </p>
 
-                          <div className="text-sm font-bold text-[#0a192f] mt-1.5">
+                          <div className="text-base font-extrabold text-[#0a192f] mt-1.5">
                             {prop.price}
                           </div>
 
-                          <div className="flex items-center gap-2.5 text-[10px] text-slate-600 mt-2">
-                            <div className="flex items-center gap-1">
-                              <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                          <div className="flex items-center justify-between text-[11px] font-medium text-slate-600 mt-2.5 pt-2 border-t border-slate-100">
+                            <div className="flex items-center gap-1 shrink-0 whitespace-nowrap">
+                              <svg className="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M3 7v11m0-4h18m0-7v11M7 10h4a2 2 0 012 2v2H3v-2a2 2 0 012-2z" />
                               </svg>
                               <span>{prop.beds} bd</span>
                             </div>
-                            <div className="flex items-center gap-1">
-                              <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            <div className="flex items-center gap-1 shrink-0 whitespace-nowrap">
+                              <svg className="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M4 12h16a1 1 0 011 1v3a4 4 0 01-4 4H7a4 4 0 01-4-4v-3a1 1 0 011-1zm0 0V6a2 2 0 012-2h2m0 0v2m0-2h2m-6 16v2m14-2v2" />
                               </svg>
                               <span>{prop.baths} ba</span>
                             </div>
-                            <div className="flex items-center gap-1">
-                              <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <div className="flex items-center gap-1 shrink-0 whitespace-nowrap">
+                              <svg className="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
                               </svg>
-                              <span>{prop.sqft}</span>
+                              <span>{prop.sqft.replace(/\s*sqft$/i, "")} sqft</span>
                             </div>
                           </div>
                         </div>
 
                         {/* Footer Badges */}
-                        <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-slate-50">
+                        <div className="flex items-center justify-between mt-3 pt-2.5 border-t border-slate-100">
                           {prop.tagColor === "green" && (
-                            <span className="bg-[#eaf5ea] text-[#137333] border border-[#d2ecd2] text-[10px] font-semibold px-1.5 py-0.5 rounded-sm">
+                            <span className="inline-flex items-center bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-semibold px-2 py-0.5 rounded-md">
                               {prop.tag}
                             </span>
                           )}
                           {prop.tagColor === "gold" && (
-                            <span className="bg-[#fef3c7] text-[#b45309] border border-[#fde68a] text-[10px] font-semibold px-1.5 py-0.5 rounded-sm">
+                            <span className="inline-flex items-center bg-amber-50 text-amber-700 border border-amber-200 text-[11px] font-semibold px-2 py-0.5 rounded-md">
                               {prop.tag}
                             </span>
                           )}
                           {prop.tagColor === "blue" && (
-                            <span className="bg-[#e0f2fe] text-[#0369a1] border border-[#bae6fd] text-[10px] font-semibold px-1.5 py-0.5 rounded-sm">
+                            <span className="inline-flex items-center bg-sky-50 text-sky-700 border border-sky-200 text-[11px] font-semibold px-2 py-0.5 rounded-md">
                               {prop.tag}
                             </span>
                           )}
-                          <span className="text-[10px] text-slate-400 font-normal">
+                          <span className="text-[11px] text-slate-400 font-medium whitespace-nowrap">
                             {prop.savedTime}
                           </span>
                         </div>
@@ -638,7 +638,7 @@ export default function BuyerMainPage() {
           {/* ===================================================================== */}
           {/* SECOND COLUMN (RIGHT): Recommended + Upcoming Tours + Application     */}
           {/* ===================================================================== */}
-          <div className="xl:col-span-5 space-y-5">
+          <div className="xl:col-span-4 space-y-5">
             {/* 1. RECOMMENDED FOR YOU */}
             <div className="bg-[#FAF3EA] rounded-md border border-[#fdf0df] p-4 sm:p-5 shadow-xs space-y-3.5">
               <div>
@@ -695,24 +695,24 @@ export default function BuyerMainPage() {
                     </div>
 
                     {/* Specs with Icons */}
-                    <div className="flex items-center gap-2.5 text-[11px] text-slate-600 mt-1.5">
-                      <div className="flex items-center gap-1">
-                        <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    <div className="flex items-center gap-3 text-xs text-slate-600 mt-2">
+                      <div className="flex items-center gap-1 shrink-0 whitespace-nowrap">
+                        <svg className="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 7v11m0-4h18m0-7v11M7 10h4a2 2 0 012 2v2H3v-2a2 2 0 012-2z" />
                         </svg>
                         <span>{currentRec.beds} bd</span>
                       </div>
-                      <div className="flex items-center gap-1">
-                        <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      <div className="flex items-center gap-1 shrink-0 whitespace-nowrap">
+                        <svg className="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4 12h16a1 1 0 011 1v3a4 4 0 01-4 4H7a4 4 0 01-4-4v-3a1 1 0 011-1zm0 0V6a2 2 0 012-2h2m0 0v2m0-2h2m-6 16v2m14-2v2" />
                         </svg>
                         <span>{currentRec.baths} ba</span>
                       </div>
-                      <div className="flex items-center gap-1">
-                        <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <div className="flex items-center gap-1 shrink-0 whitespace-nowrap">
+                        <svg className="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
                         </svg>
-                        <span>{currentRec.sqft}</span>
+                        <span>{currentRec.sqft.replace(/\s*sqft$/i, "")} sqft</span>
                       </div>
                     </div>
                   </div>
@@ -760,7 +760,7 @@ export default function BuyerMainPage() {
               {/* Tours List */}
               <div className="space-y-3 divide-y divide-slate-100">
                 {UPCOMING_TOURS.map((tour) => (
-                  <div key={tour.id} className="py-3 first:pt-0 flex items-center justify-between gap-3">
+                  <div key={tour.id} className="py-3 px-1 first:pt-0 flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
                       {/* Date Block */}
                       <div className="bg-[#FAF7F4] py-2 flex flex-col items-center justify-center w-10 text-center flex-shrink-0">
@@ -966,14 +966,16 @@ export default function BuyerMainPage() {
         {isBannerVisible && (
           <section className="relative bg-[#FEF8F2] border border-[#F5EBD9] rounded-md p-4 sm:p-5 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4 w-full md:w-auto">
-              <div className="relative w-12 h-12 rounded-md bg-white border border-[#f3e5ce] flex items-center justify-center flex-shrink-0 shadow-xs p-2">
-                <Image
-                  src="/icons/buyer-main-page-icons/bottom-mobile-icon.png"
-                  alt="Mobile Alerts Icon"
-                  fill
-                  sizes="48px"
-                  className="object-contain p-2"
-                />
+              <div className="relative w-12 h-12 rounded-full bg-[#FBEEDD] border border-[#f3deca] flex items-center justify-center flex-shrink-0 shadow-xs">
+                <div className="relative w-6 h-6">
+                  <Image
+                    src="/icons/buyer-main-page-icons/bottom-mobile-icon.png"
+                    alt="Mobile Alerts Icon"
+                    fill
+                    sizes="24px"
+                    className="object-contain"
+                  />
+                </div>
               </div>
 
               <div>

@@ -687,8 +687,8 @@ const LeafletMap = dynamic(() => import("@/components/LeafletMap"), {
 
                     {/* Spec Row (Beds, Baths, Sqft) */}
                     <div className="flex items-center gap-3 sm:gap-3.5 text-xs font-semibold text-slate-600 mt-1.5 flex-wrap">
-                      <div className="flex items-center gap-1">
-                        <div className="relative w-4 h-4">
+                      <div className="flex items-center gap-1 shrink-0 whitespace-nowrap">
+                        <div className="relative w-4 h-4 shrink-0">
                           <Image
                             src="/icons/search-house/bed-icon.png"
                             alt="Beds"
@@ -700,8 +700,8 @@ const LeafletMap = dynamic(() => import("@/components/LeafletMap"), {
                         <span>{item.beds} bd</span>
                       </div>
 
-                      <div className="flex items-center gap-1">
-                        <div className="relative w-4 h-4">
+                      <div className="flex items-center gap-1 shrink-0 whitespace-nowrap">
+                        <div className="relative w-4 h-4 shrink-0">
                           <Image
                             src="/icons/search-house/bathtub-icon.png"
                             alt="Baths"
@@ -713,8 +713,8 @@ const LeafletMap = dynamic(() => import("@/components/LeafletMap"), {
                         <span>{item.baths} ba</span>
                       </div>
 
-                      <div className="flex items-center gap-1">
-                        <div className="relative w-4 h-4">
+                      <div className="flex items-center gap-1 shrink-0 whitespace-nowrap">
+                        <div className="relative w-4 h-4 shrink-0">
                           <Image
                             src="/icons/search-house/sqft-icon.png"
                             alt="Square Feet"
