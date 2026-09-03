@@ -1,22 +1,36 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 
 export default function ScheduleTourPage() {
-  // Calendar & scheduling states
-  const [currentMonth, setCurrentMonth] = useState("May 2024");
-  const [selectedDay, setSelectedDay] = useState<number>(14);
-  const [selectedTime, setSelectedTime] = useState<string>("11:00 AM");
+  // Calendar state
+  const [viewDate, setViewDate] = useState<Date>(() => {
+    const d = new Date();
+    d.setDate(1);
+    d.setHours(0, 0, 0, 0);
+    return d;
+  });
+
+  const [selectedDate, setSelectedDate] = useState<Date>(() => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    return d;
+  });
+
+  const [selectedTime, setSelectedTime] = useState<string>("");
   const [contactMethod, setContactMethod] = useState<"email" | "phone">("email");
 
   // Form states
-  const [fullName, setFullName] = useState("Olivia Bennett");
-  const [email, setEmail] = useState("olivia.bennett@email.com");
-  const [phone, setPhone] = useState("(512) 555-0198");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [note, setNote] = useState("");
+
+  const isTimeSelected = Boolean(selectedTime);
+  const isInfoFilled = Boolean(fullName.trim() && email.trim() && phone.trim());
 
   // Confirmation modal/status
   const [isConfirmed, setIsConfirmed] = useState(false);
@@ -42,56 +56,142 @@ export default function ScheduleTourPage() {
     "5:30 PM",
   ];
 
-  // Calendar dates matching the exact UI design in May 2024
-  // Previous month dates: 28, 29, 30
-  // Current month: 1..31
-  // Next month: 1
-  const calendarCells = [
-    { day: 28, isCurrentMonth: false },
-    { day: 29, isCurrentMonth: false },
-    { day: 30, isCurrentMonth: false },
-    { day: 1, isCurrentMonth: true },
-    { day: 2, isCurrentMonth: true, hasDot: true },
-    { day: 3, isCurrentMonth: true },
-    { day: 4, isCurrentMonth: true },
-    { day: 5, isCurrentMonth: true },
-    { day: 6, isCurrentMonth: true },
-    { day: 7, isCurrentMonth: true },
-    { day: 8, isCurrentMonth: true },
-    { day: 9, isCurrentMonth: true },
-    { day: 10, isCurrentMonth: true },
-    { day: 11, isCurrentMonth: true },
-    { day: 12, isCurrentMonth: true },
-    { day: 13, isCurrentMonth: true },
-    { day: 14, isCurrentMonth: true, hasDot: true },
-    { day: 15, isCurrentMonth: true },
-    { day: 16, isCurrentMonth: true },
-    { day: 17, isCurrentMonth: true },
-    { day: 18, isCurrentMonth: true },
-    { day: 19, isCurrentMonth: true },
-    { day: 20, isCurrentMonth: true },
-    { day: 21, isCurrentMonth: true },
-    { day: 22, isCurrentMonth: true },
-    { day: 23, isCurrentMonth: true },
-    { day: 24, isCurrentMonth: true },
-    { day: 25, isCurrentMonth: true },
-    { day: 26, isCurrentMonth: true },
-    { day: 27, isCurrentMonth: true },
-    { day: 28, isCurrentMonth: true },
-    { day: 29, isCurrentMonth: true },
-    { day: 30, isCurrentMonth: true },
-    { day: 31, isCurrentMonth: true },
-    { day: 1, isCurrentMonth: false },
-  ];
+  // Normalized today's date (midnight)
+  const today = useMemo(() => {
+    const t = new Date();
+    t.setHours(0, 0, 0, 0);
+    return t;
+  }, []);
 
-  const handleDateSelect = (cell: { day: number; isCurrentMonth: boolean }) => {
-    if (cell.isCurrentMonth) {
-      setSelectedDay(cell.day);
+  // Month navigation
+  const handlePrevMonth = () => {
+    setViewDate((prev) => new Date(prev.getFullYear(), prev.getMonth() - 1, 1));
+  };
+
+  const handleNextMonth = () => {
+    setViewDate((prev) => new Date(prev.getFullYear(), prev.getMonth() + 1, 1));
+  };
+
+  // Disable previous month button if already at current month/year
+  const isPrevMonthDisabled = useMemo(() => {
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth();
+    const viewYear = viewDate.getFullYear();
+    const viewMonth = viewDate.getMonth();
+    return viewYear < currentYear || (viewYear === currentYear && viewMonth <= currentMonth);
+  }, [viewDate, today]);
+
+  // Generate calendar matrix
+  const { monthLabel, calendarCells } = useMemo(() => {
+    const year = viewDate.getFullYear();
+    const month = viewDate.getMonth();
+    const label = viewDate.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+
+    const firstDayIndex = new Date(year, month, 1).getDay();
+    const daysInCurrentMonth = new Date(year, month + 1, 0).getDate();
+    const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+    interface Cell {
+      day: number;
+      date: Date;
+      isCurrentMonth: boolean;
+      isPast: boolean;
+      isSelected: boolean;
+      hasDot: boolean;
+    }
+
+    const cells: Cell[] = [];
+
+    // Trailing days from previous month
+    for (let i = firstDayIndex - 1; i >= 0; i--) {
+      const day = daysInPrevMonth - i;
+      const date = new Date(year, month - 1, day);
+      date.setHours(0, 0, 0, 0);
+      cells.push({
+        day,
+        date,
+        isCurrentMonth: false,
+        isPast: date < today,
+        isSelected: false,
+        hasDot: false,
+      });
+    }
+
+    // Days in current month
+    for (let day = 1; day <= daysInCurrentMonth; day++) {
+      const date = new Date(year, month, day);
+      date.setHours(0, 0, 0, 0);
+      const isPast = date < today;
+      const isSelected = selectedDate.getTime() === date.getTime();
+      const hasDot = !isPast && (day % 6 === 2 || isSelected);
+
+      cells.push({
+        day,
+        date,
+        isCurrentMonth: true,
+        isPast,
+        isSelected,
+        hasDot,
+      });
+    }
+
+    // Leading days from next month (fill up to 35 or 42 cells)
+    const targetLength = cells.length > 35 ? 42 : 35;
+    const remaining = targetLength - cells.length;
+    for (let i = 1; i <= remaining; i++) {
+      const date = new Date(year, month + 1, i);
+      date.setHours(0, 0, 0, 0);
+      cells.push({
+        day: i,
+        date,
+        isCurrentMonth: false,
+        isPast: false,
+        isSelected: false,
+        hasDot: false,
+      });
+    }
+
+    return { monthLabel: label, calendarCells: cells };
+  }, [viewDate, selectedDate, today]);
+
+  // Selected date formatted representations
+  const formattedSelectedDate = useMemo(() => {
+    return selectedDate.toLocaleDateString("en-US", {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    });
+  }, [selectedDate]);
+
+  const shortSelectedDate = useMemo(() => {
+    return selectedDate.toLocaleDateString("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+    });
+  }, [selectedDate]);
+
+  const summaryDateStr = useMemo(() => {
+    return selectedDate.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  }, [selectedDate]);
+
+  const handleDateSelect = (cell: { date: Date; isCurrentMonth: boolean; isPast: boolean }) => {
+    if (cell.isCurrentMonth && !cell.isPast) {
+      setSelectedDate(cell.date);
     }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!selectedTime) {
+      alert("Please select a tour time.");
+      return;
+    }
     setIsConfirmed(true);
   };
 
@@ -101,9 +201,9 @@ export default function ScheduleTourPage() {
       <Navbar activeTab="Buy" showSearch={true} />
 
       {/* Main Content Area */}
-      <main className="flex-1 w-full max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-7">
+      <main className="flex-1 w-full max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-5 sm:space-y-7">
         {/* Back Link & Page Title */}
-        <div className="space-y-2">
+        <div className="space-y-1.5 sm:space-y-2">
           <Link
             href="/house-detail"
             className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700 hover:text-[#0D2349] transition-colors group cursor-pointer"
@@ -121,43 +221,75 @@ export default function ScheduleTourPage() {
           </Link>
 
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0D2349] tracking-tight">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#0D2349] tracking-tight">
               Schedule a Tour
             </h1>
-            <p className="text-xs sm:text-sm text-slate-500 mt-1">
+            <p className="text-xs sm:text-sm text-slate-500 mt-0.5 sm:mt-1">
               Pick a date and time that works for you. We&apos;ll confirm with the agent.
             </p>
           </div>
         </div>
 
         {/* Stepper Progress Bar */}
-        <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm">
+        <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm overflow-x-auto no-scrollbar py-1">
           {/* Step 1 */}
           <div className="flex items-center gap-2 flex-shrink-0">
             <span className="w-6 h-6 rounded-full bg-[#0D2349] text-white font-bold flex items-center justify-center text-xs shadow-2xs">
               1
             </span>
-            <span className="font-bold text-[#0D2349]">Choose Date &amp; Time</span>
+            <span className="font-bold text-[#0D2349] whitespace-nowrap">Choose Date &amp; Time</span>
           </div>
 
-          <div className="h-[1px] bg-slate-300 w-12 sm:w-28 lg:w-44 flex-shrink-0" />
+          <div
+            className={`h-[1px] w-6 sm:w-16 md:w-28 lg:w-44 flex-shrink-0 transition-colors ${
+              isTimeSelected ? "bg-[#0D2349]" : "bg-slate-300"
+            }`}
+          />
 
           {/* Step 2 */}
           <div className="flex items-center gap-2 flex-shrink-0">
-            <span className="w-6 h-6 rounded-full bg-[#0D2349] text-white font-bold flex items-center justify-center text-xs shadow-2xs">
+            <span
+              className={`w-6 h-6 rounded-full font-bold flex items-center justify-center text-xs transition-all ${
+                isTimeSelected
+                  ? "bg-[#0D2349] text-white shadow-2xs"
+                  : "bg-slate-200 text-slate-500"
+              }`}
+            >
               2
             </span>
-            <span className="font-medium text-[#0D2349]">Your Information</span>
+            <span
+              className={`whitespace-nowrap transition-colors ${
+                isTimeSelected ? "font-bold text-[#0D2349]" : "font-medium text-slate-400"
+              }`}
+            >
+              Your Information
+            </span>
           </div>
 
-          <div className="h-[1px] bg-slate-300 w-12 sm:w-28 lg:w-44 flex-shrink-0" />
+          <div
+            className={`h-[1px] w-6 sm:w-16 md:w-28 lg:w-44 flex-shrink-0 transition-colors ${
+              isInfoFilled ? "bg-[#0D2349]" : "bg-slate-300"
+            }`}
+          />
 
           {/* Step 3 */}
           <div className="flex items-center gap-2 flex-shrink-0">
-            <span className="w-6 h-6 rounded-full bg-[#0D2349] text-white font-bold flex items-center justify-center text-xs shadow-2xs">
+            <span
+              className={`w-6 h-6 rounded-full font-bold flex items-center justify-center text-xs transition-all ${
+                isInfoFilled
+                  ? "bg-[#0D2349] text-white shadow-2xs"
+                  : "bg-slate-200 text-slate-500"
+              }`}
+            >
               3
             </span>
-            <span className="font-medium text-[#0D2349]">Confirmation</span>
+            <span
+              className={`whitespace-nowrap transition-colors ${
+                isInfoFilled ? "font-bold text-[#0D2349]" : "font-medium text-slate-400"
+              }`}
+            >
+              Confirmation
+            </span>
           </div>
         </div>
 
@@ -180,12 +312,17 @@ export default function ScheduleTourPage() {
 
                   {/* Month Navigator */}
                   <div className="flex items-center justify-between mt-3">
-                    <span className="text-sm font-bold text-[#0D2349]">{currentMonth}</span>
+                    <span className="text-sm font-bold text-[#0D2349]">{monthLabel}</span>
                     <div className="flex items-center gap-1">
                       <button
                         type="button"
-                        onClick={() => setCurrentMonth("April 2024")}
-                        className="p-1 text-slate-400 hover:text-slate-700 transition cursor-pointer"
+                        onClick={handlePrevMonth}
+                        disabled={isPrevMonthDisabled}
+                        className={`p-1 rounded-md transition ${
+                          isPrevMonthDisabled
+                            ? "text-slate-200 cursor-not-allowed"
+                            : "text-slate-400 hover:text-slate-700 hover:bg-slate-100 cursor-pointer"
+                        }`}
                         aria-label="Previous month"
                       >
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -194,8 +331,8 @@ export default function ScheduleTourPage() {
                       </button>
                       <button
                         type="button"
-                        onClick={() => setCurrentMonth("May 2024")}
-                        className="p-1 text-slate-400 hover:text-slate-700 transition cursor-pointer"
+                        onClick={handleNextMonth}
+                        className="p-1 rounded-md text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition cursor-pointer"
                         aria-label="Next month"
                       >
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -219,19 +356,19 @@ export default function ScheduleTourPage() {
                   {/* Calendar Days Matrix */}
                   <div className="grid grid-cols-7 gap-y-1.5 text-center text-xs font-medium mt-1.5">
                     {calendarCells.map((cell, idx) => {
-                      const isSelected = cell.isCurrentMonth && cell.day === selectedDay;
+                      const isClickable = cell.isCurrentMonth && !cell.isPast;
                       return (
                         <div key={idx} className="flex flex-col items-center justify-center">
                           <button
                             type="button"
-                            disabled={!cell.isCurrentMonth}
+                            disabled={!isClickable}
                             onClick={() => handleDateSelect(cell)}
-                            className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition cursor-pointer ${
-                              !cell.isCurrentMonth
-                                ? "text-slate-300 cursor-default"
-                                : isSelected
-                                ? "bg-[#0D2349] text-white font-bold shadow-xs"
-                                : "text-slate-700 hover:bg-slate-100"
+                            className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition ${
+                              !cell.isCurrentMonth || cell.isPast
+                                ? "text-slate-300 cursor-not-allowed"
+                                : cell.isSelected
+                                ? "bg-[#0D2349] text-white font-bold shadow-xs cursor-pointer"
+                                : "text-slate-700 hover:bg-slate-100 cursor-pointer"
                             }`}
                           >
                             <span>{cell.day}</span>
@@ -240,7 +377,7 @@ export default function ScheduleTourPage() {
                           {cell.hasDot ? (
                             <span
                               className={`w-1 h-1 rounded-full mt-0.5 ${
-                                isSelected ? "bg-[#0D2349]" : "bg-[#0D2349]"
+                                cell.isSelected ? "bg-[#0D2349]" : "bg-[#0D2349]"
                               }`}
                             />
                           ) : (
@@ -258,7 +395,7 @@ export default function ScheduleTourPage() {
                     <span className="w-4 h-4 rounded-full border border-emerald-500 text-emerald-600 flex items-center justify-center text-[10px] font-black">
                       ✓
                     </span>
-                    <span>Tuesday, May {selectedDay}, 2024</span>
+                    <span>{formattedSelectedDate}</span>
                   </div>
                   <p className="text-[11px] text-slate-500 pl-6">
                     All times shown in Central Time (CT)
@@ -278,7 +415,7 @@ export default function ScheduleTourPage() {
                       <h2 className="text-base font-bold text-[#0D2349]">Select a Time</h2>
                     </div>
                     <p className="text-xs text-slate-500 mt-0.5">
-                      Available times for Tue, May {selectedDay}
+                      Available times for {shortSelectedDate}
                     </p>
                   </div>
 
@@ -339,9 +476,10 @@ export default function ScheduleTourPage() {
                       <input
                         type="text"
                         required
+                        placeholder="e.g. Olivia Bennett"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
-                        className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-800 focus:outline-none focus:border-slate-400 transition"
+                        className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-slate-400 transition"
                       />
                     </div>
 
@@ -353,9 +491,10 @@ export default function ScheduleTourPage() {
                       <input
                         type="email"
                         required
+                        placeholder="e.g. olivia.bennett@email.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-800 focus:outline-none focus:border-slate-400 transition"
+                        className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-slate-400 transition"
                       />
                     </div>
 
@@ -367,9 +506,10 @@ export default function ScheduleTourPage() {
                       <input
                         type="tel"
                         required
+                        placeholder="e.g. (512) 555-0198"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-800 focus:outline-none focus:border-slate-400 transition"
+                        className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-slate-400 transition"
                       />
                     </div>
 
@@ -492,7 +632,7 @@ export default function ScheduleTourPage() {
             </div>
 
             {/* Separator */}
-            <div className="border-t border-slate-100 pt-4 space-y-3.5">
+            <div className="border-t border-slate-100 pt-5 space-y-4">
               {/* Agent Avatar & Info */}
               <div className="flex items-center gap-3.5">
                 <div className="relative w-12 h-12 rounded-full overflow-hidden border border-slate-200 flex-shrink-0">
@@ -594,7 +734,7 @@ export default function ScheduleTourPage() {
               <p className="text-xs sm:text-sm text-slate-500 max-w-sm mx-auto">
                 We have notified Emma Clark. She will confirm the appointment for{" "}
                 <span className="font-semibold text-slate-800">
-                  Tuesday, May {selectedDay}, 2024 at {selectedTime}
+                  {formattedSelectedDate} at {selectedTime}
                 </span>
                 .
               </p>
@@ -607,7 +747,7 @@ export default function ScheduleTourPage() {
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-500">Date &amp; Time:</span>
-                <span className="font-bold text-[#0D2349]">May {selectedDay}, 2024 • {selectedTime}</span>
+                <span className="font-bold text-[#0D2349]">{summaryDateStr} • {selectedTime}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-500">Agent:</span>
