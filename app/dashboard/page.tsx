@@ -364,81 +364,127 @@ export default function DashboardPage() {
     setIsAddLeadModalOpen(false);
   };
 
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-white text-[#0a192f] flex font-sans">
-      {/* Agent Sidebar */}
-      <AgentSidebar activeItem="Dashboard" />
+      {/* Desktop Fixed Sidebar */}
+      <AgentSidebar activeItem="Dashboard" className="hidden lg:flex" />
+
+      {/* Mobile Sidebar Slide-Over Drawer */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden flex">
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          {/* Drawer Content */}
+          <div className="relative z-10 w-[240px] max-w-[85vw] h-full bg-[#F9F6F4] shadow-2xl flex flex-col animate-slide-in">
+            <div className="flex items-center justify-between p-3 border-b border-[#ece5de]">
+              <span className="text-sm font-bold text-[#0D2449]">Navigation</span>
+              <button
+                type="button"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-1.5 text-slate-500 hover:text-slate-800 rounded-md cursor-pointer"
+                aria-label="Close menu"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="flex-1 overflow-y-auto">
+              <AgentSidebar activeItem="Dashboard" className="w-full h-full static border-r-0" />
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Main Dashboard Workspace */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Header Bar */}
-        <header className="h-16 bg-white border-b border-slate-200/90 px-6 sm:px-8 flex items-center justify-end gap-5 sm:gap-6 sticky top-0 z-40">
-          {/* Search Input (Aligned to Right) */}
-          <div className="relative w-72 sm:w-80">
-            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-            <input
-              type="text"
-              placeholder="Search leads, properties, or clients..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-md text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-hidden focus:border-slate-300 focus:ring-1 focus:ring-slate-200 transition"
-            />
-          </div>
-
-          {/* Bell Notification */}
+        <header className="h-16 bg-white border-b border-slate-200/90 px-4 sm:px-6 lg:px-8 flex items-center justify-between lg:justify-end gap-3 sm:gap-6 sticky top-0 z-40">
+          {/* Mobile Hamburger Button */}
           <button
             type="button"
-            className="relative p-1.5 text-slate-600 hover:text-[#0a192f] transition cursor-pointer"
-            aria-label="Notifications"
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="lg:hidden p-1.5 text-slate-600 hover:text-[#0a192f] rounded-md transition cursor-pointer"
+            aria-label="Open Navigation Menu"
           >
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-            </svg>
-            <span className="absolute top-0 right-0 w-4.5 h-4.5 bg-[#d99738] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-              3
-            </span>
-          </button>
-
-          {/* Mail Icon */}
-          <button
-            type="button"
-            className="p-1.5 text-slate-600 hover:text-[#0a192f] transition cursor-pointer"
-            aria-label="Messages"
-          >
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
 
-          {/* User Profile */}
-          <div className="flex items-center gap-3">
-            <div className="relative w-9 h-9 rounded-full overflow-hidden border border-slate-200 flex-shrink-0">
-              <Image
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=80"
-                alt="Emma Clark"
-                fill
-                sizes="36px"
-                className="object-cover"
+          <div className="flex items-center justify-end gap-3 sm:gap-6 flex-1 max-w-full">
+            {/* Search Input (Aligned to Right) */}
+            <div className="relative w-full max-w-[170px] sm:max-w-xs md:max-w-sm">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+              <input
+                type="text"
+                placeholder="Search leads, properties..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-1.5 sm:py-2 bg-white border border-slate-200 rounded-md text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-hidden focus:border-slate-300 focus:ring-1 focus:ring-slate-200 transition"
               />
             </div>
-            <div className="hidden sm:block text-left">
-              <p className="text-sm font-bold text-[#0a192f] leading-tight">
-                Emma Clark
-              </p>
-              <p className="text-[11px] text-slate-500 font-medium">Broker/Owner</p>
+
+            {/* Bell Notification */}
+            <button
+              type="button"
+              className="relative p-1.5 text-slate-600 hover:text-[#0a192f] transition cursor-pointer flex-shrink-0"
+              aria-label="Notifications"
+            >
+              <svg className="w-5.5 h-5.5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              </svg>
+              <span className="absolute top-0 right-0 w-4 h-4 sm:w-4.5 sm:h-4.5 bg-[#d99738] text-white text-[9px] sm:text-[10px] font-bold rounded-full flex items-center justify-center">
+                3
+              </span>
+            </button>
+
+            {/* Mail Icon */}
+            <button
+              type="button"
+              className="p-1.5 text-slate-600 hover:text-[#0a192f] transition cursor-pointer flex-shrink-0"
+              aria-label="Messages"
+            >
+              <svg className="w-5.5 h-5.5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </button>
+
+            {/* User Profile */}
+            <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+              <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-slate-200 flex-shrink-0">
+                <Image
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=80"
+                  alt="Emma Clark"
+                  fill
+                  sizes="36px"
+                  className="object-cover"
+                />
+              </div>
+              <div className="hidden sm:block text-left">
+                <p className="text-xs sm:text-sm font-bold text-[#0a192f] leading-tight">
+                  Emma Clark
+                </p>
+                <p className="text-[10px] sm:text-[11px] text-slate-500 font-medium">Broker/Owner</p>
+              </div>
+              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-400 hidden sm:block" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
             </div>
-            <svg className="w-4 h-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-            </svg>
           </div>
         </header>
 
         {/* Dashboard Main Scrollable Area */}
-        <main className="p-6 lg:p-8 space-y-7 overflow-y-auto">
+        <main className="p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-7 overflow-y-auto">
           {/* Welcome Title */}
           <div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0a192f] tracking-tight">
@@ -592,9 +638,9 @@ export default function DashboardPage() {
                 </div>
 
                 {/* 5 Kanban Columns */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 items-start">
+                <div className="overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0 flex lg:grid lg:grid-cols-5 gap-2.5 items-start">
                   {pipeline.map((col) => (
-                    <div key={col.id} className="space-y-2.5 min-w-0">
+                    <div key={col.id} className="space-y-2.5 min-w-[190px] sm:min-w-[210px] lg:min-w-0 flex-shrink-0 lg:flex-shrink flex-1">
                       {/* Column Header Pill */}
                       <div className={`flex items-center justify-between px-2.5 py-1.5 rounded-md border border-slate-200/70 ${col.badgeBg}`}>
                         <span className={`text-[11.5px] font-bold ${col.badgeText} truncate`}>
