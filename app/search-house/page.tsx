@@ -218,12 +218,12 @@ export default function SearchHousePage() {
                 </button>
               </div>
 
-              <div className="grid grid-cols-4 gap-1.5">
+              <div className="grid grid-cols-4 gap-2">
                 {/* All Types */}
                 <button
                   type="button"
                   onClick={() => setSelectedPropertyType("all")}
-                  className={`flex flex-col items-center justify-center p-1.5 rounded-md border text-center transition cursor-pointer ${
+                  className={`aspect-square flex flex-col items-center justify-center rounded-lg border text-center transition cursor-pointer ${
                     selectedPropertyType === "all"
                       ? "border-[#d99738] bg-[#fffdf7] ring-1 ring-[#d99738]"
                       : "border-slate-200 bg-white hover:border-slate-300"
@@ -234,11 +234,11 @@ export default function SearchHousePage() {
                       src="/icons/search-house/all-types-icon.png"
                       alt="All Types"
                       fill
-                      sizes="16px"
+                      sizes="20px"
                       className="object-contain"
                     />
                   </div>
-                  <span className="text-[10px] font-bold text-[#0a192f] leading-tight">
+                  <span className="text-[9px] font-bold text-[#0a192f] leading-tight">
                     All Types
                   </span>
                 </button>
@@ -247,7 +247,7 @@ export default function SearchHousePage() {
                 <button
                   type="button"
                   onClick={() => setSelectedPropertyType("house")}
-                  className={`flex flex-col items-center justify-center p-1.5 rounded-md border text-center transition cursor-pointer ${
+                  className={`aspect-square flex flex-col items-center justify-center rounded-lg border text-center transition cursor-pointer ${
                     selectedPropertyType === "house"
                       ? "border-[#d99738] bg-[#fffdf7] ring-1 ring-[#d99738]"
                       : "border-slate-200 bg-white hover:border-slate-300"
@@ -258,11 +258,11 @@ export default function SearchHousePage() {
                       src="/icons/search-house/house-icon.png"
                       alt="House"
                       fill
-                      sizes="16px"
+                      sizes="20px"
                       className="object-contain"
                     />
                   </div>
-                  <span className="text-[10px] font-bold text-[#0a192f] leading-tight">
+                  <span className="text-[9px] font-bold text-[#0a192f] leading-tight">
                     House
                   </span>
                 </button>
@@ -271,7 +271,7 @@ export default function SearchHousePage() {
                 <button
                   type="button"
                   onClick={() => setSelectedPropertyType("condo")}
-                  className={`flex flex-col items-center justify-center p-1.5 rounded-md border text-center transition cursor-pointer ${
+                  className={`aspect-square flex flex-col items-center justify-center rounded-lg border text-center transition cursor-pointer ${
                     selectedPropertyType === "condo"
                       ? "border-[#d99738] bg-[#fffdf7] ring-1 ring-[#d99738]"
                       : "border-slate-200 bg-white hover:border-slate-300"
@@ -282,11 +282,11 @@ export default function SearchHousePage() {
                       src="/icons/search-house/condo-icon.png"
                       alt="Condo"
                       fill
-                      sizes="16px"
+                      sizes="20px"
                       className="object-contain"
                     />
                   </div>
-                  <span className="text-[10px] font-bold text-[#0a192f] leading-tight">
+                  <span className="text-[9px] font-bold text-[#0a192f] leading-tight">
                     Condo
                   </span>
                 </button>
@@ -295,7 +295,7 @@ export default function SearchHousePage() {
                 <button
                   type="button"
                   onClick={() => setSelectedPropertyType("townhome")}
-                  className={`flex flex-col items-center justify-center p-1.5 rounded-md border text-center transition cursor-pointer ${
+                  className={`aspect-square flex flex-col items-center justify-center rounded-lg border text-center transition cursor-pointer ${
                     selectedPropertyType === "townhome"
                       ? "border-[#d99738] bg-[#fffdf7] ring-1 ring-[#d99738]"
                       : "border-slate-200 bg-white hover:border-slate-300"
@@ -306,11 +306,11 @@ export default function SearchHousePage() {
                       src="/icons/search-house/townhouse-icon.png"
                       alt="Townhome"
                       fill
-                      sizes="16px"
+                      sizes="20px"
                       className="object-contain"
                     />
                   </div>
-                  <span className="text-[10px] font-bold text-[#0a192f] leading-tight">
+                  <span className="text-[9px] font-bold text-[#0a192f] leading-tight">
                     Townhome
                   </span>
                 </button>
@@ -483,7 +483,7 @@ export default function SearchHousePage() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
-                      d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                      d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
                     />
                   </svg>
                   <span>{isSaved ? "Saved" : "Save Search"}</span>
