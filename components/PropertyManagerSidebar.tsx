@@ -187,7 +187,7 @@ export default function PropertyManagerSidebar({
 
       {/* Bottom Card: Manage on the go */}
       <div className="mt-8 pt-4">
-        <div className="bg-white border border-[#ece5de] rounded-md p-4 text-left relative shadow-2xs">
+        <div className="bg-white border border-[#ece5de] rounded-md p-3.5 text-left relative shadow-2xs">
           <h4 className="text-xs font-bold text-[#0D254F]">Manage on the go</h4>
           <p className="text-[11px] text-slate-500 mt-1 leading-relaxed">
             Access your properties, tenants, and tasks from anywhere.
@@ -198,22 +198,22 @@ export default function PropertyManagerSidebar({
             <button
               type="button"
               onClick={() => alert("HOMIQ iOS App coming soon to Apple App Store!")}
-              className="flex items-center justify-center gap-2.5 bg-black hover:bg-zinc-900 text-white px-3 py-2 rounded-md text-left transition w-full shadow-2xs cursor-pointer"
+              className="w-full flex items-center justify-start gap-3 bg-black hover:bg-zinc-900 text-white px-3.5 py-2.5 rounded-md text-left transition shadow-2xs cursor-pointer"
             >
-              <div className="relative w-4.5 h-4.5 flex-shrink-0">
+              <div className="relative w-6 h-6 flex-shrink-0">
                 <Image
                   src="/icons/apple-icon.png"
                   alt="Apple Logo"
                   fill
-                  sizes="18px"
+                  sizes="24px"
                   className="object-contain brightness-0 invert"
                 />
               </div>
               <div className="leading-tight text-left">
-                <span className="block text-[8px] uppercase tracking-wider text-zinc-300 font-medium leading-none">
+                <span className="block text-[9.5px] uppercase tracking-wider text-zinc-300 font-medium leading-none">
                   Download on the
                 </span>
-                <span className="block text-xs font-semibold leading-tight text-white mt-0.5">
+                <span className="block text-sm font-bold leading-tight text-white mt-0.5">
                   App Store
                 </span>
               </div>
@@ -223,22 +223,22 @@ export default function PropertyManagerSidebar({
             <button
               type="button"
               onClick={() => alert("HOMIQ Android App coming soon to Google Play!")}
-              className="flex items-center justify-center gap-2.5 bg-black hover:bg-zinc-900 text-white px-3 py-2 rounded-md text-left transition w-full shadow-2xs cursor-pointer"
+              className="w-full flex items-center justify-start gap-3 bg-black hover:bg-zinc-900 text-white px-3.5 py-2.5 rounded-md text-left transition shadow-2xs cursor-pointer"
             >
-              <div className="relative w-4 h-4 flex-shrink-0">
+              <div className="relative w-6 h-6 flex-shrink-0">
                 <Image
                   src="/icons/playstore-icon.png"
                   alt="Google Play Logo"
                   fill
-                  sizes="16px"
+                  sizes="24px"
                   className="object-contain"
                 />
               </div>
               <div className="leading-tight text-left">
-                <span className="block text-[8px] uppercase tracking-wider text-zinc-300 font-medium leading-none">
+                <span className="block text-[9.5px] uppercase tracking-wider text-zinc-300 font-medium leading-none">
                   GET IT ON
                 </span>
-                <span className="block text-xs font-semibold leading-tight text-white mt-0.5">
+                <span className="block text-sm font-bold leading-tight text-white mt-0.5">
                   Google Play
                 </span>
               </div>
