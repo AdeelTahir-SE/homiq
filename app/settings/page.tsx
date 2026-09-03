@@ -699,31 +699,6 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          {/* HORIZONTAL TAB NAVIGATION ON MOBILE & TABLET (< lg) */}
-          <div className="lg:hidden flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none -mx-4 px-4 sm:-mx-7 sm:px-7">
-            {[
-              { id: "account", label: "Account" },
-              { id: "notifications", label: "Notifications" },
-              { id: "searches", label: "Searches & Alerts" },
-              { id: "privacy", label: "Privacy" },
-              { id: "billing", label: "Payment & Billing" },
-              { id: "devices", label: "Devices" },
-              { id: "close", label: "Close Account" },
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveTab(tab.id as any)}
-                className={`px-3.5 py-2 rounded-md text-xs font-semibold whitespace-nowrap transition cursor-pointer flex-shrink-0 border ${
-                  activeTab === tab.id
-                    ? "bg-[#0E2551] text-white border-[#0E2551] shadow-2xs"
-                    : "bg-white text-[#0E2551] border-slate-200 hover:bg-slate-50"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
 
           {/* 3 COLUMN MAIN GRID */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
