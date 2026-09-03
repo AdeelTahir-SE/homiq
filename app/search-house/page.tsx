@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 
@@ -570,9 +571,12 @@ export default function SearchHousePage() {
                   <div className="flex-1 flex flex-col justify-between min-w-0 pr-6">
                     {/* Address */}
                     <div>
-                      <h3 className="text-sm font-bold text-[#0a192f] leading-snug truncate">
+                      <Link
+                        href="/house-detail"
+                        className="text-sm font-bold text-[#0a192f] hover:text-[#d99738] leading-snug truncate block transition-colors"
+                      >
                         {item.title}
-                      </h3>
+                      </Link>
                       <p className="text-xs text-slate-500 mt-0.5 truncate">
                         {item.cityZip}
                       </p>
