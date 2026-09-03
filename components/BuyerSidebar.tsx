@@ -20,7 +20,7 @@ interface SidebarItem {
 const SIDEBAR_ITEMS: SidebarItem[] = [
   {
     name: "Dashboard",
-    href: "/dashboard",
+    href: "/buyer-main-page",
     icon: "/icons/buyer-sidebar-icons/dashboard-icon.png",
   },
   {
@@ -30,7 +30,7 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
   },
   {
     name: "Saved Properties",
-    href: "/saved-properties",
+    href: "/buyer-main-page",
     icon: "/icons/buyer-sidebar-icons/saved-properties-icon.png",
   },
   {
@@ -40,12 +40,12 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
   },
   {
     name: "Alerts",
-    href: "/alerts",
+    href: "/buyer-main-page#saved-searches",
     icon: "/icons/buyer-sidebar-icons/alerts-icon.png",
   },
   {
     name: "My Tours",
-    href: "/my-tours",
+    href: "/schedule-tour",
     icon: "/icons/buyer-sidebar-icons/my-tours-icon.png",
   },
   {

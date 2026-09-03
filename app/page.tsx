@@ -21,7 +21,7 @@ export default function LoginPage() {
     } else if (selectedRole === "agent") {
       router.push("/dashboard");
     } else {
-      router.push("/search-house");
+      router.push("/buyer-main-page");
     }
   };
 
