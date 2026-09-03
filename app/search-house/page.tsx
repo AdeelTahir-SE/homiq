@@ -141,18 +141,14 @@ export default function SearchHousePage() {
     [properties, selectedHouseId]
   );
 
-  const LeafletMap = useMemo(
-    () =>
-      dynamic(() => import("@/components/LeafletMap"), {
-        loading: () => (
-          <div className="w-full h-full min-h-[350px] flex items-center justify-center bg-slate-50 text-slate-400 font-medium">
-            Loading interactive map...
-          </div>
-        ),
-        ssr: false,
-      }),
-    []
-  );
+const LeafletMap = dynamic(() => import("@/components/LeafletMap"), {
+  loading: () => (
+    <div className="w-full h-full min-h-[350px] flex items-center justify-center bg-slate-50 text-slate-400 font-medium">
+      Loading interactive map...
+    </div>
+  ),
+  ssr: false,
+});
 
   // Reusable Filter Sidebar Content Component
   const renderFilterContent = (onClose?: () => void) => (

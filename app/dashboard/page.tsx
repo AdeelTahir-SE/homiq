@@ -372,9 +372,9 @@ export default function DashboardPage() {
       {/* Main Dashboard Workspace */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Header Bar */}
-        <header className="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between sticky top-0 z-40">
-          {/* Search Input */}
-          <div className="relative w-full max-w-md">
+        <header className="h-16 bg-white border-b border-slate-200/90 px-6 sm:px-8 flex items-center justify-end gap-5 sm:gap-6 sticky top-0 z-40">
+          {/* Search Input (Aligned to Right) */}
+          <div className="relative w-72 sm:w-80">
             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -385,58 +385,55 @@ export default function DashboardPage() {
               placeholder="Search leads, properties, or clients..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-[#f8fafc] border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-hidden focus:bg-white focus:ring-2 focus:ring-[#0a192f]/20 transition"
+              className="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-hidden focus:border-slate-300 focus:ring-1 focus:ring-slate-200 transition"
             />
           </div>
 
-          {/* Right Section: Notifications, Messages, Profile */}
-          <div className="flex items-center gap-4 sm:gap-6">
-            {/* Bell Notification */}
-            <button
-              type="button"
-              className="relative p-2 text-slate-600 hover:text-[#0a192f] transition cursor-pointer"
-              aria-label="Notifications"
-            >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-              </svg>
-              <span className="absolute top-1 right-1 w-4 h-4 bg-[#d99738] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-                3
-              </span>
-            </button>
+          {/* Bell Notification */}
+          <button
+            type="button"
+            className="relative p-1.5 text-slate-600 hover:text-[#0a192f] transition cursor-pointer"
+            aria-label="Notifications"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+            <span className="absolute top-0 right-0 w-4.5 h-4.5 bg-[#d99738] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+              3
+            </span>
+          </button>
 
-            {/* Mail Icon */}
-            <button
-              type="button"
-              className="p-2 text-slate-600 hover:text-[#0a192f] transition cursor-pointer"
-              aria-label="Messages"
-            >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </button>
+          {/* Mail Icon */}
+          <button
+            type="button"
+            className="p-1.5 text-slate-600 hover:text-[#0a192f] transition cursor-pointer"
+            aria-label="Messages"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </button>
 
-            {/* User Profile */}
-            <div className="flex items-center gap-3 pl-2 border-l border-slate-200">
-              <div className="relative w-9 h-9 rounded-full overflow-hidden border border-slate-200 flex-shrink-0">
-                <Image
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=80"
-                  alt="Emma Clark"
-                  fill
-                  sizes="36px"
-                  className="object-cover"
-                />
-              </div>
-              <div className="hidden sm:block text-left">
-                <p className="text-sm font-bold text-[#0a192f] leading-tight">
-                  Emma Clark
-                </p>
-                <p className="text-[11px] text-slate-500">Broker/Owner</p>
-              </div>
-              <svg className="w-4 h-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
+          {/* User Profile */}
+          <div className="flex items-center gap-3">
+            <div className="relative w-9 h-9 rounded-full overflow-hidden border border-slate-200 flex-shrink-0">
+              <Image
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=80"
+                alt="Emma Clark"
+                fill
+                sizes="36px"
+                className="object-cover"
+              />
             </div>
+            <div className="hidden sm:block text-left">
+              <p className="text-sm font-bold text-[#0a192f] leading-tight">
+                Emma Clark
+              </p>
+              <p className="text-[11px] text-slate-500 font-medium">Broker/Owner</p>
+            </div>
+            <svg className="w-4 h-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
           </div>
         </header>
 
@@ -910,13 +907,13 @@ export default function DashboardPage() {
                       stroke="#f1f5f9"
                       strokeWidth="4"
                     />
-                    {/* Active: 64% -> strokeDasharray="56.3 31.7" stroke="#0ea5e9" */}
+                    {/* Active: 64% -> strokeDasharray="56.3 31.7" stroke="#d99738" */}
                     <circle
                       cx="18"
                       cy="18"
                       r="14"
                       fill="none"
-                      stroke="#0ea5e9"
+                      stroke="#d99738"
                       strokeWidth="4"
                       strokeDasharray="56.3 31.7"
                       strokeDashoffset="0"
@@ -932,13 +929,13 @@ export default function DashboardPage() {
                       strokeDasharray="15.8 72.2"
                       strokeDashoffset="-56.3"
                     />
-                    {/* Pending: 11% -> strokeDasharray="9.7 78.3" stroke="#f59e0b" */}
+                    {/* Pending: 11% -> strokeDasharray="9.7 78.3" stroke="#0ea5e9" */}
                     <circle
                       cx="18"
                       cy="18"
                       r="14"
                       fill="none"
-                      stroke="#f59e0b"
+                      stroke="#0ea5e9"
                       strokeWidth="4"
                       strokeDasharray="9.7 78.3"
                       strokeDashoffset="-72.1"
@@ -957,16 +954,16 @@ export default function DashboardPage() {
                   </svg>
                   {/* Center Text */}
                   <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                    <span className="text-base font-black text-[#0a192f] leading-none">28</span>
+                    <span className="text-xl font-black text-[#0a192f] leading-none">28</span>
                     <span className="text-[10px] text-slate-400 font-medium mt-0.5">Total</span>
                   </div>
                 </div>
 
                 {/* Legend List */}
-                <div className="space-y-2 text-xs flex-1">
+                <div className="space-y-2.5 text-xs flex-1">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#0ea5e9]" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#d99738]" />
                       <span className="text-slate-600 font-medium">Active</span>
                     </div>
                     <span className="font-bold text-[#0a192f]">18 (64%)</span>
@@ -982,7 +979,7 @@ export default function DashboardPage() {
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#f59e0b]" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#0ea5e9]" />
                       <span className="text-slate-600 font-medium">Pending</span>
                     </div>
                     <span className="font-bold text-[#0a192f]">3 (11%)</span>
