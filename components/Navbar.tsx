@@ -7,9 +7,10 @@ import Link from "next/link";
 interface NavbarProps {
   activeTab?: string;
   showSearch?: boolean;
+  searchPlaceholder?: string;
 }
 
-export default function Navbar({ activeTab = "Buy", showSearch = false }: NavbarProps) {
+export default function Navbar({ activeTab = "Buy", showSearch = false, searchPlaceholder = "Search properties, clients, or messages..." }: NavbarProps) {
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
@@ -127,7 +128,7 @@ export default function Navbar({ activeTab = "Buy", showSearch = false }: Navbar
               </div>
               <input
                 type="text"
-                placeholder="Search properties, neighborhoods..."
+                placeholder={searchPlaceholder}
                 className="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg text-xs xl:text-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 transition"
               />
             </div>
