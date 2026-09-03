@@ -167,18 +167,18 @@ export default function LoginPage() {
             <div className="flex items-center gap-3">
               <div className="relative w-6 h-6 flex-shrink-0">
                 <Image
-                  src="/icons/login-page/privacy-icon.png"
+                  src="/icons/login-page/password-icon.png"
                   alt="Privacy Security Lock"
                   fill
                   sizes="24px"
-                  className="object-contain"
+                  className="object-contain invert"
                 />
               </div>
               <div>
-                <p className="text-xs font-bold text-white leading-tight">
+                <p className="text-sm sm:text-base font-normal text-white leading-tight">
                   Your privacy is our priority.
                 </p>
-                <p className="text-[11px] text-slate-400 leading-tight mt-0.5">
+                <p className="text-xs sm:text-[13px] text-slate-300 leading-tight mt-1">
                   We never share your personal information.
                 </p>
               </div>
@@ -186,30 +186,30 @@ export default function LoginPage() {
 
             {/* Compliance Badges */}
             <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
-              <div className="relative w-10 h-10">
+              <div className="relative w-12 h-12 sm:w-14 sm:h-14">
                 <Image
                   src="/icons/login-page/soc2-icon.png"
                   alt="SOC 2 COMPLIANT"
                   fill
-                  sizes="40px"
+                  sizes="56px"
                   className="object-contain"
                 />
               </div>
-              <div className="relative w-10 h-10">
+              <div className="relative w-12 h-12 sm:w-14 sm:h-14">
                 <Image
                   src="/icons/login-page/gdpr-icon.png"
                   alt="GDPR COMPLIANT"
                   fill
-                  sizes="40px"
+                  sizes="56px"
                   className="object-contain"
                 />
               </div>
-              <div className="relative w-10 h-10">
+              <div className="relative w-12 h-12 sm:w-14 sm:h-14">
                 <Image
                   src="/icons/login-page/ccpa-icon.png"
                   alt="CCPA READY"
                   fill
-                  sizes="40px"
+                  sizes="56px"
                   className="object-contain"
                 />
               </div>
@@ -331,12 +331,12 @@ export default function LoginPage() {
                   Email address
                 </label>
                 <div className="relative flex items-center border border-slate-200 rounded-lg px-3.5 py-2.5 bg-white focus-within:border-[#0a192f] focus-within:ring-1 focus-within:ring-[#0a192f] transition">
-                  <div className="relative w-4 h-4 flex-shrink-0 mr-2.5">
+                  <div className="relative w-3.5 h-3.5 flex-shrink-0 mr-3 ml-0.5 opacity-40 grayscale">
                     <Image
                       src="/icons/login-page/email-icon.png"
                       alt="Email Icon"
                       fill
-                      sizes="16px"
+                      sizes="14px"
                       className="object-contain"
                     />
                   </div>
@@ -356,7 +356,7 @@ export default function LoginPage() {
                   Password
                 </label>
                 <div className="relative flex items-center border border-slate-200 rounded-lg px-3.5 py-2.5 bg-white focus-within:border-[#0a192f] focus-within:ring-1 focus-within:ring-[#0a192f] transition">
-                  <div className="relative w-4 h-4 flex-shrink-0 mr-2.5">
+                  <div className="relative w-4 h-4 flex-shrink-0 mr-2.5 opacity-40 grayscale">
                     <Image
                       src="/icons/login-page/password-icon.png"
                       alt="Password Icon"
@@ -378,7 +378,7 @@ export default function LoginPage() {
                     className="absolute right-3.5 p-0.5 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer"
                     aria-label={showPassword ? "Hide password" : "Show password"}
                   >
-                    <div className="relative w-4 h-4">
+                    <div className="relative w-4 h-4 opacity-40 hover:opacity-70 transition-opacity grayscale">
                       <Image
                         src={
                           showPassword
