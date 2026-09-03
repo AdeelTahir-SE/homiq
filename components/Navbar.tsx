@@ -20,7 +20,7 @@ export default function Navbar({ activeTab = "Buy", showSearch = false, searchPl
     : ["Buy", "Rent", "Sell", "Invest", "Resources"];
 
   return (
-    <header className="w-full bg-white border-b border-slate-200 sticky top-0 z-50">
+    <header className="w-full bg-[#FAF8F7] border-b border-slate-200 sticky top-0 z-50">
       <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand Logo & Main Nav */}
         <div className="flex items-center gap-3">
@@ -266,7 +266,7 @@ export default function Navbar({ activeTab = "Buy", showSearch = false, searchPl
 
       {/* Mobile Navigation Dropdown */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-200 bg-white px-4 py-3 shadow-lg">
+        <div className="md:hidden border-t border-slate-200 bg-[#FAF8F7] px-4 py-3 shadow-lg">
           <nav className="flex flex-col space-y-1">
             {navItems.map((item) => {
               const isActive = activeTab === item;

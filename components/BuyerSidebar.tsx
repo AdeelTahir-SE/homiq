@@ -73,10 +73,10 @@ export default function BuyerSidebar({
             <Link
               key={item.name}
               href={item.href}
-              className={`flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-150 group cursor-pointer ${
+              className={`flex items-center gap-3.5 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-150 group cursor-pointer ${
                 isActive
-                  ? "bg-[#0a192f] text-white shadow-sm font-semibold"
-                  : "text-slate-600 hover:text-[#0a192f] hover:bg-slate-100/80"
+                  ? "bg-[#0B2449] text-white shadow-sm font-semibold"
+                  : "text-slate-600 hover:text-[#0B2449] hover:bg-slate-100/80"
               }`}
             >
               <div
@@ -100,8 +100,8 @@ export default function BuyerSidebar({
 
       {/* Need Help Box */}
       <div className="mt-8 pt-4">
-        <div className="bg-[#f8fafc] border border-slate-200/80 rounded-2xl p-4 text-left">
-          <h4 className="text-sm font-bold text-[#0a192f]">Need help?</h4>
+        <div className="bg-[#f8fafc] border border-slate-200/80 rounded-lg p-4 text-left">
+          <h4 className="text-sm font-bold text-[#0B2449]">Need help?</h4>
           <p className="text-xs text-slate-500 mt-1 leading-relaxed">
             Our support team is here.
           </p>
@@ -112,7 +112,7 @@ export default function BuyerSidebar({
                 ? onContactSupport
                 : () => alert("Contact support clicked! Our team is available 24/7.")
             }
-            className="mt-3.5 w-full bg-white hover:bg-slate-50 border border-slate-300 text-[#0a192f] text-xs font-semibold py-2.5 px-3 rounded-xl shadow-xs transition duration-150 cursor-pointer text-center"
+            className="mt-3.5 w-full bg-white hover:bg-slate-50 border border-slate-300 text-[#0B2449] text-xs font-semibold py-2.5 px-3 rounded-lg shadow-xs transition duration-150 cursor-pointer text-center"
           >
             Contact Support
           </button>

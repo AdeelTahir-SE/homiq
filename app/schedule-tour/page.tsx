@@ -420,7 +420,7 @@ export default function ScheduleTourPage() {
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full bg-[#0a192f] hover:bg-[#071325] text-white text-xs sm:text-sm font-semibold py-3 px-4 rounded-xl shadow-xs transition duration-150 cursor-pointer active:scale-[0.99]"
+                    className="w-full bg-[#0A2246] hover:bg-[#071933] text-white text-xs sm:text-sm font-semibold py-3 px-4 rounded-lg shadow-xs transition duration-150 cursor-pointer active:scale-[0.99]"
                   >
                     Confirm &amp; Request Tour
                   </button>
