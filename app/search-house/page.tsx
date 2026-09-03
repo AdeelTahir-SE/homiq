@@ -1,19 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
-
-// Dynamically import LeafletMap to ensure it runs strictly in client-side context
-const LeafletMap = dynamic(() => import("@/components/LeafletMap"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full min-h-[500px] flex items-center justify-center bg-slate-50 text-slate-400 font-medium">
-      Loading interactive map...
-    </div>
-  ),
-});
 
 interface PropertyItem {
   id: string;
@@ -140,6 +130,19 @@ export default function SearchHousePage() {
   const toggleAccordion = (name: string) => {
     setOpenAccordion(openAccordion === name ? null : name);
   };
+
+  const LeafletMap = useMemo(
+    () =>
+      dynamic(() => import("@/components/LeafletMap"), {
+        loading: () => (
+          <div className="w-full h-full min-h-[400px] flex items-center justify-center bg-slate-50 text-slate-400 font-medium">
+            Loading interactive map...
+          </div>
+        ),
+        ssr: false,
+      }),
+    []
+  );
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-[#0a192f]">
