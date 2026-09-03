@@ -308,11 +308,11 @@ export default function BuyerMainPage() {
             </div>
 
             {/* 2. 4 Metric Summary Cards in a row using buyer-main-page-icons */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-3.5">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3.5">
               {/* Card 1: Saved Properties */}
-              <div className="bg-white rounded-md border border-slate-100 p-4 shadow-xs hover:shadow-md transition-shadow">
-                <div className="flex items-start gap-3">
-                  <div className="relative w-6 h-6 flex-shrink-0 mt-0.5">
+              <div className="bg-white rounded-md border border-slate-100 p-3 sm:p-4 shadow-xs hover:shadow-md transition-shadow min-w-0">
+                <div className="flex items-start gap-2.5 sm:gap-3">
+                  <div className="relative w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 mt-0.5">
                     <Image
                       src="/icons/buyer-main-page-icons/saved-properties-icon.png"
                       alt="Saved Properties Icon"
@@ -321,10 +321,10 @@ export default function BuyerMainPage() {
                       className="object-contain"
                     />
                   </div>
-                  <div>
-                    <div className="text-2xl font-bold text-[#0a192f] leading-none">24</div>
-                    <div className="text-[11px] text-slate-500 font-medium mt-1">Saved Properties</div>
-                    <div className="mt-2.5">
+                  <div className="min-w-0 flex-1">
+                    <div className="text-xl sm:text-2xl font-bold text-[#0a192f] leading-none">24</div>
+                    <div className="text-[10px] sm:text-[11px] text-slate-500 font-medium mt-1 truncate">Saved Properties</div>
+                    <div className="mt-2 sm:mt-2.5">
                       <Link href="/search-house" className="text-xs font-semibold text-[#1d64d8] hover:text-[#1e40af] hover:underline transition inline-block">
                         View all
                       </Link>
@@ -334,9 +334,9 @@ export default function BuyerMainPage() {
               </div>
 
               {/* Card 2: Saved Searches */}
-              <div className="bg-white rounded-md border border-slate-100 p-4 shadow-xs hover:shadow-md transition-shadow">
-                <div className="flex items-start gap-3">
-                  <div className="relative w-6 h-6 flex-shrink-0 mt-0.5">
+              <div className="bg-white rounded-md border border-slate-100 p-3 sm:p-4 shadow-xs hover:shadow-md transition-shadow min-w-0">
+                <div className="flex items-start gap-2.5 sm:gap-3">
+                  <div className="relative w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 mt-0.5">
                     <Image
                       src="/icons/buyer-main-page-icons/saved-searches-icon.png"
                       alt="Saved Searches Icon"
@@ -345,10 +345,10 @@ export default function BuyerMainPage() {
                       className="object-contain"
                     />
                   </div>
-                  <div>
-                    <div className="text-2xl font-bold text-[#0a192f] leading-none">3</div>
-                    <div className="text-[11px] text-slate-500 font-medium mt-1">Saved Searches</div>
-                    <div className="mt-2.5">
+                  <div className="min-w-0 flex-1">
+                    <div className="text-xl sm:text-2xl font-bold text-[#0a192f] leading-none">3</div>
+                    <div className="text-[10px] sm:text-[11px] text-slate-500 font-medium mt-1 truncate">Saved Searches</div>
+                    <div className="mt-2 sm:mt-2.5">
                       <Link href="#saved-searches" className="text-xs font-semibold text-[#1d64d8] hover:text-[#1e40af] hover:underline transition inline-block">
                         View all
                       </Link>
@@ -358,9 +358,9 @@ export default function BuyerMainPage() {
               </div>
 
               {/* Card 3: Upcoming Tours */}
-              <div className="bg-white rounded-md border border-slate-100 p-4 shadow-xs hover:shadow-md transition-shadow">
-                <div className="flex items-start gap-3">
-                  <div className="relative w-6 h-6 flex-shrink-0 mt-0.5">
+              <div className="bg-white rounded-md border border-slate-100 p-3 sm:p-4 shadow-xs hover:shadow-md transition-shadow min-w-0">
+                <div className="flex items-start gap-2.5 sm:gap-3">
+                  <div className="relative w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 mt-0.5">
                     <Image
                       src="/icons/buyer-main-page-icons/upcoming-tours-icon.png"
                       alt="Upcoming Tours Icon"
@@ -369,12 +369,12 @@ export default function BuyerMainPage() {
                       className="object-contain"
                     />
                   </div>
-                  <div>
-                    <div className="text-2xl font-bold text-[#0a192f] leading-none">2</div>
-                    <div className="text-[11px] text-slate-500 font-medium mt-1">Upcoming Tours</div>
-                    <div className="mt-2.5">
+                  <div className="min-w-0 flex-1">
+                    <div className="text-xl sm:text-2xl font-bold text-[#0a192f] leading-none">2</div>
+                    <div className="text-[10px] sm:text-[11px] text-slate-500 font-medium mt-1 truncate">Upcoming Tours</div>
+                    <div className="mt-2 sm:mt-2.5">
                       <Link href="/schedule-tour" className="text-xs font-semibold text-[#1d64d8] hover:text-[#1e40af] hover:underline transition inline-block">
-                        View schedule
+                        View all
                       </Link>
                     </div>
                   </div>
@@ -382,9 +382,9 @@ export default function BuyerMainPage() {
               </div>
 
               {/* Card 4: Applications */}
-              <div className="bg-white rounded-md border border-slate-100 p-4 shadow-xs hover:shadow-md transition-shadow">
-                <div className="flex items-start gap-3">
-                  <div className="relative w-6 h-6 flex-shrink-0 mt-0.5">
+              <div className="bg-white rounded-md border border-slate-100 p-3 sm:p-4 shadow-xs hover:shadow-md transition-shadow min-w-0">
+                <div className="flex items-start gap-2.5 sm:gap-3">
+                  <div className="relative w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 mt-0.5">
                     <Image
                       src="/icons/buyer-main-page-icons/applications-icon.png"
                       alt="Applications Icon"
@@ -393,10 +393,10 @@ export default function BuyerMainPage() {
                       className="object-contain"
                     />
                   </div>
-                  <div>
-                    <div className="text-2xl font-bold text-[#0a192f] leading-none">1</div>
-                    <div className="text-[11px] text-slate-500 font-medium mt-1">Applications</div>
-                    <div className="mt-2.5">
+                  <div className="min-w-0 flex-1">
+                    <div className="text-xl sm:text-2xl font-bold text-[#0a192f] leading-none">1</div>
+                    <div className="text-[10px] sm:text-[11px] text-slate-500 font-medium mt-1 truncate">Applications</div>
+                    <div className="mt-2 sm:mt-2.5">
                       <Link href="/applications" className="text-xs font-semibold text-[#1d64d8] hover:text-[#1e40af] hover:underline transition inline-block">
                         View status
                       </Link>
@@ -422,14 +422,14 @@ export default function BuyerMainPage() {
 
               {/* Property Cards Row */}
               <div className="relative group">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-3.5 sm:gap-3">
                   {savedProperties.map((prop) => (
                     <div
                       key={prop.id}
                       className="bg-white rounded-xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-md transition duration-200 flex flex-col justify-between"
                     >
                       {/* Thumbnail with floating heart */}
-                      <div className="relative w-full h-36 bg-slate-100 overflow-hidden group">
+                      <div className="relative w-full h-44 sm:h-36 bg-slate-100 overflow-hidden group">
                         <Image
                           src={prop.imageUrl}
                           alt={prop.title}
@@ -580,13 +580,17 @@ export default function BuyerMainPage() {
                         )}
                       </div>
 
-                      <div className="min-w-0">
+                      <div className="min-w-0 flex-1">
                         <h3 className="font-bold text-xs sm:text-sm text-[#0a192f] truncate">
                           {search.title}
                         </h3>
                         <p className="text-[11px] text-slate-500 truncate mt-0.5">
                           {search.criteria}
                         </p>
+                        <div className="sm:hidden flex items-center gap-2 mt-1 text-[10px]">
+                          <span className="font-semibold text-[#1d64d8]">{search.matchesCount}</span>
+                          <span className="text-slate-400">• {search.timestamp}</span>
+                        </div>
                       </div>
                     </div>
 
@@ -653,12 +657,12 @@ export default function BuyerMainPage() {
               {/* Spotlight Property Card */}
               <div className="grid grid-cols-1 sm:grid-cols-12 gap-3.5 items-center">
                 {/* Left Thumbnail Image */}
-                <div className="sm:col-span-5 relative h-36 sm:h-32 rounded-md overflow-hidden bg-slate-100">
+                <div className="sm:col-span-5 relative h-44 sm:h-36 rounded-md overflow-hidden bg-slate-100">
                   <Image
                     src={currentRec.imageUrl}
                     alt={currentRec.title}
                     fill
-                    sizes="(max-width: 640px) 100vw, 30vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 40vw, 25vw"
                     className="object-cover"
                   />
                 </div>
@@ -667,11 +671,11 @@ export default function BuyerMainPage() {
                 <div className="sm:col-span-7 flex flex-col justify-between h-full space-y-2">
                   <div>
                     <div className="flex items-start justify-between gap-2">
-                      <div>
-                        <h3 className="font-bold text-xs sm:text-sm text-[#0a192f]">
+                      <div className="min-w-0">
+                        <h3 className="font-bold text-xs sm:text-sm text-[#0a192f] truncate">
                           {currentRec.title}
                         </h3>
-                        <p className="text-[11px] text-slate-500">
+                        <p className="text-[11px] text-slate-500 truncate">
                           {currentRec.cityZip}
                         </p>
                       </div>
@@ -681,7 +685,7 @@ export default function BuyerMainPage() {
                           const updated = [...RECOMMENDED_PROPERTIES];
                           updated[recIndex].isFavorite = !updated[recIndex].isFavorite;
                         }}
-                        className="text-slate-400 hover:text-[#0a192f] transition p-0.5 cursor-pointer"
+                        className="text-slate-400 hover:text-[#0a192f] transition p-0.5 cursor-pointer shrink-0"
                         aria-label="Save recommended property"
                       >
                         <svg className="w-5 h-5 stroke-[#0a192f] fill-none" viewBox="0 0 24 24" strokeWidth={1.8}>
@@ -695,7 +699,7 @@ export default function BuyerMainPage() {
                     </div>
 
                     {/* Specs with Icons */}
-                    <div className="flex items-center gap-3 text-xs text-slate-600 mt-2">
+                    <div className="flex items-center gap-3 text-xs text-slate-600 mt-2 flex-wrap">
                       <div className="flex items-center gap-1 shrink-0 whitespace-nowrap">
                         <svg className="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M3 7v11m0-4h18m0-7v11M7 10h4a2 2 0 012 2v2H3v-2a2 2 0 012-2z" />
@@ -720,7 +724,7 @@ export default function BuyerMainPage() {
                   {/* View Details Button */}
                   <Link
                     href="/house-detail"
-                    className="w-fit text-center bg-[#FCF6EF] hover:bg-[#fff4e8] border border-black text-xs font-semibold text-[#0a192f] py-1.5 px-3 rounded-lg shadow-2xs transition"
+                    className="w-fit text-center bg-[#FCF6EF] hover:bg-[#fff4e8] border border-black text-xs font-semibold text-[#0a192f] py-1.5 px-3 rounded-lg shadow-2xs transition mt-1"
                   >
                     View Details
                   </Link>
@@ -760,23 +764,23 @@ export default function BuyerMainPage() {
               {/* Tours List */}
               <div className="space-y-3 divide-y divide-slate-100">
                 {UPCOMING_TOURS.map((tour) => (
-                  <div key={tour.id} className="py-3 px-1 first:pt-0 flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-3 min-w-0">
+                  <div key={tour.id} className="py-3 px-1 first:pt-0 flex items-center justify-between gap-2.5 sm:gap-3">
+                    <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
                       {/* Date Block */}
-                      <div className="bg-[#FAF7F4] py-2 flex flex-col items-center justify-center w-10 text-center flex-shrink-0">
-                        <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wide leading-tight">
+                      <div className="bg-[#FAF7F4] py-1.5 sm:py-2 flex flex-col items-center justify-center w-9 sm:w-10 text-center flex-shrink-0 rounded-sm">
+                        <span className="text-[8px] sm:text-[9px] font-bold text-slate-400 uppercase tracking-wide leading-tight">
                           {tour.month}
                         </span>
-                        <span className="text-lg font-extrabold text-[#0a192f] leading-none my-0.5">
+                        <span className="text-base sm:text-lg font-extrabold text-[#0a192f] leading-none my-0.5">
                           {tour.day}
                         </span>
-                        <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wide leading-tight">
+                        <span className="text-[8px] sm:text-[9px] font-bold text-slate-400 uppercase tracking-wide leading-tight">
                           {tour.dayOfWeek}
                         </span>
                       </div>
 
                       {/* Thumbnail */}
-                      <div className="relative w-18 h-14 rounded-md overflow-hidden bg-slate-100 flex-shrink-0">
+                      <div className="relative w-16 sm:w-18 h-12 sm:h-14 rounded-md overflow-hidden bg-slate-100 flex-shrink-0">
                         <Image
                           src={tour.imageUrl}
                           alt={tour.title}
@@ -787,24 +791,21 @@ export default function BuyerMainPage() {
                       </div>
 
                       {/* Info */}
-                      <div className="min-w-0">
+                      <div className="min-w-0 flex-1">
                         <h3 className="font-bold text-xs text-[#0a192f] truncate">
                           {tour.title}
                         </h3>
                         <p className="text-[10px] text-slate-400 truncate">
                           {tour.cityZip}
                         </p>
-                        <p className="text-[11px] text-slate-600 font-medium mt-1">
-                          {tour.dateStr}
-                        </p>
-                        <p className="text-[11px] text-slate-600 font-medium">
-                          {tour.timeStr}
+                        <p className="text-[10px] sm:text-[11px] text-slate-600 font-medium mt-0.5 truncate">
+                          {tour.dateStr} • {tour.timeStr}
                         </p>
                       </div>
                     </div>
 
                     {/* Right Badge & Menu */}
-                    <div className="flex items-center gap-2 flex-shrink-0">
+                    <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
                       <span className="bg-[#fff7ed] text-[#c2410c] border border-[#ffedd5] text-[10px] font-semibold px-2 py-0.5 rounded-sm">
                         {tour.status}
                       </span>
@@ -851,8 +852,8 @@ export default function BuyerMainPage() {
               </div>
 
               {/* Stepper Progress Bar */}
-              <div className="py-1">
-                <div className="flex items-center justify-between relative">
+              <div className="py-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                <div className="flex items-center justify-between relative min-w-[280px]">
                   {/* Step 1: Submitted */}
                   <div className="flex flex-col items-center relative z-10">
                     <div className="w-5 h-5 rounded-full bg-[#0a192f] text-white flex items-center justify-center text-[9px] font-bold shadow-xs">
@@ -860,7 +861,7 @@ export default function BuyerMainPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                       </svg>
                     </div>
-                    <span className="text-[10px] font-medium text-[#0a192f] mt-1.5">Submitted</span>
+                    <span className="text-[9px] sm:text-[10px] font-medium text-[#0a192f] mt-1.5 text-center">Submitted</span>
                   </div>
 
                   {/* Line 1 -> 2 */}
@@ -871,7 +872,7 @@ export default function BuyerMainPage() {
                     <div className="w-5 h-5 rounded-full bg-[#d99738] text-white flex items-center justify-center text-[10px] font-bold shadow-xs">
                       2
                     </div>
-                    <span className="text-[10px] font-semibold text-[#0a192f] mt-1.5">Under Review</span>
+                    <span className="text-[9px] sm:text-[10px] font-semibold text-[#0a192f] mt-1.5 text-center">Under Review</span>
                   </div>
 
                   {/* Line 2 -> 3 */}
@@ -882,7 +883,7 @@ export default function BuyerMainPage() {
                     <div className="w-5 h-5 rounded-full bg-slate-100 text-slate-400 border border-slate-200 flex items-center justify-center text-[10px] font-medium">
                       3
                     </div>
-                    <span className="text-[10px] text-slate-400 mt-1.5">Approved</span>
+                    <span className="text-[9px] sm:text-[10px] text-slate-400 mt-1.5 text-center">Approved</span>
                   </div>
 
                   {/* Line 3 -> 4 */}
@@ -893,7 +894,7 @@ export default function BuyerMainPage() {
                     <div className="w-5 h-5 rounded-full bg-slate-100 text-slate-400 border border-slate-200 flex items-center justify-center text-[10px] font-medium">
                       4
                     </div>
-                    <span className="text-[10px] text-slate-400 mt-1.5">Lease Sent</span>
+                    <span className="text-[9px] sm:text-[10px] text-slate-400 mt-1.5 text-center">Lease Sent</span>
                   </div>
 
                   {/* Line 4 -> 5 */}
@@ -904,13 +905,13 @@ export default function BuyerMainPage() {
                     <div className="w-5 h-5 rounded-full bg-slate-100 text-slate-400 border border-slate-200 flex items-center justify-center text-[10px] font-medium">
                       5
                     </div>
-                    <span className="text-[10px] text-slate-400 mt-1.5">Signed</span>
+                    <span className="text-[9px] sm:text-[10px] text-slate-400 mt-1.5 text-center">Signed</span>
                   </div>
                 </div>
               </div>
 
               {/* Application Details Card */}
-              <div className="pt-2 flex items-center justify-between gap-3 border-t border-slate-50">
+              <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-slate-50">
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="relative w-16 h-14 rounded-md overflow-hidden bg-slate-100 flex-shrink-0">
                     <Image
@@ -938,19 +939,18 @@ export default function BuyerMainPage() {
                 </div>
 
                 {/* Status & Decision */}
-                <div className="text-right flex-shrink-0 flex flex-col items-end">
-                  <span className="bg-[#fff7ed] text-[#c2410c] border border-[#ffedd5] text-[10px] font-semibold px-2 py-0.5 rounded-sm">
-                    Under Review
-                  </span>
-                  <div className="text-[10px] text-slate-400 mt-1">
-                    Est. decision
-                  </div>
-                  <div className="text-[11px] font-bold text-[#0a192f]">
-                    May 17, 2024
+                <div className="flex items-center sm:flex-col justify-between sm:justify-center sm:items-end flex-shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100">
+                  <div className="flex items-center sm:flex-col gap-2 sm:gap-0 sm:items-end">
+                    <span className="bg-[#fff7ed] text-[#c2410c] border border-[#ffedd5] text-[10px] font-semibold px-2 py-0.5 rounded-sm">
+                      Under Review
+                    </span>
+                    <div className="text-[10px] text-slate-400 sm:mt-1">
+                      Est. decision: <span className="text-[11px] font-bold text-[#0a192f]">May 17, 2024</span>
+                    </div>
                   </div>
                   <Link
                     href="/applications"
-                    className="mt-1.5 bg-white hover:bg-slate-50 border border-slate-300 text-[11px] font-semibold text-[#0a192f] py-1 px-2.5 rounded-md shadow-2xs transition inline-block text-center"
+                    className="sm:mt-1.5 bg-white hover:bg-slate-50 border border-slate-300 text-[11px] font-semibold text-[#0a192f] py-1 px-2.5 rounded-md shadow-2xs transition inline-block text-center"
                   >
                     View Application
                   </Link>
@@ -964,10 +964,23 @@ export default function BuyerMainPage() {
         {/* BOTTOM REAL-TIME ALERTS MOBILE APP PROMOTION BANNER                       */}
         {/* ========================================================================= */}
         {isBannerVisible && (
-          <section className="relative bg-[#FEF8F2] border border-[#F5EBD9] rounded-md p-4 sm:p-5 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-4 w-full md:w-auto">
-              <div className="relative w-12 h-12 rounded-full bg-[#FBEEDD] border border-[#f3deca] flex items-center justify-center flex-shrink-0 shadow-xs">
-                <div className="relative w-6 h-6">
+          <section className="relative bg-[#FEF8F2] border border-[#F5EBD9] rounded-xl p-4 sm:p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+            {/* Top-Right Dismiss / Close Button */}
+            <button
+              type="button"
+              onClick={() => setIsBannerVisible(false)}
+              className="absolute top-3 right-3 text-slate-400 hover:text-slate-600 p-1.5 rounded-full hover:bg-black/5 transition cursor-pointer z-10"
+              aria-label="Dismiss banner"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Left Info: Phone Icon + Text */}
+            <div className="flex items-start sm:items-center gap-3.5 sm:gap-4 pr-7 sm:pr-8 md:pr-0">
+              <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#FBEEDD] border border-[#f3deca] flex items-center justify-center flex-shrink-0 shadow-xs mt-0.5 sm:mt-0">
+                <div className="relative w-5 h-5 sm:w-6 sm:h-6">
                   <Image
                     src="/icons/buyer-main-page-icons/bottom-mobile-icon.png"
                     alt="Mobile Alerts Icon"
@@ -978,71 +991,58 @@ export default function BuyerMainPage() {
                 </div>
               </div>
 
-              <div>
+              <div className="min-w-0">
                 <h3 className="text-sm sm:text-base font-bold text-[#0a192f] leading-snug">
                   Get real-time alerts on the go
                 </h3>
-                <p className="text-xs text-slate-600 font-normal mt-0.5">
+                <p className="text-xs text-slate-600 font-normal mt-0.5 leading-relaxed">
                   Download the HOMIQ app to receive instant notifications for new matches and updates.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">
-              <div className="flex items-center gap-2.5">
-                {/* Apple App Store Button */}
-                <button
-                  type="button"
-                  onClick={() => alert("HOMIQ iOS App coming soon to Apple App Store!")}
-                  className="bg-black hover:bg-slate-900 text-white px-3.5 py-1.5 rounded-md flex items-center gap-2.5 shadow-xs transition cursor-pointer"
-                >
-                  <div className="relative w-5 h-5 flex-shrink-0">
-                    <Image
-                      src="/icons/apple-icon.png"
-                      alt="Apple Logo"
-                      fill
-                      sizes="20px"
-                      className="object-contain brightness-0 invert"
-                    />
-                  </div>
-                  <div className="text-left">
-                    <div className="text-[8px] uppercase tracking-wide leading-none text-slate-300">Download on the</div>
-                    <div className="text-xs font-semibold leading-tight text-white">App Store</div>
-                  </div>
-                </button>
-
-                {/* Google Play Store Button */}
-                <button
-                  type="button"
-                  onClick={() => alert("HOMIQ Android App coming soon to Google Play!")}
-                  className="bg-black hover:bg-slate-900 text-white px-3.5 py-1.5 rounded-md flex items-center gap-2.5 shadow-xs transition cursor-pointer"
-                >
-                  <div className="relative w-4 h-4 flex-shrink-0">
-                    <Image
-                      src="/icons/playstore-icon.png"
-                      alt="Google Play Logo"
-                      fill
-                      sizes="18px"
-                      className="object-contain"
-                    />
-                  </div>
-                  <div className="text-left">
-                    <div className="text-[8px] uppercase tracking-wide leading-none text-slate-300">GET IT ON</div>
-                    <div className="text-xs font-semibold leading-tight text-white">Google Play</div>
-                  </div>
-                </button>
-              </div>
-
-              {/* Close Button */}
+            {/* Right / Bottom: App Store & Google Play Buttons */}
+            <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap sm:flex-nowrap md:mr-7">
+              {/* Apple App Store Button */}
               <button
                 type="button"
-                onClick={() => setIsBannerVisible(false)}
-                className="text-slate-400 hover:text-slate-600 p-1.5 rounded-md hover:bg-black/5 transition cursor-pointer"
-                aria-label="Dismiss banner"
+                onClick={() => alert("HOMIQ iOS App coming soon to Apple App Store!")}
+                className="flex-1 sm:flex-initial bg-black hover:bg-slate-900 text-white px-3.5 py-2 sm:py-1.5 rounded-lg sm:rounded-md flex items-center justify-center gap-2.5 shadow-xs transition cursor-pointer"
               >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <div className="relative w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0">
+                  <Image
+                    src="/icons/apple-icon.png"
+                    alt="Apple Logo"
+                    fill
+                    sizes="20px"
+                    className="object-contain brightness-0 invert"
+                  />
+                </div>
+                <div className="text-left">
+                  <div className="text-[7px] sm:text-[8px] uppercase tracking-wide leading-none text-slate-300">Download on the</div>
+                  <div className="text-[11px] sm:text-xs font-semibold leading-tight text-white">App Store</div>
+                </div>
+              </button>
+
+              {/* Google Play Store Button */}
+              <button
+                type="button"
+                onClick={() => alert("HOMIQ Android App coming soon to Google Play!")}
+                className="flex-1 sm:flex-initial bg-black hover:bg-slate-900 text-white px-3.5 py-2 sm:py-1.5 rounded-lg sm:rounded-md flex items-center justify-center gap-2.5 shadow-xs transition cursor-pointer"
+              >
+                <div className="relative w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0">
+                  <Image
+                    src="/icons/playstore-icon.png"
+                    alt="Google Play Logo"
+                    fill
+                    sizes="18px"
+                    className="object-contain"
+                  />
+                </div>
+                <div className="text-left">
+                  <div className="text-[7px] sm:text-[8px] uppercase tracking-wide leading-none text-slate-300">GET IT ON</div>
+                  <div className="text-[11px] sm:text-xs font-semibold leading-tight text-white">Google Play</div>
+                </div>
               </button>
             </div>
           </section>

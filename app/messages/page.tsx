@@ -558,15 +558,15 @@ export default function MessagesPage() {
           <div className="space-y-6">
             {/* Header & New Message Button */}
             <div>
-              <h1 className="text-2xl font-black tracking-tight text-[#0a192f] mb-4">
+              <h1 className="text-2xl font-bold tracking-tight text-[#0B244A] mb-4">
                 Messages
               </h1>
               <button
                 type="button"
                 onClick={() => setIsNewMessageModalOpen(true)}
-                className="w-full bg-[#0a192f] hover:bg-[#112240] text-white text-sm font-semibold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-colors cursor-pointer"
+                className="w-full bg-[#0B244A] hover:bg-[#071933] text-white text-sm font-semibold py-2.5 px-4 rounded-md flex items-center justify-center gap-2 shadow-xs transition-colors cursor-pointer"
               >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                 </svg>
                 <span>New Message</span>
@@ -579,19 +579,23 @@ export default function MessagesPage() {
               <button
                 type="button"
                 onClick={() => { setActiveFolder("inbox"); setActiveCategoryFilter("all"); }}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition cursor-pointer ${
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-md text-sm transition cursor-pointer ${
                   activeFolder === "inbox" && activeCategoryFilter === "all"
-                    ? "bg-[#fff7ed] text-[#b45309] font-semibold"
-                    : "text-slate-700 hover:bg-slate-50"
+                    ? "bg-[#0B244A] text-white font-semibold"
+                    : "text-[#0B244A] hover:bg-slate-50 font-medium"
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <svg className="w-5 h-5 text-current" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                  <svg className={`w-5 h-5 ${activeFolder === "inbox" && activeCategoryFilter === "all" ? "text-white stroke-white" : "text-[#0B244A]"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                   </svg>
                   <span>Inbox</span>
                 </div>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-[#ffedd5] text-[#9a3412] font-semibold">
+                <span className={`text-xs px-2 py-0.5 rounded-md font-semibold ${
+                  activeFolder === "inbox" && activeCategoryFilter === "all"
+                    ? "bg-white/20 text-white"
+                    : "bg-[#FAF0E4] text-[#0B244A]"
+                }`}>
                   12
                 </span>
               </button>
@@ -600,14 +604,14 @@ export default function MessagesPage() {
               <button
                 type="button"
                 onClick={() => setActiveFolder("starred")}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition cursor-pointer ${
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-md text-sm transition cursor-pointer ${
                   activeFolder === "starred"
-                    ? "bg-[#fff7ed] text-[#b45309] font-semibold"
-                    : "text-slate-700 hover:bg-slate-50"
+                    ? "bg-[#0B244A] text-white font-semibold"
+                    : "text-[#0B244A] hover:bg-slate-50 font-medium"
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <svg className="w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                  <svg className={`w-5 h-5 ${activeFolder === "starred" ? "text-white stroke-white" : "text-[#0B244A]"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                   </svg>
                   <span>Starred</span>
@@ -618,19 +622,23 @@ export default function MessagesPage() {
               <button
                 type="button"
                 onClick={() => setActiveFolder("unanswered")}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition cursor-pointer ${
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-md text-sm transition cursor-pointer ${
                   activeFolder === "unanswered"
-                    ? "bg-[#fff7ed] text-[#b45309] font-semibold"
-                    : "text-slate-700 hover:bg-slate-50"
+                    ? "bg-[#0B244A] text-white font-semibold"
+                    : "text-[#0B244A] hover:bg-slate-50 font-medium"
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <svg className="w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                  <svg className={`w-5 h-5 ${activeFolder === "unanswered" ? "text-white stroke-white" : "text-[#0B244A]"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
                   <span>Unanswered</span>
                 </div>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-[#fef3c7] text-[#d97706] font-semibold">
+                <span className={`text-xs px-2 py-0.5 rounded-md font-semibold ${
+                  activeFolder === "unanswered"
+                    ? "bg-white/20 text-white"
+                    : "bg-[#FAF0E4] text-[#0B244A]"
+                }`}>
                   3
                 </span>
               </button>
@@ -639,14 +647,14 @@ export default function MessagesPage() {
               <button
                 type="button"
                 onClick={() => setActiveFolder("archived")}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition cursor-pointer ${
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-md text-sm transition cursor-pointer ${
                   activeFolder === "archived"
-                    ? "bg-[#fff7ed] text-[#b45309] font-semibold"
-                    : "text-slate-700 hover:bg-slate-50"
+                    ? "bg-[#0B244A] text-white font-semibold"
+                    : "text-[#0B244A] hover:bg-slate-50 font-medium"
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <svg className="w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                  <svg className={`w-5 h-5 ${activeFolder === "archived" ? "text-white stroke-white" : "text-[#0B244A]"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
                   </svg>
                   <span>Archived</span>
@@ -657,14 +665,14 @@ export default function MessagesPage() {
               <button
                 type="button"
                 onClick={() => setActiveFolder("trash")}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition cursor-pointer ${
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-md text-sm transition cursor-pointer ${
                   activeFolder === "trash"
-                    ? "bg-[#fff7ed] text-[#b45309] font-semibold"
-                    : "text-slate-700 hover:bg-slate-50"
+                    ? "bg-[#0B244A] text-white font-semibold"
+                    : "text-[#0B244A] hover:bg-slate-50 font-medium"
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <svg className="w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                  <svg className={`w-5 h-5 ${activeFolder === "trash" ? "text-white stroke-white" : "text-[#0B244A]"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                   </svg>
                   <span>Trash</span>
@@ -675,22 +683,22 @@ export default function MessagesPage() {
             {/* FILTERS Section */}
             <div>
               <p className="text-[11px] font-bold text-slate-400 tracking-wider uppercase mb-2 px-1">
-                Filters
+                FILTERS
               </p>
               <div className="space-y-1">
                 {/* All Conversations */}
                 <button
                   type="button"
                   onClick={() => { setActiveCategoryFilter("all"); setActiveFolder("inbox"); }}
-                  className={`w-full flex items-center justify-between px-3.5 py-2 rounded-xl text-sm font-medium transition cursor-pointer ${
+                  className={`w-full flex items-center justify-between px-3.5 py-2 rounded-md text-sm transition cursor-pointer ${
                     activeCategoryFilter === "all"
-                      ? "bg-[#eff6ff] text-[#1d4ed8] font-semibold"
-                      : "text-slate-700 hover:bg-slate-50"
+                      ? "bg-[#0B244A] text-white font-semibold"
+                      : "text-[#0B244A] hover:bg-slate-50 font-medium"
                   }`}
                 >
                   <span>All Conversations</span>
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-semibold ${
-                    activeCategoryFilter === "all" ? "bg-[#dbeafe] text-[#1e40af]" : "bg-slate-100 text-slate-600"
+                  <span className={`text-xs px-2 py-0.5 rounded-md font-semibold ${
+                    activeCategoryFilter === "all" ? "bg-white/20 text-white" : "bg-slate-100 text-[#0B244A]"
                   }`}>
                     12
                   </span>
@@ -700,14 +708,16 @@ export default function MessagesPage() {
                 <button
                   type="button"
                   onClick={() => setActiveCategoryFilter("buyers")}
-                  className={`w-full flex items-center justify-between px-3.5 py-2 rounded-xl text-sm font-medium transition cursor-pointer ${
+                  className={`w-full flex items-center justify-between px-3.5 py-2 rounded-md text-sm transition cursor-pointer ${
                     activeCategoryFilter === "buyers"
-                      ? "bg-[#eff6ff] text-[#1d4ed8] font-semibold"
-                      : "text-slate-700 hover:bg-slate-50"
+                      ? "bg-[#0B244A] text-white font-semibold"
+                      : "text-[#0B244A] hover:bg-slate-50 font-medium"
                   }`}
                 >
                   <span>Buyers / Renters</span>
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold">
+                  <span className={`text-xs px-2 py-0.5 rounded-md font-semibold ${
+                    activeCategoryFilter === "buyers" ? "bg-white/20 text-white" : "bg-slate-100 text-[#0B244A]"
+                  }`}>
                     9
                   </span>
                 </button>
@@ -716,14 +726,16 @@ export default function MessagesPage() {
                 <button
                   type="button"
                   onClick={() => setActiveCategoryFilter("sellers")}
-                  className={`w-full flex items-center justify-between px-3.5 py-2 rounded-xl text-sm font-medium transition cursor-pointer ${
+                  className={`w-full flex items-center justify-between px-3.5 py-2 rounded-md text-sm transition cursor-pointer ${
                     activeCategoryFilter === "sellers"
-                      ? "bg-[#eff6ff] text-[#1d4ed8] font-semibold"
-                      : "text-slate-700 hover:bg-slate-50"
+                      ? "bg-[#0B244A] text-white font-semibold"
+                      : "text-[#0B244A] hover:bg-slate-50 font-medium"
                   }`}
                 >
                   <span>Sellers</span>
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold">
+                  <span className={`text-xs px-2 py-0.5 rounded-md font-semibold ${
+                    activeCategoryFilter === "sellers" ? "bg-white/20 text-white" : "bg-slate-100 text-[#0B244A]"
+                  }`}>
                     2
                   </span>
                 </button>
@@ -732,14 +744,16 @@ export default function MessagesPage() {
                 <button
                   type="button"
                   onClick={() => setActiveCategoryFilter("other")}
-                  className={`w-full flex items-center justify-between px-3.5 py-2 rounded-xl text-sm font-medium transition cursor-pointer ${
+                  className={`w-full flex items-center justify-between px-3.5 py-2 rounded-md text-sm transition cursor-pointer ${
                     activeCategoryFilter === "other"
-                      ? "bg-[#eff6ff] text-[#1d4ed8] font-semibold"
-                      : "text-slate-700 hover:bg-slate-50"
+                      ? "bg-[#0B244A] text-white font-semibold"
+                      : "text-[#0B244A] hover:bg-slate-50 font-medium"
                   }`}
                 >
                   <span>Other</span>
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold">
+                  <span className={`text-xs px-2 py-0.5 rounded-md font-semibold ${
+                    activeCategoryFilter === "other" ? "bg-white/20 text-white" : "bg-slate-100 text-[#0B244A]"
+                  }`}>
                     1
                   </span>
                 </button>
@@ -749,15 +763,15 @@ export default function MessagesPage() {
 
           {/* Bottom Card: Stay connected on the go */}
           <div className="mt-6 pt-4">
-            <div className="bg-[#fcf9f5] border border-[#f5ebd9] rounded-2xl p-4 text-left relative shadow-2xs">
+            <div className="bg-[#FCF9F5] border border-[#F5EBD9] rounded-md p-3.5 text-left relative shadow-2xs">
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-amber-100/80 flex items-center justify-center flex-shrink-0 text-amber-800">
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <div className="w-8 h-8 rounded-md bg-[#FBEEDD] flex items-center justify-center flex-shrink-0 text-[#0B244A]">
+                  <svg className="w-4 h-4 text-[#0B244A]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-[#0a192f] leading-snug">
+                  <h4 className="text-xs font-bold text-[#0B244A] leading-snug">
                     Stay connected on the go
                   </h4>
                   <p className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
@@ -771,7 +785,7 @@ export default function MessagesPage() {
                 {/* App Store */}
                 <button
                   type="button"
-                  className="w-full bg-black hover:bg-zinc-900 text-white rounded-lg px-2.5 py-1.5 flex items-center justify-center gap-2 cursor-pointer transition"
+                  className="w-full bg-black hover:bg-zinc-900 text-white rounded-md px-2.5 py-1.5 flex items-center justify-center gap-2 cursor-pointer transition"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 384 512">
                     <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.3 26.1 2 52.1-13.6 69.5-33.7z" />
@@ -785,7 +799,7 @@ export default function MessagesPage() {
                 {/* Google Play */}
                 <button
                   type="button"
-                  className="w-full bg-black hover:bg-zinc-900 text-white rounded-lg px-2.5 py-1.5 flex items-center justify-center gap-2 cursor-pointer transition"
+                  className="w-full bg-black hover:bg-zinc-900 text-white rounded-md px-2.5 py-1.5 flex items-center justify-center gap-2 cursor-pointer transition"
                 >
                   <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 512 512">
                     <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 24 20.6 24 37v438c0 16.4 10 30.2 23 37l244.6-244.6L47 0zm395.2 214.7l-48.4-27.8-69.7 69.7 69.7 69.7 48.7-27.9c14.7-8.4 23.5-23.7 23.5-40.6s-8.8-32.2-23.8-40.9zM104.6 499l220.7-221.3 60.1 60.1L104.6 499z" />
@@ -817,7 +831,7 @@ export default function MessagesPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search messages..."
-                className="w-full pl-9 pr-9 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-slate-400 transition"
+                className="w-full pl-9 pr-9 py-2 bg-slate-50 border border-slate-200 rounded-md text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-slate-400 transition"
               />
               <button
                 type="button"
@@ -907,7 +921,7 @@ export default function MessagesPage() {
                     {/* Content */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between gap-1 mb-0.5">
-                        <h3 className="text-xs font-bold text-[#0a192f] truncate">
+                        <h3 className="text-xs font-bold text-[#0B244A] truncate">
                           {conv.name}
                         </h3>
                         <span className="text-[11px] text-slate-400 flex-shrink-0">
@@ -920,7 +934,7 @@ export default function MessagesPage() {
                           {conv.lastMessagePreview}
                         </p>
                         {conv.unreadCount > 0 ? (
-                          <span className="w-4.5 h-4.5 rounded-full bg-[#0a192f] text-white text-[10px] font-bold flex items-center justify-center flex-shrink-0">
+                          <span className="w-4.5 h-4.5 rounded-full bg-[#0B244A] text-white text-[10px] font-bold flex items-center justify-center flex-shrink-0">
                             {conv.unreadCount}
                           </span>
                         ) : conv.isStarred ? (
@@ -965,7 +979,7 @@ export default function MessagesPage() {
                 />
               </div>
               <div>
-                <h2 className="text-sm font-bold text-[#0a192f] leading-snug">
+                <h2 className="text-sm font-bold text-[#0B244A] leading-snug">
                   {activeConversation.name}
                 </h2>
                 <p className="text-xs text-slate-500">
@@ -980,7 +994,7 @@ export default function MessagesPage() {
               <button
                 type="button"
                 onClick={() => handleToggleStar(activeConversation.id)}
-                className={`p-2 rounded-lg hover:bg-slate-100 transition cursor-pointer ${
+                className={`p-2 rounded-md hover:bg-slate-100 transition cursor-pointer ${
                   activeConversation.isStarred ? "text-amber-500" : "text-slate-500"
                 }`}
                 title={activeConversation.isStarred ? "Unstar conversation" : "Star conversation"}
@@ -994,8 +1008,8 @@ export default function MessagesPage() {
               <button
                 type="button"
                 onClick={() => setIsDetailsOpen(!isDetailsOpen)}
-                className={`p-2 rounded-lg hover:bg-slate-100 transition cursor-pointer ${
-                  isDetailsOpen ? "text-[#0a192f] bg-slate-100" : "text-slate-500"
+                className={`p-2 rounded-md hover:bg-slate-100 transition cursor-pointer ${
+                  isDetailsOpen ? "text-[#0B244A] bg-slate-100" : "text-slate-500"
                 }`}
                 title="Toggle details panel"
               >
@@ -1007,7 +1021,7 @@ export default function MessagesPage() {
               {/* More Actions Dropdown */}
               <button
                 type="button"
-                className="p-2 rounded-lg hover:bg-slate-100 transition cursor-pointer text-slate-500"
+                className="p-2 rounded-md hover:bg-slate-100 transition cursor-pointer text-slate-500"
                 title="More options"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
@@ -1021,9 +1035,9 @@ export default function MessagesPage() {
           <div className="flex-1 overflow-y-auto p-6 space-y-6">
             {/* Top Property Pin Card */}
             {activeConversation.propertyOfInterest && (
-              <div className="bg-white border border-slate-200/90 rounded-2xl p-3.5 flex items-center justify-between gap-4 shadow-2xs">
+              <div className="bg-white border border-slate-200/90 rounded-md p-3.5 flex items-center justify-between gap-4 shadow-2xs">
                 <div className="flex items-center gap-3.5 min-w-0">
-                  <div className="relative w-24 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-slate-100">
+                  <div className="relative w-24 h-16 rounded-md overflow-hidden flex-shrink-0 border border-slate-100">
                     <Image
                       src={activeConversation.propertyOfInterest.imageUrl}
                       alt={activeConversation.propertyOfInterest.title}
@@ -1033,7 +1047,7 @@ export default function MessagesPage() {
                     />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-xs sm:text-sm font-bold text-[#0a192f] truncate">
+                    <h4 className="text-xs sm:text-sm font-bold text-[#0B244A] truncate">
                       {activeConversation.propertyOfInterest.title}
                     </h4>
                     <p className="text-xs text-slate-500 mt-0.5">
@@ -1050,7 +1064,7 @@ export default function MessagesPage() {
 
                 <Link
                   href="/house-detail"
-                  className="px-3.5 py-1.5 bg-white hover:bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 rounded-xl transition flex-shrink-0 whitespace-nowrap shadow-2xs"
+                  className="px-3.5 py-1.5 bg-white hover:bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 rounded-md transition flex-shrink-0 whitespace-nowrap shadow-2xs"
                 >
                   View Property
                 </Link>
@@ -1075,7 +1089,7 @@ export default function MessagesPage() {
                 if (isUser) {
                   return (
                     <div key={msg.id} className="flex flex-col items-end">
-                      <div className="bg-[#0a192f] text-white rounded-2xl rounded-tr-xs px-4 py-3 text-xs sm:text-sm max-w-[80%] md:max-w-md shadow-2xs leading-relaxed">
+                      <div className="bg-[#0B244A] text-white rounded-md rounded-tr-xs px-4 py-3 text-xs sm:text-sm max-w-[80%] md:max-w-md shadow-2xs leading-relaxed">
                         {msg.text}
                       </div>
                       <div className="flex items-center gap-1.5 mt-1 text-[11px] text-slate-400">
@@ -1101,7 +1115,7 @@ export default function MessagesPage() {
                       />
                     </div>
                     <div className="flex flex-col items-start max-w-[80%] md:max-w-md">
-                      <div className="bg-white border border-slate-100 text-slate-800 rounded-2xl rounded-tl-xs px-4 py-3 text-xs sm:text-sm shadow-2xs leading-relaxed">
+                      <div className="bg-white border border-slate-100 text-slate-800 rounded-md rounded-tl-xs px-4 py-3 text-xs sm:text-sm shadow-2xs leading-relaxed">
                         {msg.text}
                       </div>
                       <span className="text-[11px] text-slate-400 mt-1 ml-1">
@@ -1147,7 +1161,7 @@ export default function MessagesPage() {
             </div>
 
             {/* Main Input Box Card */}
-            <div className="border border-slate-200 rounded-xl p-3 bg-white focus-within:border-slate-400 transition">
+            <div className="border border-slate-200 rounded-md p-3 bg-white focus-within:border-slate-400 transition">
               <textarea
                 value={messageInput}
                 onChange={(e) => setMessageInput(e.target.value)}
@@ -1162,7 +1176,7 @@ export default function MessagesPage() {
                 {/* Left Attachment Buttons */}
                 <div className="flex items-center gap-4 text-xs font-medium text-slate-600">
                   {/* Attach File */}
-                  <label className="flex items-center gap-1.5 hover:text-[#0a192f] transition cursor-pointer">
+                  <label className="flex items-center gap-1.5 hover:text-[#0B244A] transition cursor-pointer">
                     <input type="file" className="hidden" onChange={(e) => {
                       if (e.target.files?.[0]) {
                         setMessageInput((prev) => `${prev} [Attachment: ${e.target.files![0].name}]`);
@@ -1175,7 +1189,7 @@ export default function MessagesPage() {
                   </label>
 
                   {/* Image */}
-                  <label className="flex items-center gap-1.5 hover:text-[#0a192f] transition cursor-pointer">
+                  <label className="flex items-center gap-1.5 hover:text-[#0B244A] transition cursor-pointer">
                     <input type="file" accept="image/*" className="hidden" onChange={(e) => {
                       if (e.target.files?.[0]) {
                         setMessageInput((prev) => `${prev} [Image: ${e.target.files![0].name}]`);
@@ -1191,7 +1205,7 @@ export default function MessagesPage() {
                   <button
                     type="button"
                     onClick={() => setShowScheduleModal(true)}
-                    className="flex items-center gap-1.5 hover:text-[#0a192f] transition cursor-pointer"
+                    className="flex items-center gap-1.5 hover:text-[#0B244A] transition cursor-pointer"
                   >
                     <svg className="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -1205,7 +1219,7 @@ export default function MessagesPage() {
                   <button
                     type="button"
                     onClick={handleSendMessage}
-                    className="bg-[#0a192f] hover:bg-[#112240] text-white px-4 py-2 rounded-l-lg text-xs font-semibold flex items-center gap-2 transition cursor-pointer shadow-xs"
+                    className="bg-[#0B244A] hover:bg-[#071933] text-white px-4 py-2 rounded-l-md text-xs font-semibold flex items-center gap-2 transition cursor-pointer shadow-xs"
                   >
                     <svg className="w-3.5 h-3.5 fill-current transform rotate-45" viewBox="0 0 20 20">
                       <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
@@ -1214,7 +1228,7 @@ export default function MessagesPage() {
                   </button>
                   <button
                     type="button"
-                    className="bg-[#081426] hover:bg-[#050c17] text-white px-2 py-2 rounded-r-lg border-l border-slate-700 text-xs transition cursor-pointer"
+                    className="bg-[#081b37] hover:bg-[#051124] text-white px-2 py-2 rounded-r-md border-l border-slate-700 text-xs transition cursor-pointer"
                     title="Send options"
                   >
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -1234,7 +1248,7 @@ export default function MessagesPage() {
           <aside className="w-80 lg:w-[340px] flex-shrink-0 bg-white border-l border-slate-200 overflow-y-auto p-5 space-y-6 hidden xl:block">
             {/* Header: Conversation Details */}
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <h3 className="text-sm font-bold text-[#0a192f]">
+              <h3 className="text-sm font-bold text-[#0B244A]">
                 Conversation Details
               </h3>
               <button
@@ -1262,7 +1276,7 @@ export default function MessagesPage() {
                   />
                 </div>
                 <div className="min-w-0">
-                  <h4 className="text-sm font-bold text-[#0a192f] truncate">
+                  <h4 className="text-sm font-bold text-[#0B244A] truncate">
                     {activeConversation.name}
                   </h4>
                   <p className="text-xs text-slate-500 truncate">
@@ -1291,7 +1305,7 @@ export default function MessagesPage() {
 
             {/* About Section */}
             <div className="pt-3 border-t border-slate-100 space-y-3">
-              <h4 className="text-xs font-bold text-[#0a192f]">
+              <h4 className="text-xs font-bold text-[#0B244A]">
                 About {activeConversation.name.split(" ")[0]}
               </h4>
 
@@ -1329,12 +1343,12 @@ export default function MessagesPage() {
             {/* Property of Interest */}
             {activeConversation.propertyOfInterest && (
               <div className="pt-3 border-t border-slate-100 space-y-3">
-                <h4 className="text-xs font-bold text-[#0a192f]">
+                <h4 className="text-xs font-bold text-[#0B244A]">
                   Property of Interest
                 </h4>
 
                 <div className="flex items-start gap-3">
-                  <div className="relative w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 border border-slate-100">
+                  <div className="relative w-14 h-14 rounded-md overflow-hidden flex-shrink-0 border border-slate-100">
                     <Image
                       src={activeConversation.propertyOfInterest.imageUrl}
                       alt={activeConversation.propertyOfInterest.title}
@@ -1344,10 +1358,10 @@ export default function MessagesPage() {
                     />
                   </div>
                   <div className="min-w-0">
-                    <h5 className="text-xs font-bold text-[#0a192f] truncate">
+                    <h5 className="text-xs font-bold text-[#0B244A] truncate">
                       {activeConversation.propertyOfInterest.title}
                     </h5>
-                    <p className="text-sm font-black text-[#0a192f] mt-0.5">
+                    <p className="text-sm font-bold text-[#0B244A] mt-0.5">
                       {activeConversation.propertyOfInterest.price}
                     </p>
                     <p className="text-[11px] text-slate-500 mt-0.5">
@@ -1367,7 +1381,7 @@ export default function MessagesPage() {
             {/* Quick Replies */}
             <div className="pt-3 border-t border-slate-100 space-y-3">
               <div className="flex items-center justify-between">
-                <h4 className="text-xs font-bold text-[#0a192f]">
+                <h4 className="text-xs font-bold text-[#0B244A]">
                   Quick Replies
                 </h4>
                 <button
@@ -1388,7 +1402,7 @@ export default function MessagesPage() {
                     key={idx}
                     type="button"
                     onClick={() => handleQuickReply(reply)}
-                    className="w-full text-left p-2.5 rounded-xl border border-slate-100 bg-slate-50/70 hover:bg-slate-100/90 transition cursor-pointer flex items-start gap-2.5 group"
+                    className="w-full text-left p-2.5 rounded-md border border-slate-100 bg-slate-50/70 hover:bg-slate-100/90 transition cursor-pointer flex items-start gap-2.5 group"
                   >
                     <svg className="w-4 h-4 text-slate-400 group-hover:text-slate-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -1417,9 +1431,9 @@ export default function MessagesPage() {
       {/* New Message Modal */}
       {isNewMessageModalOpen && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl space-y-4">
+          <div className="bg-white rounded-md max-w-md w-full p-6 shadow-xl space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <h3 className="text-base font-bold text-[#0a192f]">
+              <h3 className="text-base font-bold text-[#0B244A]">
                 Compose New Message
               </h3>
               <button
@@ -1443,7 +1457,7 @@ export default function MessagesPage() {
                   value={newRecipient}
                   onChange={(e) => setNewRecipient(e.target.value)}
                   placeholder="e.g. Sarah Jenkins or (512) 555-0199"
-                  className="w-full px-3.5 py-2 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-slate-400"
+                  className="w-full px-3.5 py-2 border border-slate-200 rounded-md text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-slate-400"
                 />
               </div>
 
@@ -1456,7 +1470,7 @@ export default function MessagesPage() {
                   onChange={(e) => setNewMsgText(e.target.value)}
                   placeholder="Type your message..."
                   rows={4}
-                  className="w-full px-3.5 py-2 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-slate-400 resize-none"
+                  className="w-full px-3.5 py-2 border border-slate-200 rounded-md text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-slate-400 resize-none"
                 />
               </div>
             </div>
@@ -1465,14 +1479,14 @@ export default function MessagesPage() {
               <button
                 type="button"
                 onClick={() => setIsNewMessageModalOpen(false)}
-                className="px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 rounded-xl transition cursor-pointer"
+                className="px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 rounded-md transition cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={handleCreateNewConversation}
-                className="px-4 py-2 bg-[#0a192f] hover:bg-[#112240] text-white text-xs font-semibold rounded-xl transition cursor-pointer"
+                className="px-4 py-2 bg-[#0B244A] hover:bg-[#071933] text-white text-xs font-semibold rounded-md transition cursor-pointer"
               >
                 Send Message
               </button>
@@ -1484,9 +1498,9 @@ export default function MessagesPage() {
       {/* Schedule Tour / Message Modal */}
       {showScheduleModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-2xl max-w-sm w-full p-6 shadow-xl space-y-4">
+          <div className="bg-white rounded-md max-w-sm w-full p-6 shadow-xl space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <h3 className="text-base font-bold text-[#0a192f]">
+              <h3 className="text-base font-bold text-[#0B244A]">
                 Schedule Tour with {activeConversation.name}
               </h3>
               <button
@@ -1509,7 +1523,7 @@ export default function MessagesPage() {
                   type="date"
                   value={tourDate}
                   onChange={(e) => setTourDate(e.target.value)}
-                  className="w-full px-3.5 py-2 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:border-slate-400"
+                  className="w-full px-3.5 py-2 border border-slate-200 rounded-md text-xs sm:text-sm text-slate-800 focus:outline-none focus:border-slate-400"
                 />
               </div>
 
@@ -1520,7 +1534,7 @@ export default function MessagesPage() {
                 <select
                   value={tourTime}
                   onChange={(e) => setTourTime(e.target.value)}
-                  className="w-full px-3.5 py-2 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:border-slate-400"
+                  className="w-full px-3.5 py-2 border border-slate-200 rounded-md text-xs sm:text-sm text-slate-800 focus:outline-none focus:border-slate-400"
                 >
                   <option value="10:00 AM">10:00 AM - Morning</option>
                   <option value="11:00 AM">11:00 AM - Late Morning</option>
@@ -1534,7 +1548,7 @@ export default function MessagesPage() {
               <button
                 type="button"
                 onClick={() => setShowScheduleModal(false)}
-                className="px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 rounded-xl transition cursor-pointer"
+                className="px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 rounded-md transition cursor-pointer"
               >
                 Cancel
               </button>
@@ -1544,7 +1558,7 @@ export default function MessagesPage() {
                   setMessageInput(`I've scheduled a tour for ${tourDate} at ${tourTime} at ${activeConversation.propertyOfInterest?.title || "the property"}. Looking forward to seeing you!`);
                   setShowScheduleModal(false);
                 }}
-                className="px-4 py-2 bg-[#0a192f] hover:bg-[#112240] text-white text-xs font-semibold rounded-xl transition cursor-pointer"
+                className="px-4 py-2 bg-[#0B244A] hover:bg-[#071933] text-white text-xs font-semibold rounded-md transition cursor-pointer"
               >
                 Insert Schedule
               </button>
