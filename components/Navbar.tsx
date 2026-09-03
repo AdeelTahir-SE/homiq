@@ -10,7 +10,7 @@ interface NavbarProps {
   searchPlaceholder?: string;
 }
 
-export default function Navbar({ activeTab = "none", showSearch = false, searchPlaceholder = "Search properties, clients, or messages..." }: NavbarProps) {
+export default function Navbar({ activeTab = "Buy", showSearch = false, searchPlaceholder = "Search properties, clients, or messages..." }: NavbarProps) {
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
@@ -52,7 +52,7 @@ export default function Navbar({ activeTab = "none", showSearch = false, searchP
                       onClick={() => setIsResourcesOpen(!isResourcesOpen)}
                       className={`flex items-center gap-1.5 text-sm font-medium transition-colors cursor-pointer ${
                         isActive
-                          ? "text-[#0a192f] font-semibold"
+                          ? "text-[#0a192f]"
                           : "text-slate-600 hover:text-[#0a192f]"
                       }`}
                     >
@@ -106,7 +106,7 @@ export default function Navbar({ activeTab = "none", showSearch = false, searchP
                   href="/search-house"
                   className={`text-sm font-medium py-1 transition-colors ${
                     isActive
-                      ? "text-[#0a192f] font-semibold"
+                      ? "text-[#0a192f]"
                       : "text-slate-600 hover:text-[#0a192f]"
                   }`}
                 >
