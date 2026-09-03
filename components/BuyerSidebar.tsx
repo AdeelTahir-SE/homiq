@@ -68,7 +68,7 @@ export default function BuyerSidebar({
 }: BuyerSidebarProps) {
   return (
     <aside
-      className={`w-64 flex-shrink-0 bg-white border-r border-slate-200 min-h-[calc(100vh-64px)] flex flex-col justify-between p-4 sm:p-5 select-none ${className}`}
+      className={`w-64 flex-shrink-0 bg-white border-r border-slate-200 h-[calc(100vh-64px)] sticky top-16 flex flex-col justify-between p-4 sm:p-5 select-none overflow-y-auto ${className}`}
     >
       {/* Navigation List */}
       <div className="space-y-1.5">
@@ -105,9 +105,9 @@ export default function BuyerSidebar({
         })}
       </div>
 
-      {/* Need Help Box */}
-      <div className="mt-8 pt-4">
-        <div className="bg-[#f8fafc] border border-slate-200/80 rounded-lg p-4 text-left">
+      {/* Need Help / Contact Support Box at Bottom */}
+      <div className="mt-auto pt-6">
+        <div className="bg-[#f8fafc] border-2 border-[#F8F6F4] rounded-lg p-4 text-left shadow-2xs">
           <h4 className="text-sm font-bold text-[#0B2449]">Need help?</h4>
           <p className="text-xs text-slate-500 mt-1 leading-relaxed">
             Our support team is here.
@@ -119,7 +119,7 @@ export default function BuyerSidebar({
                 ? onContactSupport
                 : () => alert("Contact support clicked! Our team is available 24/7.")
             }
-            className="mt-3.5 w-full bg-white hover:bg-slate-50 border border-slate-300 text-[#0B2449] text-xs font-semibold py-2.5 px-3 rounded-lg shadow-xs transition duration-150 cursor-pointer text-center"
+            className="mt-3.5 w-full bg-white hover:bg-slate-50 border-2 border-[#F8F6F4] text-[#0B2449] text-xs font-semibold py-2.5 px-3 rounded-lg shadow-xs transition duration-150 cursor-pointer text-center"
           >
             Contact Support
           </button>

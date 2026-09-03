@@ -172,7 +172,7 @@ export default function HouseDetailPage() {
       {/* Main Body with Buyer Sidebar (lg+) and Page Content */}
       <div className="flex-1 flex flex-col lg:flex-row w-full max-w-[1920px] mx-auto">
         {/* Buyer Sidebar Component (Hidden on mobile & tablet for full-width layout) */}
-        <div className="hidden lg:block">
+        <div className="hidden lg:flex flex-col flex-shrink-0">
           <BuyerSidebar activeItem="Dashboard" />
         </div>
 
@@ -1180,7 +1180,7 @@ export default function HouseDetailPage() {
             <div className="flex-1 overflow-y-auto">
               <BuyerSidebar
                 activeItem="Dashboard"
-                className="w-full border-r-0 min-h-0 p-3.5 sm:p-4"
+                className="w-full h-full static border-r-0 min-h-0 p-3.5 sm:p-4"
                 onNavigate={() => setIsMobileSidebarOpen(false)}
                 onContactSupport={() => setIsMobileSidebarOpen(false)}
               />
