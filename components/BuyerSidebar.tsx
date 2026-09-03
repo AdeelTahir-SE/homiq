@@ -7,6 +7,8 @@ import Link from "next/link";
 interface BuyerSidebarProps {
   activeItem?: string;
   onContactSupport?: () => void;
+  className?: string;
+  onNavigate?: () => void;
 }
 
 interface SidebarItem {
@@ -61,9 +63,13 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
 export default function BuyerSidebar({
   activeItem = "Dashboard",
   onContactSupport,
+  className = "",
+  onNavigate,
 }: BuyerSidebarProps) {
   return (
-    <aside className="w-64 flex-shrink-0 bg-white border-r border-slate-200 min-h-[calc(100vh-64px)] flex flex-col justify-between p-4 sm:p-5 select-none">
+    <aside
+      className={`w-64 flex-shrink-0 bg-white border-r border-slate-200 min-h-[calc(100vh-64px)] flex flex-col justify-between p-4 sm:p-5 select-none ${className}`}
+    >
       {/* Navigation List */}
       <div className="space-y-1.5">
         {SIDEBAR_ITEMS.map((item) => {
@@ -73,6 +79,7 @@ export default function BuyerSidebar({
             <Link
               key={item.name}
               href={item.href}
+              onClick={onNavigate}
               className={`flex items-center gap-3.5 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-150 group cursor-pointer ${
                 isActive
                   ? "bg-[#0B2449] text-white shadow-sm font-semibold"

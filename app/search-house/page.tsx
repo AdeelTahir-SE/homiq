@@ -137,7 +137,7 @@ export default function SearchHousePage() {
   };
 
   const selectedProperty = useMemo(
-    () => properties.find((p) => p.id === selectedHouseId) || properties[0],
+    () => (selectedHouseId ? properties.find((p) => p.id === selectedHouseId) || null : null),
     [properties, selectedHouseId]
   );
 
@@ -811,10 +811,10 @@ export default function SearchHousePage() {
                       <button
                         type="button"
                         onClick={() => setSelectedHouseId(null)}
-                        className="text-slate-400 hover:text-slate-600 p-1 -mr-1"
+                        className="text-slate-400 hover:text-slate-700 p-1.5 -mr-1 rounded-full hover:bg-slate-100 transition cursor-pointer"
                         aria-label="Close preview"
                       >
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                       </button>

@@ -1,8 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Image from "next/image";
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Polygon,
+  Polyline,
+  CircleMarker,
+  useMap,
+  useMapEvents,
+} from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility";
@@ -91,6 +100,23 @@ function CustomMapControls() {
   );
 }
 
+function MapDrawingEvents({
+  isDrawingMode,
+  onAddPoint,
+}: {
+  isDrawingMode: boolean;
+  onAddPoint: (point: [number, number]) => void;
+}) {
+  useMapEvents({
+    click(e) {
+      if (isDrawingMode) {
+        onAddPoint([e.latlng.lat, e.latlng.lng]);
+      }
+    },
+  });
+  return null;
+}
+
 interface LeafletMapProps {
   selectedHouseId?: string | null;
   onSelectHouse?: (id: string) => void;
@@ -101,9 +127,40 @@ export default function LeafletMap({
   onSelectHouse,
 }: LeafletMapProps) {
   const [searchAsMove, setSearchAsMove] = useState(true);
+  const [isDrawingMode, setIsDrawingMode] = useState(false);
+  const [drawnPoints, setDrawnPoints] = useState<[number, number][]>([]);
+
+  const handleAddPoint = useCallback((point: [number, number]) => {
+    setDrawnPoints((prev) => [...prev, point]);
+  }, []);
+
+  const handleToggleDraw = () => {
+    if (!isDrawingMode && drawnPoints.length === 0) {
+      // Start fresh drawing mode
+      setIsDrawingMode(true);
+    } else if (isDrawingMode) {
+      setIsDrawingMode(false);
+    } else {
+      setIsDrawingMode(true);
+    }
+  };
+
+  const handleClearDrawing = () => {
+    setDrawnPoints([]);
+  };
+
+  const handleLoadSampleBoundary = () => {
+    // Sample custom search area around Central/Downtown Austin
+    setDrawnPoints([
+      [30.295, -97.785],
+      [30.302, -97.720],
+      [30.245, -97.705],
+      [30.230, -97.770],
+    ]);
+  };
 
   return (
-    <div className="relative w-full h-full flex-1 overflow-hidden bg-slate-100">
+    <div className={`relative w-full h-full flex-1 overflow-hidden bg-slate-100 ${isDrawingMode ? "cursor-crosshair" : ""}`}>
       {/* React Leaflet Map Container */}
       <MapContainer
         center={[30.2672, -97.7431]}
@@ -122,6 +179,49 @@ export default function LeafletMap({
 
         {/* Custom Zoom Controls inside map context */}
         <CustomMapControls />
+
+        {/* Drawing Events Handler */}
+        <MapDrawingEvents isDrawingMode={isDrawingMode} onAddPoint={handleAddPoint} />
+
+        {/* Render Drawn Shape (Polygon when >= 3 points, Polyline when 2 points) */}
+        {drawnPoints.length >= 3 && (
+          <Polygon
+            positions={drawnPoints}
+            pathOptions={{
+              color: "#0D2349",
+              fillColor: "#0D2349",
+              fillOpacity: 0.18,
+              weight: 2.5,
+              dashArray: isDrawingMode ? "6, 6" : undefined,
+            }}
+          />
+        )}
+
+        {drawnPoints.length === 2 && (
+          <Polyline
+            positions={drawnPoints}
+            pathOptions={{
+              color: "#0D2349",
+              weight: 2.5,
+              dashArray: "6, 6",
+            }}
+          />
+        )}
+
+        {/* Vertex Marker Points during drawing */}
+        {drawnPoints.map((point, index) => (
+          <CircleMarker
+            key={`vertex-${index}`}
+            center={point}
+            radius={index === 0 ? 6 : 4.5}
+            pathOptions={{
+              color: "#ffffff",
+              fillColor: index === 0 ? "#d99738" : "#0D2349",
+              fillOpacity: 1,
+              weight: 2,
+            }}
+          />
+        ))}
 
         {/* Dynamic Markers */}
         {AUSTIN_MARKERS.map((item) => {
@@ -160,23 +260,118 @@ export default function LeafletMap({
         </label>
       </div>
 
-      {/* Bottom Right: Draw Search Area floating button */}
-      <div className="absolute bottom-6 right-6 z-[1000]">
-        <button
-          type="button"
-          className="bg-white hover:bg-slate-50 text-[#0a192f] text-xs font-bold px-4 py-2.5 rounded-lg shadow-lg border border-slate-200 flex items-center gap-2.5 transition duration-150 cursor-pointer"
-        >
-          <div className="relative w-4 h-4">
-            <Image
-              src="/icons/search-house/draw-search-area-icon.png"
-              alt="Draw Search Area"
-              fill
-              sizes="16px"
-              className="object-contain"
-            />
+      {/* Bottom Floating Drawing Controls (Unified at the bottom right) */}
+      <div
+        className={`absolute ${
+          selectedHouseId ? "bottom-48 md:bottom-6" : "bottom-20 md:bottom-6"
+        } right-3 sm:right-4 md:right-6 z-[900] transition-all duration-200`}
+      >
+        {isDrawingMode ? (
+          /* Active Drawing Mode Toolbar */
+          <div className="bg-[#0D2349] text-white p-2.5 sm:p-3 rounded-2xl shadow-2xl border border-white/15 flex flex-col sm:flex-row items-start sm:items-center gap-2.5 max-w-[92vw] sm:max-w-md animate-in fade-in zoom-in-95">
+            <div className="flex items-center gap-2 px-1">
+              <span className="w-2 h-2 rounded-full bg-[#d99738] animate-pulse flex-shrink-0" />
+              <div className="text-xs text-slate-200">
+                <p className="font-semibold text-white">
+                  {drawnPoints.length === 0
+                    ? "Click on map to place boundary points"
+                    : drawnPoints.length < 3
+                    ? `Click ${3 - drawnPoints.length} more point${3 - drawnPoints.length > 1 ? "s" : ""} to close`
+                    : `Custom area (${drawnPoints.length} points)`}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-1.5 w-full sm:w-auto justify-end pt-1 sm:pt-0 border-t border-white/10 sm:border-t-0">
+              {drawnPoints.length === 0 ? (
+                <button
+                  type="button"
+                  onClick={handleLoadSampleBoundary}
+                  className="px-2.5 py-1.5 bg-white/10 hover:bg-white/20 text-slate-200 text-xs font-medium rounded-lg transition cursor-pointer whitespace-nowrap"
+                >
+                  Sample Area
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleClearDrawing}
+                  className="px-2.5 py-1.5 bg-white/10 hover:bg-white/20 text-slate-200 text-xs font-medium rounded-lg transition cursor-pointer whitespace-nowrap"
+                >
+                  Clear
+                </button>
+              )}
+
+              {drawnPoints.length >= 3 && (
+                <button
+                  type="button"
+                  onClick={() => setIsDrawingMode(false)}
+                  className="px-3.5 py-1.5 bg-[#d99738] hover:bg-[#c5852b] text-white text-xs font-bold rounded-lg shadow-xs transition cursor-pointer whitespace-nowrap"
+                >
+                  Apply Area
+                </button>
+              )}
+
+              <button
+                type="button"
+                onClick={() => {
+                  setIsDrawingMode(false);
+                  if (drawnPoints.length < 3) setDrawnPoints([]);
+                }}
+                className="p-1.5 text-slate-400 hover:text-white hover:bg-white/10 rounded-lg transition cursor-pointer"
+                aria-label="Cancel drawing"
+                title="Cancel"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
           </div>
-          <span>Draw Search Area</span>
-        </button>
+        ) : drawnPoints.length >= 3 ? (
+          /* Area Applied State */
+          <div className="bg-white rounded-xl shadow-xl border border-slate-200/90 flex items-center p-1 gap-1">
+            <button
+              type="button"
+              onClick={() => setIsDrawingMode(true)}
+              className="bg-[#0D2349] hover:bg-[#071933] text-white text-xs font-bold px-3 py-2 rounded-lg flex items-center gap-1.5 transition cursor-pointer shadow-xs"
+            >
+              <svg className="w-3.5 h-3.5 text-[#d99738]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+              </svg>
+              <span>Edit Area</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={handleClearDrawing}
+              className="text-slate-500 hover:text-red-600 hover:bg-red-50 text-xs font-semibold px-2.5 py-2 rounded-lg transition cursor-pointer flex items-center gap-1"
+              title="Clear custom area"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              <span>Clear</span>
+            </button>
+          </div>
+        ) : (
+          /* Default Button - Original Design */
+          <button
+            type="button"
+            onClick={handleToggleDraw}
+            className="bg-white hover:bg-slate-50 text-[#0a192f] text-xs font-bold px-4 py-2.5 rounded-lg shadow-lg border border-slate-200 flex items-center gap-2.5 transition duration-150 cursor-pointer"
+          >
+            <div className="relative w-4 h-4">
+              <Image
+                src="/icons/search-house/draw-search-area-icon.png"
+                alt="Draw Search Area"
+                fill
+                sizes="16px"
+                className="object-contain"
+              />
+            </div>
+            <span>Draw Search Area</span>
+          </button>
+        )}
       </div>
     </div>
   );

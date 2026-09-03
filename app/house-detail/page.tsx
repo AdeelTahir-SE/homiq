@@ -140,6 +140,7 @@ export default function HouseDetailPage() {
   const [tourTime, setTourTime] = useState("10:00 AM");
   const [tourBooked, setTourBooked] = useState(false);
   const [showEstBreakdown, setShowEstBreakdown] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % GALLERY_IMAGES.length);
@@ -180,26 +181,43 @@ export default function HouseDetailPage() {
           <div className="max-w-[1320px] mx-auto space-y-6">
             {/* Top Navigation & Action Row */}
             <div className="flex items-center justify-between">
-              {/* Back to Search */}
-              <Link
-                href="/search-house"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-[#0a192f] transition-colors group cursor-pointer"
-              >
-                <svg
-                  className="w-4 h-4 text-slate-600 group-hover:-translate-x-0.5 transition-transform"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
+              {/* Left: Mobile Sidebar Trigger & Back to Search */}
+              <div className="flex items-center gap-2 sm:gap-3">
+                <button
+                  type="button"
+                  onClick={() => setIsMobileSidebarOpen(true)}
+                  className="lg:hidden inline-flex items-center gap-2 px-3 py-1.5 text-xs font-bold text-[#0B2449] bg-slate-50 hover:bg-slate-100 border border-slate-200/90 rounded-xl shadow-2xs transition-all active:scale-95 cursor-pointer"
+                  aria-label="Open sidebar navigation"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                  />
-                </svg>
-                <span>Back to Search</span>
-              </Link>
+                  <div className="w-3.5 h-3.5 flex flex-col justify-center gap-[3px]">
+                    <span className="w-3.5 h-[2px] bg-[#0B2449] rounded-full"></span>
+                    <span className="w-2.5 h-[2px] bg-[#0B2449] rounded-full"></span>
+                    <span className="w-3.5 h-[2px] bg-[#0B2449] rounded-full"></span>
+                  </div>
+                  <span>Menu</span>
+                </button>
+
+                {/* Back to Search */}
+                <Link
+                  href="/search-house"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-[#0a192f] transition-colors group cursor-pointer"
+                >
+                  <svg
+                    className="w-4 h-4 text-slate-600 group-hover:-translate-x-0.5 transition-transform"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                    />
+                  </svg>
+                  <span>Back to Search</span>
+                </Link>
+              </div>
 
               {/* Share and Save Actions */}
               <div className="flex items-center gap-4">
@@ -1111,6 +1129,62 @@ export default function HouseDetailPage() {
                 </button>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Sidebar Slide-Over Drawer for Phone Screens */}
+      {isMobileSidebarOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden flex">
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity animate-fade-in"
+            onClick={() => setIsMobileSidebarOpen(false)}
+          />
+
+          {/* Slide-over Content */}
+          <div className="relative flex flex-col w-[85vw] max-w-[310px] bg-white shadow-2xl z-10 animate-slide-right h-full rounded-r-2xl sm:rounded-r-3xl overflow-hidden border-r border-slate-100">
+            {/* Drawer Header */}
+            <div className="flex items-center justify-between px-4 py-3.5 border-b border-slate-100 bg-[#FAF8F7]/80">
+              <div className="flex items-center gap-2.5">
+                <div className="relative w-7 h-7 flex-shrink-0">
+                  <Image
+                    src="/logo.png"
+                    alt="HOMIQ"
+                    fill
+                    sizes="28px"
+                    className="object-contain"
+                  />
+                </div>
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-extrabold text-[#0a192f] text-sm tracking-wide">HOMIQ</span>
+                    <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded-full bg-slate-200/80 text-slate-700">Buyer</span>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsMobileSidebarOpen(false)}
+                className="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 rounded-full transition cursor-pointer"
+                aria-label="Close sidebar"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Drawer Body: Buyer Navigation */}
+            <div className="flex-1 overflow-y-auto">
+              <BuyerSidebar
+                activeItem="Dashboard"
+                className="w-full border-r-0 min-h-0 p-3.5 sm:p-4"
+                onNavigate={() => setIsMobileSidebarOpen(false)}
+                onContactSupport={() => setIsMobileSidebarOpen(false)}
+              />
+            </div>
           </div>
         </div>
       )}
