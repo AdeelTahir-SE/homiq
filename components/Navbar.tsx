@@ -158,7 +158,7 @@ export default function Navbar({
               <input
                 type="text"
                 placeholder={searchPlaceholder}
-                className="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg text-xs xl:text-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 transition"
+                className="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-md text-xs xl:text-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 transition"
               />
             </div>
           )}

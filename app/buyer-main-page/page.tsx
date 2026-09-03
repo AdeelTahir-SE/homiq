@@ -276,7 +276,7 @@ export default function BuyerMainPage() {
   const currentRec = RECOMMENDED_PROPERTIES[recIndex];
 
   return (
-    <div className="min-h-screen bg-[#FAF8F7] text-[#0a192f] flex flex-col font-sans antialiased">
+    <div className="min-h-screen bg-white text-[#0a192f] flex flex-col font-sans antialiased">
       {/* Top Navbar */}
       <Navbar
         activeTab="Buy"
@@ -296,7 +296,7 @@ export default function BuyerMainPage() {
           {/* ===================================================================== */}
           {/* FIRST COLUMN (LEFT): Welcome + 4 Stat Cards + Saved Properties + Alerts */}
           {/* ===================================================================== */}
-          <div className="xl:col-span-7 space-y-6 sm:space-y-7">
+          <div className="xl:col-span-7 space-y-5 sm:space-y-6">
             {/* 1. Welcome Header */}
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-[#0a192f] tracking-tight flex items-center gap-2">
@@ -310,7 +310,7 @@ export default function BuyerMainPage() {
             {/* 2. 4 Metric Summary Cards in a row using buyer-main-page-icons */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-3.5">
               {/* Card 1: Saved Properties */}
-              <div className="bg-white rounded-xl border border-slate-100 p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow">
+              <div className="bg-white rounded-md border border-slate-100 p-4 shadow-xs hover:shadow-md transition-shadow">
                 <div className="flex items-start gap-3">
                   <div className="relative w-6 h-6 flex-shrink-0 mt-0.5">
                     <Image
@@ -324,17 +324,17 @@ export default function BuyerMainPage() {
                   <div>
                     <div className="text-2xl font-bold text-[#0a192f] leading-none">24</div>
                     <div className="text-[11px] text-slate-500 font-medium mt-1">Saved Properties</div>
+                    <div className="mt-2.5">
+                      <Link href="/search-house" className="text-xs font-semibold text-[#1d64d8] hover:text-[#1e40af] hover:underline transition inline-block">
+                        View all
+                      </Link>
+                    </div>
                   </div>
-                </div>
-                <div className="mt-3">
-                  <Link href="/search-house" className="text-xs font-semibold text-[#1B365D] hover:underline transition inline-block">
-                    View all
-                  </Link>
                 </div>
               </div>
 
               {/* Card 2: Saved Searches */}
-              <div className="bg-white rounded-xl border border-slate-100 p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow">
+              <div className="bg-white rounded-md border border-slate-100 p-4 shadow-xs hover:shadow-md transition-shadow">
                 <div className="flex items-start gap-3">
                   <div className="relative w-6 h-6 flex-shrink-0 mt-0.5">
                     <Image
@@ -348,17 +348,17 @@ export default function BuyerMainPage() {
                   <div>
                     <div className="text-2xl font-bold text-[#0a192f] leading-none">3</div>
                     <div className="text-[11px] text-slate-500 font-medium mt-1">Saved Searches</div>
+                    <div className="mt-2.5">
+                      <Link href="#saved-searches" className="text-xs font-semibold text-[#1d64d8] hover:text-[#1e40af] hover:underline transition inline-block">
+                        View all
+                      </Link>
+                    </div>
                   </div>
-                </div>
-                <div className="mt-3">
-                  <Link href="#saved-searches" className="text-xs font-semibold text-[#1B365D] hover:underline transition inline-block">
-                    View all
-                  </Link>
                 </div>
               </div>
 
               {/* Card 3: Upcoming Tours */}
-              <div className="bg-white rounded-xl border border-slate-100 p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow">
+              <div className="bg-white rounded-md border border-slate-100 p-4 shadow-xs hover:shadow-md transition-shadow">
                 <div className="flex items-start gap-3">
                   <div className="relative w-6 h-6 flex-shrink-0 mt-0.5">
                     <Image
@@ -372,17 +372,17 @@ export default function BuyerMainPage() {
                   <div>
                     <div className="text-2xl font-bold text-[#0a192f] leading-none">2</div>
                     <div className="text-[11px] text-slate-500 font-medium mt-1">Upcoming Tours</div>
+                    <div className="mt-2.5">
+                      <Link href="/schedule-tour" className="text-xs font-semibold text-[#1d64d8] hover:text-[#1e40af] hover:underline transition inline-block">
+                        View schedule
+                      </Link>
+                    </div>
                   </div>
-                </div>
-                <div className="mt-3">
-                  <Link href="/schedule-tour" className="text-xs font-semibold text-[#1B365D] hover:underline transition inline-block">
-                    View schedule
-                  </Link>
                 </div>
               </div>
 
               {/* Card 4: Applications */}
-              <div className="bg-white rounded-xl border border-slate-100 p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow">
+              <div className="bg-white rounded-md border border-slate-100 p-4 shadow-xs hover:shadow-md transition-shadow">
                 <div className="flex items-start gap-3">
                   <div className="relative w-6 h-6 flex-shrink-0 mt-0.5">
                     <Image
@@ -396,25 +396,25 @@ export default function BuyerMainPage() {
                   <div>
                     <div className="text-2xl font-bold text-[#0a192f] leading-none">1</div>
                     <div className="text-[11px] text-slate-500 font-medium mt-1">Applications</div>
+                    <div className="mt-2.5">
+                      <Link href="/applications" className="text-xs font-semibold text-[#1d64d8] hover:text-[#1e40af] hover:underline transition inline-block">
+                        View status
+                      </Link>
+                    </div>
                   </div>
-                </div>
-                <div className="mt-3">
-                  <Link href="/applications" className="text-xs font-semibold text-[#1B365D] hover:underline transition inline-block">
-                    View status
-                  </Link>
                 </div>
               </div>
             </div>
 
-            {/* 3. Saved Properties Section */}
-            <section className="space-y-3.5">
+            {/* 3. Saved Properties Section wrapped in outer container card */}
+            <div className="bg-white rounded-md border border-slate-100 p-4 sm:p-5 shadow-xs space-y-3.5">
               <div className="flex items-center justify-between">
                 <h2 className="text-base font-bold text-[#0a192f] tracking-tight">
                   Saved Properties
                 </h2>
                 <Link
                   href="/search-house"
-                  className="text-xs font-semibold text-[#1B365D] hover:underline transition"
+                  className="text-xs font-semibold text-[#1d64d8] hover:text-[#1e40af] hover:underline transition"
                 >
                   View all
                 </Link>
@@ -426,10 +426,10 @@ export default function BuyerMainPage() {
                   {savedProperties.map((prop) => (
                     <div
                       key={prop.id}
-                      className="bg-white rounded-xl border border-slate-100 overflow-hidden shadow-xs hover:shadow-md transition duration-200 flex flex-col justify-between"
+                      className="bg-white rounded-md border border-slate-100 overflow-hidden shadow-xs hover:shadow-md transition duration-200 flex flex-col justify-between"
                     >
                       {/* Thumbnail with floating heart */}
-                      <div className="relative w-full h-32 bg-slate-100 overflow-hidden">
+                      <div className="relative w-full h-32 bg-slate-100 overflow-hidden rounded-t-md">
                         <Image
                           src={prop.imageUrl}
                           alt={prop.title}
@@ -471,21 +471,21 @@ export default function BuyerMainPage() {
                             {prop.price}
                           </div>
 
-                          <div className="flex items-center gap-2 text-[10px] text-slate-600 mt-2">
+                          <div className="flex items-center gap-2.5 text-[10px] text-slate-600 mt-2">
                             <div className="flex items-center gap-1">
-                              <svg className="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                               </svg>
                               <span>{prop.beds} bd</span>
                             </div>
                             <div className="flex items-center gap-1">
-                              <svg className="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                               </svg>
                               <span>{prop.baths} ba</span>
                             </div>
                             <div className="flex items-center gap-1">
-                              <svg className="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
                               </svg>
                               <span>{prop.sqft}</span>
@@ -496,17 +496,17 @@ export default function BuyerMainPage() {
                         {/* Footer Badges */}
                         <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-slate-50">
                           {prop.tagColor === "green" && (
-                            <span className="bg-[#eaf5ea] text-[#137333] border border-[#d2ecd2] text-[10px] font-semibold px-1.5 py-0.5 rounded">
+                            <span className="bg-[#eaf5ea] text-[#137333] border border-[#d2ecd2] text-[10px] font-semibold px-1.5 py-0.5 rounded-sm">
                               {prop.tag}
                             </span>
                           )}
                           {prop.tagColor === "gold" && (
-                            <span className="bg-[#fef3c7] text-[#b45309] border border-[#fde68a] text-[10px] font-semibold px-1.5 py-0.5 rounded">
+                            <span className="bg-[#fef3c7] text-[#b45309] border border-[#fde68a] text-[10px] font-semibold px-1.5 py-0.5 rounded-sm">
                               {prop.tag}
                             </span>
                           )}
                           {prop.tagColor === "blue" && (
-                            <span className="bg-[#e0f2fe] text-[#0369a1] border border-[#bae6fd] text-[10px] font-semibold px-1.5 py-0.5 rounded">
+                            <span className="bg-[#e0f2fe] text-[#0369a1] border border-[#bae6fd] text-[10px] font-semibold px-1.5 py-0.5 rounded-sm">
                               {prop.tag}
                             </span>
                           )}
@@ -530,10 +530,10 @@ export default function BuyerMainPage() {
                   </svg>
                 </button>
               </div>
-            </section>
+            </div>
 
-            {/* 4. Saved Searches & Alerts Section */}
-            <section id="saved-searches" className="space-y-3.5">
+            {/* 4. Saved Searches & Alerts Section wrapped in outer container card */}
+            <div id="saved-searches" className="bg-white rounded-md border border-slate-100 p-4 sm:p-5 shadow-xs space-y-3.5">
               <div className="flex items-center justify-between">
                 <h2 className="text-base font-bold text-[#0a192f] tracking-tight">
                   Saved Searches & Alerts
@@ -541,18 +541,18 @@ export default function BuyerMainPage() {
                 <button
                   type="button"
                   onClick={() => setIsCreateSearchOpen(true)}
-                  className="text-xs font-semibold text-[#1B365D] hover:underline transition cursor-pointer"
+                  className="text-xs font-semibold text-[#1d64d8] hover:text-[#1e40af] hover:underline transition cursor-pointer"
                 >
                   View all
                 </button>
               </div>
 
-              {/* White Container Card */}
-              <div className="bg-white rounded-xl border border-slate-100 p-4 sm:p-5 shadow-xs divide-y divide-slate-100">
+              {/* White Container List */}
+              <div className="divide-y divide-slate-100">
                 {savedSearches.map((search) => (
                   <div
                     key={search.id}
-                    className="py-3.5 first:pt-0 last:pb-3 flex items-center justify-between gap-4"
+                    className="py-3.5 first:pt-1 last:pb-3 flex items-center justify-between gap-4"
                   >
                     {/* Left Icon & Info */}
                     <div className="flex items-center gap-3.5 min-w-0">
@@ -620,19 +620,19 @@ export default function BuyerMainPage() {
                   </div>
                 ))}
 
-                {/* Bottom Action */}
+                {/* Bottom Action in Blue */}
                 <div className="pt-3.5 text-center">
                   <button
                     type="button"
                     onClick={() => setIsCreateSearchOpen(true)}
-                    className="text-xs font-semibold text-[#1B365D] hover:underline transition inline-flex items-center justify-center gap-1.5 cursor-pointer group"
+                    className="text-xs font-semibold text-[#1d64d8] hover:text-[#1e40af] hover:underline transition inline-flex items-center justify-center gap-1.5 cursor-pointer group"
                   >
                     <span>Create New Search</span>
                     <span className="text-sm leading-none font-bold group-hover:scale-110 transition-transform">+</span>
                   </button>
                 </div>
               </div>
-            </section>
+            </div>
           </div>
 
           {/* ===================================================================== */}
@@ -640,7 +640,7 @@ export default function BuyerMainPage() {
           {/* ===================================================================== */}
           <div className="xl:col-span-5 space-y-5">
             {/* 1. RECOMMENDED FOR YOU */}
-            <div className="bg-white rounded-xl border border-slate-100 p-4 sm:p-5 shadow-xs space-y-3.5">
+            <div className="bg-[#FAF3EA] rounded-md border border-[#fdf0df] p-4 sm:p-5 shadow-xs space-y-3.5">
               <div>
                 <h2 className="text-sm sm:text-base font-bold text-[#0a192f] tracking-tight">
                   Recommended for you
@@ -651,9 +651,9 @@ export default function BuyerMainPage() {
               </div>
 
               {/* Spotlight Property Card */}
-              <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-3.5 items-center">
                 {/* Left Thumbnail Image */}
-                <div className="sm:col-span-5 relative h-36 sm:h-32 rounded-xl overflow-hidden bg-slate-100">
+                <div className="sm:col-span-5 relative h-36 sm:h-32 rounded-md overflow-hidden bg-slate-100">
                   <Image
                     src={currentRec.imageUrl}
                     alt={currentRec.title}
@@ -663,7 +663,7 @@ export default function BuyerMainPage() {
                   />
                 </div>
 
-                {/* Right Details */}
+                {/* Right Details with Bed, Bath, Sqft icons */}
                 <div className="sm:col-span-7 flex flex-col justify-between h-full space-y-2">
                   <div>
                     <div className="flex items-start justify-between gap-2">
@@ -694,19 +694,33 @@ export default function BuyerMainPage() {
                       {currentRec.price}
                     </div>
 
-                    <div className="flex items-center gap-2.5 text-[11px] text-slate-600 mt-1">
-                      <span>{currentRec.beds} bd</span>
-                      <span>•</span>
-                      <span>{currentRec.baths} ba</span>
-                      <span>•</span>
-                      <span>{currentRec.sqft}</span>
+                    {/* Specs with Icons */}
+                    <div className="flex items-center gap-2.5 text-[11px] text-slate-600 mt-1.5">
+                      <div className="flex items-center gap-1">
+                        <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                        <span>{currentRec.beds} bd</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <span>{currentRec.baths} ba</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                        </svg>
+                        <span>{currentRec.sqft}</span>
+                      </div>
                     </div>
                   </div>
 
                   {/* View Details Button */}
                   <Link
                     href="/house-detail"
-                    className="w-full text-center bg-white hover:bg-slate-50 border border-slate-300 text-xs font-semibold text-[#0a192f] py-1.5 px-3 rounded-lg shadow-2xs transition"
+                    className="w-fit text-center bg-[#FCF6EF] hover:bg-[#fff4e8] border border-black text-xs font-semibold text-[#0a192f] py-1.5 px-3 rounded-lg shadow-2xs transition"
                   >
                     View Details
                   </Link>
@@ -730,14 +744,14 @@ export default function BuyerMainPage() {
             </div>
 
             {/* 2. UPCOMING TOUR SCHEDULE */}
-            <div className="bg-white rounded-xl border border-slate-100 p-4 sm:p-5 shadow-xs space-y-3.5">
+            <div className="bg-white rounded-md border border-slate-100 p-4 sm:p-5 shadow-xs space-y-3.5">
               <div className="flex items-center justify-between">
                 <h2 className="text-sm sm:text-base font-bold text-[#0a192f] tracking-tight">
                   Upcoming Tour Schedule
                 </h2>
                 <Link
                   href="/schedule-tour"
-                  className="text-xs font-semibold text-[#1B365D] hover:underline transition"
+                  className="text-xs font-semibold text-[#1d64d8] hover:text-[#1e40af] hover:underline transition"
                 >
                   View full calendar
                 </Link>
@@ -746,10 +760,10 @@ export default function BuyerMainPage() {
               {/* Tours List */}
               <div className="space-y-3 divide-y divide-slate-100">
                 {UPCOMING_TOURS.map((tour) => (
-                  <div key={tour.id} className="pt-3 first:pt-0 flex items-center justify-between gap-3">
+                  <div key={tour.id} className="py-3 first:pt-0 flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
                       {/* Date Block */}
-                      <div className="flex flex-col items-center justify-center w-10 text-center flex-shrink-0">
+                      <div className="bg-[#FAF7F4] py-2 flex flex-col items-center justify-center w-10 text-center flex-shrink-0">
                         <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wide leading-tight">
                           {tour.month}
                         </span>
@@ -762,7 +776,7 @@ export default function BuyerMainPage() {
                       </div>
 
                       {/* Thumbnail */}
-                      <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0">
+                      <div className="relative w-18 h-14 rounded-md overflow-hidden bg-slate-100 flex-shrink-0">
                         <Image
                           src={tour.imageUrl}
                           alt={tour.title}
@@ -791,7 +805,7 @@ export default function BuyerMainPage() {
 
                     {/* Right Badge & Menu */}
                     <div className="flex items-center gap-2 flex-shrink-0">
-                      <span className="bg-[#fff7ed] text-[#c2410c] border border-[#ffedd5] text-[10px] font-semibold px-2 py-0.5 rounded">
+                      <span className="bg-[#fff7ed] text-[#c2410c] border border-[#ffedd5] text-[10px] font-semibold px-2 py-0.5 rounded-sm">
                         {tour.status}
                       </span>
                       <button
@@ -812,7 +826,7 @@ export default function BuyerMainPage() {
               <div className="pt-1">
                 <Link
                   href="/schedule-tour"
-                  className="w-full bg-white hover:bg-slate-50 border border-slate-300 text-xs font-semibold text-[#0a192f] py-2.5 px-4 rounded-xl shadow-2xs transition flex items-center justify-center gap-2"
+                  className="w-full bg-white hover:bg-slate-50 border border-slate-300 text-xs font-semibold text-[#0a192f] py-2.5 px-4 rounded-md shadow-2xs transition flex items-center justify-center gap-2"
                 >
                   <svg className="w-4 h-4 stroke-[#0a192f]" fill="none" viewBox="0 0 24 24" strokeWidth={1.8}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
@@ -823,14 +837,14 @@ export default function BuyerMainPage() {
             </div>
 
             {/* 3. APPLICATION STATUS */}
-            <div className="bg-white rounded-xl border border-slate-100 p-4 sm:p-5 shadow-xs space-y-3.5">
+            <div className="bg-white rounded-md border border-slate-100 p-4 sm:p-5 shadow-xs space-y-3.5">
               <div className="flex items-center justify-between">
                 <h2 className="text-sm sm:text-base font-bold text-[#0a192f] tracking-tight">
                   Application Status
                 </h2>
                 <Link
                   href="/applications"
-                  className="text-xs font-semibold text-[#1B365D] hover:underline transition"
+                  className="text-xs font-semibold text-[#1d64d8] hover:text-[#1e40af] hover:underline transition"
                 >
                   View all applications
                 </Link>
@@ -898,7 +912,7 @@ export default function BuyerMainPage() {
               {/* Application Details Card */}
               <div className="pt-2 flex items-center justify-between gap-3 border-t border-slate-50">
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="relative w-16 h-14 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0">
+                  <div className="relative w-16 h-14 rounded-md overflow-hidden bg-slate-100 flex-shrink-0">
                     <Image
                       src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&auto=format&fit=crop&q=80"
                       alt="310 Bowie St"
@@ -925,7 +939,7 @@ export default function BuyerMainPage() {
 
                 {/* Status & Decision */}
                 <div className="text-right flex-shrink-0 flex flex-col items-end">
-                  <span className="bg-[#fff7ed] text-[#c2410c] border border-[#ffedd5] text-[10px] font-semibold px-2 py-0.5 rounded">
+                  <span className="bg-[#fff7ed] text-[#c2410c] border border-[#ffedd5] text-[10px] font-semibold px-2 py-0.5 rounded-sm">
                     Under Review
                   </span>
                   <div className="text-[10px] text-slate-400 mt-1">
@@ -936,7 +950,7 @@ export default function BuyerMainPage() {
                   </div>
                   <Link
                     href="/applications"
-                    className="mt-1.5 bg-white hover:bg-slate-50 border border-slate-300 text-[11px] font-semibold text-[#0a192f] py-1 px-2.5 rounded-lg shadow-2xs transition inline-block text-center"
+                    className="mt-1.5 bg-white hover:bg-slate-50 border border-slate-300 text-[11px] font-semibold text-[#0a192f] py-1 px-2.5 rounded-md shadow-2xs transition inline-block text-center"
                   >
                     View Application
                   </Link>
@@ -950,9 +964,9 @@ export default function BuyerMainPage() {
         {/* BOTTOM REAL-TIME ALERTS MOBILE APP PROMOTION BANNER                       */}
         {/* ========================================================================= */}
         {isBannerVisible && (
-          <section className="relative bg-[#FEF8F2] border border-[#F5EBD9] rounded-2xl p-4 sm:p-5 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
+          <section className="relative bg-[#FEF8F2] border border-[#F5EBD9] rounded-md p-4 sm:p-5 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4 w-full md:w-auto">
-              <div className="relative w-12 h-12 rounded-xl bg-white border border-[#f3e5ce] flex items-center justify-center flex-shrink-0 shadow-xs p-2">
+              <div className="relative w-12 h-12 rounded-md bg-white border border-[#f3e5ce] flex items-center justify-center flex-shrink-0 shadow-xs p-2">
                 <Image
                   src="/icons/buyer-main-page-icons/bottom-mobile-icon.png"
                   alt="Mobile Alerts Icon"
@@ -978,7 +992,7 @@ export default function BuyerMainPage() {
                 <button
                   type="button"
                   onClick={() => alert("HOMIQ iOS App coming soon to Apple App Store!")}
-                  className="bg-black hover:bg-slate-900 text-white px-3.5 py-1.5 rounded-lg flex items-center gap-2.5 shadow-xs transition cursor-pointer"
+                  className="bg-black hover:bg-slate-900 text-white px-3.5 py-1.5 rounded-md flex items-center gap-2.5 shadow-xs transition cursor-pointer"
                 >
                   <div className="relative w-5 h-5 flex-shrink-0">
                     <Image
@@ -999,7 +1013,7 @@ export default function BuyerMainPage() {
                 <button
                   type="button"
                   onClick={() => alert("HOMIQ Android App coming soon to Google Play!")}
-                  className="bg-black hover:bg-slate-900 text-white px-3.5 py-1.5 rounded-lg flex items-center gap-2.5 shadow-xs transition cursor-pointer"
+                  className="bg-black hover:bg-slate-900 text-white px-3.5 py-1.5 rounded-md flex items-center gap-2.5 shadow-xs transition cursor-pointer"
                 >
                   <div className="relative w-4 h-4 flex-shrink-0">
                     <Image
@@ -1021,7 +1035,7 @@ export default function BuyerMainPage() {
               <button
                 type="button"
                 onClick={() => setIsBannerVisible(false)}
-                className="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-black/5 transition cursor-pointer"
+                className="text-slate-400 hover:text-slate-600 p-1.5 rounded-md hover:bg-black/5 transition cursor-pointer"
                 aria-label="Dismiss banner"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -1036,13 +1050,13 @@ export default function BuyerMainPage() {
       {/* CREATE NEW SEARCH MODAL */}
       {isCreateSearchOpen && (
         <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-100 animate-in fade-in duration-200">
+          <div className="bg-white rounded-md max-w-md w-full p-6 shadow-xl border border-slate-100 animate-in fade-in duration-200">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <h3 className="text-base font-bold text-[#0a192f]">Create New Saved Search</h3>
               <button
                 type="button"
                 onClick={() => setIsCreateSearchOpen(false)}
-                className="text-slate-400 hover:text-slate-600 p-1 rounded-lg"
+                className="text-slate-400 hover:text-slate-600 p-1 rounded-md"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -1061,7 +1075,7 @@ export default function BuyerMainPage() {
                   placeholder="e.g. Modern Homes in South Congress"
                   value={newSearchTitle}
                   onChange={(e) => setNewSearchTitle(e.target.value)}
-                  className="w-full text-xs sm:text-sm border border-slate-200 rounded-lg px-3 py-2 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#0a192f]"
+                  className="w-full text-xs sm:text-sm border border-slate-200 rounded-md px-3 py-2 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#0a192f]"
                 />
               </div>
 
@@ -1074,7 +1088,7 @@ export default function BuyerMainPage() {
                   placeholder="e.g. Austin, TX 78704"
                   value={newSearchLocation}
                   onChange={(e) => setNewSearchLocation(e.target.value)}
-                  className="w-full text-xs sm:text-sm border border-slate-200 rounded-lg px-3 py-2 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#0a192f]"
+                  className="w-full text-xs sm:text-sm border border-slate-200 rounded-md px-3 py-2 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#0a192f]"
                 />
               </div>
 
@@ -1087,7 +1101,7 @@ export default function BuyerMainPage() {
                   placeholder="e.g. $450K - $750K"
                   value={newSearchPrice}
                   onChange={(e) => setNewSearchPrice(e.target.value)}
-                  className="w-full text-xs sm:text-sm border border-slate-200 rounded-lg px-3 py-2 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#0a192f]"
+                  className="w-full text-xs sm:text-sm border border-slate-200 rounded-md px-3 py-2 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#0a192f]"
                 />
               </div>
 
@@ -1095,13 +1109,13 @@ export default function BuyerMainPage() {
                 <button
                   type="button"
                   onClick={() => setIsCreateSearchOpen(false)}
-                  className="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50 border border-slate-200 rounded-lg cursor-pointer"
+                  className="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50 border border-slate-200 rounded-md cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 text-xs font-semibold text-white bg-[#0a192f] hover:bg-[#071325] rounded-lg shadow-xs cursor-pointer"
+                  className="px-4 py-2 text-xs font-semibold text-white bg-[#0a192f] hover:bg-[#071325] rounded-md shadow-xs cursor-pointer"
                 >
                   Save Search
                 </button>
