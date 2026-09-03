@@ -26,7 +26,7 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col lg:flex-row bg-[#f4f6fa] text-[#0a192f]">
+    <main className="min-h-screen flex flex-col lg:flex-row bg-[#F8F4EF] text-[#0a192f]">
       {/* LEFT COLUMN: HERO HOUSE ENVIRONMENT & TRUST OVERLAY */}
       <section className="relative lg:w-[50%] xl:w-[50%] flex flex-col justify-between bg-[#0b1a30] overflow-hidden">
         {/* Top Region with House Background */}
