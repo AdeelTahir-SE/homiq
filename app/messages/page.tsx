@@ -390,6 +390,9 @@ export default function MessagesPage() {
   const [composerMode, setComposerMode] = useState<"message" | "note">("message");
   const [messageInput, setMessageInput] = useState<string>("");
   const [isDetailsOpen, setIsDetailsOpen] = useState<boolean>(true);
+  const [mobileView, setMobileView] = useState<"list" | "chat">("list");
+  const [isFolderDrawerOpen, setIsFolderDrawerOpen] = useState<boolean>(false);
+  const [isDetailsDrawerOpen, setIsDetailsDrawerOpen] = useState<boolean>(false);
   const [isNewMessageModalOpen, setIsNewMessageModalOpen] = useState<boolean>(false);
   const [newRecipient, setNewRecipient] = useState<string>("");
   const [newMsgText, setNewMsgText] = useState<string>("");
@@ -398,14 +401,20 @@ export default function MessagesPage() {
   const [tourTime, setTourTime] = useState<string>("11:00 AM");
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const chatScrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   const activeConversation = useMemo(() => {
     return conversations.find((c) => c.id === selectedId) || conversations[0];
   }, [conversations, selectedId]);
 
-  // Auto scroll to bottom when messages update
+  // Auto scroll to bottom inside chat container only (prevent whole page shifting)
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (chatScrollContainerRef.current) {
+      chatScrollContainerRef.current.scrollTo({
+        top: chatScrollContainerRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
   }, [activeConversation?.messages]);
 
   // Filter conversations
@@ -544,17 +553,19 @@ export default function MessagesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] flex flex-col">
+    <div className="h-screen max-h-screen overflow-hidden bg-[#f8fafc] flex flex-col">
       {/* Top Main Navbar */}
-      <Navbar showSearch={true} searchPlaceholder="Search properties, clients, or messages..." />
+      <div className="shrink-0">
+        <Navbar showSearch={true} searchPlaceholder="Search properties, clients, or messages..." />
+      </div>
 
       {/* Main Messages Workspace: 4 Columns Container */}
-      <main className="flex-1 flex overflow-hidden max-w-[1920px] w-full mx-auto bg-white border-b border-slate-200">
+      <main className="flex-1 flex overflow-hidden min-h-0 max-w-[1920px] w-full mx-auto bg-white border-b border-slate-200">
         
         {/* ========================================================= */}
         {/* COLUMN 1: LEFT NAVIGATION & FOLDERS (w-64) */}
         {/* ========================================================= */}
-        <aside className="w-64 lg:w-72 flex-shrink-0 bg-white border-r border-slate-200 flex flex-col justify-between p-5 hidden md:flex select-none">
+        <aside className="w-64 lg:w-72 flex-shrink-0 bg-white border-r border-slate-200 flex-col justify-between p-5 hidden lg:flex select-none h-full overflow-y-auto min-h-0">
           <div className="space-y-6">
             {/* Header & New Message Button */}
             <div>
@@ -567,7 +578,7 @@ export default function MessagesPage() {
                 className="w-full bg-[#0B244A] hover:bg-[#071933] text-white text-sm font-semibold py-2.5 px-4 rounded-md flex items-center justify-center gap-2 shadow-xs transition-colors cursor-pointer"
               >
                 <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                 </svg>
                 <span>New Message</span>
               </button>
@@ -581,19 +592,19 @@ export default function MessagesPage() {
                 onClick={() => { setActiveFolder("inbox"); setActiveCategoryFilter("all"); }}
                 className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-md text-sm transition cursor-pointer ${
                   activeFolder === "inbox" && activeCategoryFilter === "all"
-                    ? "bg-[#0B244A] text-white font-semibold"
+                    ? "bg-[#FDF3E7] text-[#0B244A] font-semibold"
                     : "text-[#0B244A] hover:bg-slate-50 font-medium"
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <svg className={`w-5 h-5 ${activeFolder === "inbox" && activeCategoryFilter === "all" ? "text-white stroke-white" : "text-[#0B244A]"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                  <svg className="w-5 h-5 text-[#0B244A]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                   </svg>
                   <span>Inbox</span>
                 </div>
                 <span className={`text-xs px-2 py-0.5 rounded-md font-semibold ${
                   activeFolder === "inbox" && activeCategoryFilter === "all"
-                    ? "bg-white/20 text-white"
+                    ? "bg-[#f7dfbe] text-[#8a3e0b]"
                     : "bg-[#FAF0E4] text-[#0B244A]"
                 }`}>
                   12
@@ -606,12 +617,12 @@ export default function MessagesPage() {
                 onClick={() => setActiveFolder("starred")}
                 className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-md text-sm transition cursor-pointer ${
                   activeFolder === "starred"
-                    ? "bg-[#0B244A] text-white font-semibold"
+                    ? "bg-[#FDF3E7] text-[#0B244A] font-semibold"
                     : "text-[#0B244A] hover:bg-slate-50 font-medium"
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <svg className={`w-5 h-5 ${activeFolder === "starred" ? "text-white stroke-white" : "text-[#0B244A]"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                  <svg className="w-5 h-5 text-[#0B244A]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                   </svg>
                   <span>Starred</span>
@@ -624,19 +635,19 @@ export default function MessagesPage() {
                 onClick={() => setActiveFolder("unanswered")}
                 className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-md text-sm transition cursor-pointer ${
                   activeFolder === "unanswered"
-                    ? "bg-[#0B244A] text-white font-semibold"
+                    ? "bg-[#FDF3E7] text-[#0B244A] font-semibold"
                     : "text-[#0B244A] hover:bg-slate-50 font-medium"
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <svg className={`w-5 h-5 ${activeFolder === "unanswered" ? "text-white stroke-white" : "text-[#0B244A]"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                  <svg className="w-5 h-5 text-[#0B244A]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
                   <span>Unanswered</span>
                 </div>
                 <span className={`text-xs px-2 py-0.5 rounded-md font-semibold ${
                   activeFolder === "unanswered"
-                    ? "bg-white/20 text-white"
+                    ? "bg-[#f7dfbe] text-[#8a3e0b]"
                     : "bg-[#FAF0E4] text-[#0B244A]"
                 }`}>
                   3
@@ -649,12 +660,12 @@ export default function MessagesPage() {
                 onClick={() => setActiveFolder("archived")}
                 className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-md text-sm transition cursor-pointer ${
                   activeFolder === "archived"
-                    ? "bg-[#0B244A] text-white font-semibold"
+                    ? "bg-[#FDF3E7] text-[#0B244A] font-semibold"
                     : "text-[#0B244A] hover:bg-slate-50 font-medium"
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <svg className={`w-5 h-5 ${activeFolder === "archived" ? "text-white stroke-white" : "text-[#0B244A]"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                  <svg className="w-5 h-5 text-[#0B244A]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
                   </svg>
                   <span>Archived</span>
@@ -667,12 +678,12 @@ export default function MessagesPage() {
                 onClick={() => setActiveFolder("trash")}
                 className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-md text-sm transition cursor-pointer ${
                   activeFolder === "trash"
-                    ? "bg-[#0B244A] text-white font-semibold"
+                    ? "bg-[#FDF3E7] text-[#0B244A] font-semibold"
                     : "text-[#0B244A] hover:bg-slate-50 font-medium"
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <svg className={`w-5 h-5 ${activeFolder === "trash" ? "text-white stroke-white" : "text-[#0B244A]"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                  <svg className="w-5 h-5 text-[#0B244A]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                   </svg>
                   <span>Trash</span>
@@ -692,13 +703,13 @@ export default function MessagesPage() {
                   onClick={() => { setActiveCategoryFilter("all"); setActiveFolder("inbox"); }}
                   className={`w-full flex items-center justify-between px-3.5 py-2 rounded-md text-sm transition cursor-pointer ${
                     activeCategoryFilter === "all"
-                      ? "bg-[#0B244A] text-white font-semibold"
+                      ? "bg-[#F0F4FC] text-[#0B244A] font-semibold"
                       : "text-[#0B244A] hover:bg-slate-50 font-medium"
                   }`}
                 >
                   <span>All Conversations</span>
                   <span className={`text-xs px-2 py-0.5 rounded-md font-semibold ${
-                    activeCategoryFilter === "all" ? "bg-white/20 text-white" : "bg-slate-100 text-[#0B244A]"
+                    activeCategoryFilter === "all" ? "bg-[#DDE7F8] text-[#0B244A]" : "bg-slate-100 text-[#0B244A]"
                   }`}>
                     12
                   </span>
@@ -710,13 +721,13 @@ export default function MessagesPage() {
                   onClick={() => setActiveCategoryFilter("buyers")}
                   className={`w-full flex items-center justify-between px-3.5 py-2 rounded-md text-sm transition cursor-pointer ${
                     activeCategoryFilter === "buyers"
-                      ? "bg-[#0B244A] text-white font-semibold"
+                      ? "bg-[#F0F4FC] text-[#0B244A] font-semibold"
                       : "text-[#0B244A] hover:bg-slate-50 font-medium"
                   }`}
                 >
                   <span>Buyers / Renters</span>
                   <span className={`text-xs px-2 py-0.5 rounded-md font-semibold ${
-                    activeCategoryFilter === "buyers" ? "bg-white/20 text-white" : "bg-slate-100 text-[#0B244A]"
+                    activeCategoryFilter === "buyers" ? "bg-[#DDE7F8] text-[#0B244A]" : "bg-slate-100 text-[#0B244A]"
                   }`}>
                     9
                   </span>
@@ -728,13 +739,13 @@ export default function MessagesPage() {
                   onClick={() => setActiveCategoryFilter("sellers")}
                   className={`w-full flex items-center justify-between px-3.5 py-2 rounded-md text-sm transition cursor-pointer ${
                     activeCategoryFilter === "sellers"
-                      ? "bg-[#0B244A] text-white font-semibold"
+                      ? "bg-[#F0F4FC] text-[#0B244A] font-semibold"
                       : "text-[#0B244A] hover:bg-slate-50 font-medium"
                   }`}
                 >
                   <span>Sellers</span>
                   <span className={`text-xs px-2 py-0.5 rounded-md font-semibold ${
-                    activeCategoryFilter === "sellers" ? "bg-white/20 text-white" : "bg-slate-100 text-[#0B244A]"
+                    activeCategoryFilter === "sellers" ? "bg-[#DDE7F8] text-[#0B244A]" : "bg-slate-100 text-[#0B244A]"
                   }`}>
                     2
                   </span>
@@ -746,13 +757,13 @@ export default function MessagesPage() {
                   onClick={() => setActiveCategoryFilter("other")}
                   className={`w-full flex items-center justify-between px-3.5 py-2 rounded-md text-sm transition cursor-pointer ${
                     activeCategoryFilter === "other"
-                      ? "bg-[#0B244A] text-white font-semibold"
+                      ? "bg-[#F0F4FC] text-[#0B244A] font-semibold"
                       : "text-[#0B244A] hover:bg-slate-50 font-medium"
                   }`}
                 >
                   <span>Other</span>
                   <span className={`text-xs px-2 py-0.5 rounded-md font-semibold ${
-                    activeCategoryFilter === "other" ? "bg-white/20 text-white" : "bg-slate-100 text-[#0B244A]"
+                    activeCategoryFilter === "other" ? "bg-[#DDE7F8] text-[#0B244A]" : "bg-slate-100 text-[#0B244A]"
                   }`}>
                     1
                   </span>
@@ -781,32 +792,46 @@ export default function MessagesPage() {
               </div>
 
               {/* App Store Buttons */}
-              <div className="mt-3.5 space-y-1.5">
+              <div className="mt-3.5 space-y-2">
                 {/* App Store */}
                 <button
                   type="button"
-                  className="w-full bg-black hover:bg-zinc-900 text-white rounded-md px-2.5 py-1.5 flex items-center justify-center gap-2 cursor-pointer transition"
+                  onClick={() => alert("HOMIQ iOS App coming soon to Apple App Store!")}
+                  className="w-full bg-black hover:bg-zinc-900 text-white rounded-md px-3 py-2 flex items-center justify-center gap-2.5 cursor-pointer transition shadow-xs"
                 >
-                  <svg className="w-4 h-4 fill-current" viewBox="0 0 384 512">
-                    <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.3 26.1 2 52.1-13.6 69.5-33.7z" />
-                  </svg>
-                  <div className="text-left leading-none">
-                    <span className="text-[8px] uppercase tracking-wider block text-zinc-400">Download on the</span>
-                    <span className="text-[11px] font-semibold tracking-tight">App Store</span>
+                  <div className="relative w-5 h-5 flex-shrink-0">
+                    <Image
+                      src="/icons/apple-icon.png"
+                      alt="Apple Logo"
+                      fill
+                      sizes="20px"
+                      className="object-contain brightness-0 invert"
+                    />
+                  </div>
+                  <div className="text-left leading-tight">
+                    <span className="text-[8px] sm:text-[9px] uppercase tracking-wider block text-zinc-300 font-medium">Download on the</span>
+                    <span className="text-xs sm:text-sm font-bold tracking-tight text-white block">App Store</span>
                   </div>
                 </button>
 
                 {/* Google Play */}
                 <button
                   type="button"
-                  className="w-full bg-black hover:bg-zinc-900 text-white rounded-md px-2.5 py-1.5 flex items-center justify-center gap-2 cursor-pointer transition"
+                  onClick={() => alert("HOMIQ Android App coming soon to Google Play!")}
+                  className="w-full bg-black hover:bg-zinc-900 text-white rounded-md px-3 py-2 flex items-center justify-center gap-2.5 cursor-pointer transition shadow-xs"
                 >
-                  <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 512 512">
-                    <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 24 20.6 24 37v438c0 16.4 10 30.2 23 37l244.6-244.6L47 0zm395.2 214.7l-48.4-27.8-69.7 69.7 69.7 69.7 48.7-27.9c14.7-8.4 23.5-23.7 23.5-40.6s-8.8-32.2-23.8-40.9zM104.6 499l220.7-221.3 60.1 60.1L104.6 499z" />
-                  </svg>
-                  <div className="text-left leading-none">
-                    <span className="text-[8px] uppercase tracking-wider block text-zinc-400">GET IT ON</span>
-                    <span className="text-[11px] font-semibold tracking-tight">Google Play</span>
+                  <div className="relative w-4.5 h-4.5 flex-shrink-0">
+                    <Image
+                      src="/icons/playstore-icon.png"
+                      alt="Google Play Logo"
+                      fill
+                      sizes="18px"
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="text-left leading-tight">
+                    <span className="text-[8px] sm:text-[9px] uppercase tracking-wider block text-zinc-300 font-medium">GET IT ON</span>
+                    <span className="text-xs sm:text-sm font-bold tracking-tight text-white block">Google Play</span>
                   </div>
                 </button>
               </div>
@@ -817,25 +842,57 @@ export default function MessagesPage() {
         {/* ========================================================= */}
         {/* COLUMN 2: CONVERSATION LIST (w-80 / 340px) */}
         {/* ========================================================= */}
-        <section className="w-full md:w-80 lg:w-[340px] flex-shrink-0 bg-white border-r border-slate-200 flex flex-col h-full">
+        <section className={`w-full md:w-80 lg:w-[340px] flex-shrink-0 bg-white md:border-l md:border-r border-slate-200 flex-col h-full md:ml-3 min-h-0 overflow-hidden ${mobileView === "list" ? "flex" : "hidden md:flex"}`}>
           {/* Top Search & Filter icon */}
-          <div className="p-4 border-b border-slate-100 space-y-3">
-            <div className="relative flex items-center">
-              <div className="absolute left-3.5 text-slate-400 pointer-events-none">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </div>
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search messages..."
-                className="w-full pl-9 pr-9 py-2 bg-slate-50 border border-slate-200 rounded-md text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-slate-400 transition"
-              />
+          <div className="p-4 border-b border-slate-100 space-y-3 shrink-0">
+            {/* Mobile / Tablet Header Bar (< lg) */}
+            <div className="flex lg:hidden items-center justify-between pb-1">
               <button
                 type="button"
-                className="absolute right-3 text-slate-400 hover:text-slate-600 transition"
+                onClick={() => setIsFolderDrawerOpen(true)}
+                className="flex items-center gap-2 px-2.5 py-1.5 rounded-md bg-[#FDF3E7] text-[#0B244A] text-xs font-bold transition hover:bg-[#fae7cf] cursor-pointer"
+              >
+                <svg className="w-4 h-4 text-[#0B244A]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h7" />
+                </svg>
+                <span className="capitalize">{activeFolder}</span>
+                <span className="bg-[#f7dfbe] text-[#8a3e0b] px-1.5 py-0.5 rounded text-[10px] font-bold">
+                  {activeFolder === "inbox" ? "12" : activeFolder === "unanswered" ? "3" : ""}
+                </span>
+              </button>
+
+              <h2 className="text-base font-bold text-[#0B244A]">Messages</h2>
+
+              <button
+                type="button"
+                onClick={() => setIsNewMessageModalOpen(true)}
+                className="p-1.5 rounded-md bg-[#0B244A] text-white hover:bg-[#071933] transition cursor-pointer"
+                title="New message"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <div className="relative flex-1">
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search messages..."
+                  className="w-full pl-9 pr-3 py-2 bg-white border border-slate-200 rounded-md text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-slate-400 transition shadow-2xs"
+                />
+              </div>
+              <button
+                type="button"
+                className="w-8 h-8 rounded-md bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-800 hover:bg-slate-50 transition cursor-pointer flex-shrink-0 shadow-2xs"
                 aria-label="Filter options"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -888,7 +945,7 @@ export default function MessagesPage() {
           </div>
 
           {/* Conversation List Scroll Area */}
-          <div className="flex-1 overflow-y-auto divide-y divide-slate-100">
+          <div className="flex-1 overflow-y-auto min-h-0 divide-y divide-slate-100">
             {filteredConversations.length === 0 ? (
               <div className="p-8 text-center text-xs text-slate-400">
                 No conversations found matching your search.
@@ -900,7 +957,10 @@ export default function MessagesPage() {
                 return (
                   <div
                     key={conv.id}
-                    onClick={() => handleSelectConversation(conv.id)}
+                    onClick={() => {
+                      handleSelectConversation(conv.id);
+                      setMobileView("chat");
+                    }}
                     className={`p-3.5 flex items-start gap-3 cursor-pointer transition relative group ${
                       isSelected
                         ? "bg-slate-50/80 border-l-3 border-[#d99738]"
@@ -957,7 +1017,7 @@ export default function MessagesPage() {
           </div>
 
           {/* List Footer */}
-          <div className="p-3 border-t border-slate-100 text-[11px] text-slate-400 text-center select-none">
+          <div className="p-3 border-t border-slate-100 text-[11px] text-slate-400 text-center select-none shrink-0">
             1-7 of 12 conversations
           </div>
         </section>
@@ -965,11 +1025,23 @@ export default function MessagesPage() {
         {/* ========================================================= */}
         {/* COLUMN 3: ACTIVE CHAT THREAD (Flex-1) */}
         {/* ========================================================= */}
-        <section className="flex-1 flex flex-col h-full bg-[#fafbfc] min-w-0">
+        <section className={`flex-1 flex-col h-full bg-white min-w-0 min-h-0 overflow-hidden ${mobileView === "chat" ? "flex" : "hidden md:flex"}`}>
           {/* Chat Header */}
-          <div className="px-6 py-3.5 bg-white border-b border-slate-200 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-slate-200 flex-shrink-0">
+          <div className="px-4 sm:px-6 py-3.5 bg-white border-b border-slate-200 flex items-center justify-between shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+              {/* Mobile Back Button */}
+              <button
+                type="button"
+                onClick={() => setMobileView("list")}
+                className="md:hidden p-1.5 -ml-1 rounded-md text-[#0B244A] hover:bg-slate-100 transition cursor-pointer flex-shrink-0"
+                aria-label="Back to conversations"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+
+              <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-slate-200 flex-shrink-0">
                 <Image
                   src={activeConversation.avatar}
                   alt={activeConversation.name}
@@ -978,18 +1050,18 @@ export default function MessagesPage() {
                   className="object-cover"
                 />
               </div>
-              <div>
-                <h2 className="text-sm font-bold text-[#0B244A] leading-snug">
+              <div className="min-w-0">
+                <h2 className="text-xs sm:text-sm font-bold text-[#0B244A] leading-snug truncate">
                   {activeConversation.name}
                 </h2>
-                <p className="text-xs text-slate-500">
+                <p className="text-[11px] sm:text-xs text-slate-500 truncate">
                   {activeConversation.role} • {activeConversation.location}
                 </p>
               </div>
             </div>
 
             {/* Right Action Icons */}
-            <div className="flex items-center gap-1.5 text-slate-500">
+            <div className="flex items-center gap-1 sm:gap-1.5 text-slate-500 flex-shrink-0">
               {/* Star Button */}
               <button
                 type="button"
@@ -1007,10 +1079,14 @@ export default function MessagesPage() {
               {/* Info Details Toggle Button */}
               <button
                 type="button"
-                onClick={() => setIsDetailsOpen(!isDetailsOpen)}
-                className={`p-2 rounded-md hover:bg-slate-100 transition cursor-pointer ${
-                  isDetailsOpen ? "text-[#0B244A] bg-slate-100" : "text-slate-500"
-                }`}
+                onClick={() => {
+                  if (typeof window !== "undefined" && window.innerWidth < 1280) {
+                    setIsDetailsDrawerOpen(true);
+                  } else {
+                    setIsDetailsOpen(!isDetailsOpen);
+                  }
+                }}
+                className="p-2 rounded-md hover:bg-slate-100 transition cursor-pointer text-[#0B244A] bg-slate-50 xl:bg-transparent"
                 title="Toggle details panel"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
@@ -1021,7 +1097,7 @@ export default function MessagesPage() {
               {/* More Actions Dropdown */}
               <button
                 type="button"
-                className="p-2 rounded-md hover:bg-slate-100 transition cursor-pointer text-slate-500"
+                className="p-2 rounded-md hover:bg-slate-100 transition cursor-pointer text-slate-500 hidden sm:block"
                 title="More options"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
@@ -1032,7 +1108,7 @@ export default function MessagesPage() {
           </div>
 
           {/* Chat Messages Body */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-6">
+          <div ref={chatScrollContainerRef} className="flex-1 overflow-y-auto min-h-0 p-6 space-y-6">
             {/* Top Property Pin Card */}
             {activeConversation.propertyOfInterest && (
               <div className="bg-white border border-slate-200/90 rounded-md p-3.5 flex items-center justify-between gap-4 shadow-2xs">
@@ -1130,53 +1206,55 @@ export default function MessagesPage() {
           </div>
 
           {/* Message / Note Composer Box */}
-          <div className="p-4 bg-white border-t border-slate-200 space-y-2">
-            {/* Tabs: Message / Note */}
-            <div className="flex items-center gap-6 border-b border-slate-100 pb-2 px-1">
-              <button
-                type="button"
-                onClick={() => setComposerMode("message")}
-                className={`text-xs font-semibold relative transition cursor-pointer ${
-                  composerMode === "message" ? "text-slate-900" : "text-slate-400 hover:text-slate-700"
-                }`}
-              >
-                Message
-                {composerMode === "message" && (
-                  <span className="absolute -bottom-2 left-0 right-0 h-0.5 bg-[#d99738] rounded-full" />
-                )}
-              </button>
+          <div className="p-3 sm:p-4 bg-white  shrink-0">
+            <div className="bg-white border border-slate-200 rounded-md p-3 sm:p-3.5 shadow-2xs space-y-3">
+              {/* Tabs: Message / Note */}
+              <div className="flex items-center gap-6 border-b border-slate-100 pb-2 px-1">
+                <button
+                  type="button"
+                  onClick={() => setComposerMode("message")}
+                  className={`text-xs sm:text-sm font-bold relative transition cursor-pointer pb-1 ${
+                    composerMode === "message" ? "text-[#0B244A]" : "text-slate-400 hover:text-slate-700 font-medium"
+                  }`}
+                >
+                  Message
+                  {composerMode === "message" && (
+                    <span className="absolute -bottom-2 left-0 right-0 h-0.5 bg-[#d99738]" />
+                  )}
+                </button>
 
-              <button
-                type="button"
-                onClick={() => setComposerMode("note")}
-                className={`text-xs font-semibold relative transition cursor-pointer ${
-                  composerMode === "note" ? "text-slate-900" : "text-slate-400 hover:text-slate-700"
-                }`}
-              >
-                Note
-                {composerMode === "note" && (
-                  <span className="absolute -bottom-2 left-0 right-0 h-0.5 bg-[#d99738] rounded-full" />
-                )}
-              </button>
-            </div>
+                <button
+                  type="button"
+                  onClick={() => setComposerMode("note")}
+                  className={`text-xs sm:text-sm font-bold relative transition cursor-pointer pb-1 ${
+                    composerMode === "note" ? "text-[#0B244A]" : "text-slate-400 hover:text-slate-700 font-medium"
+                  }`}
+                >
+                  Note
+                  {composerMode === "note" && (
+                    <span className="absolute -bottom-2 left-0 right-0 h-0.5 bg-[#d99738]" />
+                  )}
+                </button>
+              </div>
 
-            {/* Main Input Box Card */}
-            <div className="border border-slate-200 rounded-md p-3 bg-white focus-within:border-slate-400 transition">
-              <textarea
-                value={messageInput}
-                onChange={(e) => setMessageInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder={composerMode === "message" ? "Type your message..." : "Add an internal note about this client..."}
-                rows={2}
-                className="w-full text-xs sm:text-sm text-slate-800 placeholder-slate-400 resize-none outline-none leading-relaxed bg-transparent"
-              />
+              {/* Inner Textarea Input Box */}
+              <div className="border border-slate-200 rounded-md p-3 bg-white focus-within:border-slate-400 transition">
+                <textarea
+                  value={messageInput}
+                  onChange={(e) => setMessageInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder={composerMode === "message" ? "Type your message..." : "Add an internal note about this client..."}
+                  rows={2}
+                  className="w-full text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 placeholder:font-normal resize-none outline-none leading-relaxed bg-transparent"
+                />
+              </div>
 
               {/* Bottom Action Bar */}
-              <div className="flex items-center justify-between pt-2 border-t border-slate-100 mt-2">
+              <div className="flex items-center justify-between gap-2 sm:gap-4 pt-0.5 min-w-0">
                 {/* Left Attachment Buttons */}
-                <div className="flex items-center gap-4 text-xs font-medium text-slate-600">
+                <div className="flex items-center gap-3 sm:gap-4.5 text-xs font-medium text-slate-600 min-w-0">
                   {/* Attach File */}
-                  <label className="flex items-center gap-1.5 hover:text-[#0B244A] transition cursor-pointer">
+                  <label className="flex items-center gap-1 sm:gap-1.5 hover:text-[#0B244A] transition cursor-pointer select-none flex-shrink-0">
                     <input type="file" className="hidden" onChange={(e) => {
                       if (e.target.files?.[0]) {
                         setMessageInput((prev) => `${prev} [Attachment: ${e.target.files![0].name}]`);
@@ -1189,7 +1267,7 @@ export default function MessagesPage() {
                   </label>
 
                   {/* Image */}
-                  <label className="flex items-center gap-1.5 hover:text-[#0B244A] transition cursor-pointer">
+                  <label className="flex items-center gap-1 sm:gap-1.5 hover:text-[#0B244A] transition cursor-pointer select-none flex-shrink-0">
                     <input type="file" accept="image/*" className="hidden" onChange={(e) => {
                       if (e.target.files?.[0]) {
                         setMessageInput((prev) => `${prev} [Image: ${e.target.files![0].name}]`);
@@ -1205,7 +1283,7 @@ export default function MessagesPage() {
                   <button
                     type="button"
                     onClick={() => setShowScheduleModal(true)}
-                    className="flex items-center gap-1.5 hover:text-[#0B244A] transition cursor-pointer"
+                    className="flex items-center gap-1 sm:gap-1.5 hover:text-[#0B244A] transition cursor-pointer select-none flex-shrink-0"
                   >
                     <svg className="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -1215,24 +1293,25 @@ export default function MessagesPage() {
                 </div>
 
                 {/* Right Send Button */}
-                <div className="flex items-center">
+                <div className="flex items-center rounded-md bg-[#0B244A] hover:bg-[#071933] text-white shadow-xs overflow-hidden transition flex-shrink-0 ml-auto">
                   <button
                     type="button"
                     onClick={handleSendMessage}
-                    className="bg-[#0B244A] hover:bg-[#071933] text-white px-4 py-2 rounded-l-md text-xs font-semibold flex items-center gap-2 transition cursor-pointer shadow-xs"
+                    className="px-3 sm:px-3.5 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold flex items-center gap-1.5 sm:gap-2 cursor-pointer transition hover:bg-white/10"
                   >
-                    <svg className="w-3.5 h-3.5 fill-current transform rotate-45" viewBox="0 0 20 20">
-                      <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                    <svg className="w-3.5 h-3.5 fill-current text-white -rotate-45 flex-shrink-0" viewBox="0 0 24 24">
+                      <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
                     </svg>
                     <span>Send</span>
                   </button>
+                  <div className="h-3.5 sm:h-4 w-px bg-white/20" />
                   <button
                     type="button"
-                    className="bg-[#081b37] hover:bg-[#051124] text-white px-2 py-2 rounded-r-md border-l border-slate-700 text-xs transition cursor-pointer"
+                    className="px-2 sm:px-2.5 py-1.5 sm:py-2 text-xs hover:bg-white/10 transition cursor-pointer flex items-center justify-center text-white"
                     title="Send options"
                   >
-                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                     </svg>
                   </button>
                 </div>
@@ -1245,142 +1324,145 @@ export default function MessagesPage() {
         {/* COLUMN 4: CONVERSATION DETAILS & QUICK REPLIES (w-80) */}
         {/* ========================================================= */}
         {isDetailsOpen && (
-          <aside className="w-80 lg:w-[340px] flex-shrink-0 bg-white border-l border-slate-200 overflow-y-auto p-5 space-y-6 hidden xl:block">
-            {/* Header: Conversation Details */}
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <h3 className="text-sm font-bold text-[#0B244A]">
-                Conversation Details
-              </h3>
-              <button
-                type="button"
-                onClick={() => setIsDetailsOpen(false)}
-                className="text-slate-400 hover:text-slate-600 transition cursor-pointer"
-                title="Collapse details"
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
-                </svg>
-              </button>
-            </div>
-
-            {/* User Profile Card */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="relative w-12 h-12 rounded-full overflow-hidden border border-slate-200 flex-shrink-0">
-                  <Image
-                    src={activeConversation.avatar}
-                    alt={activeConversation.name}
-                    fill
-                    sizes="48px"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="min-w-0">
-                  <h4 className="text-sm font-bold text-[#0B244A] truncate">
-                    {activeConversation.name}
-                  </h4>
-                  <p className="text-xs text-slate-500 truncate">
-                    {activeConversation.email}
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-2 pt-1 text-xs text-slate-600">
-                <div className="flex items-center gap-2.5">
-                  <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          <aside className="w-80 lg:w-[340px] flex-shrink-0 bg-white border-l border-slate-200 overflow-y-auto p-3.5 space-y-3.5 hidden xl:block min-h-0">
+            {/* BOX 1: CONVERSATION DETAILS */}
+            <div className="bg-[#F8FAFC] border border-slate-200/90 rounded-md p-4 shadow-2xs space-y-4">
+              {/* Header: Conversation Details */}
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                <h3 className="text-sm font-bold text-[#0B244A]">
+                  Conversation Details
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => setIsDetailsOpen(false)}
+                  className="text-slate-400 hover:text-slate-600 transition cursor-pointer"
+                  title="Collapse details"
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
                   </svg>
-                  <span>{activeConversation.phone}</span>
-                </div>
-
-                <div className="flex items-center gap-2.5">
-                  <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  <span>{activeConversation.location}</span>
-                </div>
+                </button>
               </div>
-            </div>
 
-            {/* About Section */}
-            <div className="pt-3 border-t border-slate-100 space-y-3">
-              <h4 className="text-xs font-bold text-[#0B244A]">
-                About {activeConversation.name.split(" ")[0]}
-              </h4>
-
-              <div className="space-y-2 text-xs">
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-500">Pre-approved:</span>
-                  <span className="px-2 py-0.5 rounded-md bg-[#ecfdf5] text-[#047857] font-semibold text-[11px]">
-                    {activeConversation.about.preApproved}
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-500">Looking for:</span>
-                  <span className="font-medium text-slate-800">
-                    {activeConversation.about.lookingFor}
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-500">Price Range:</span>
-                  <span className="font-semibold text-slate-800">
-                    {activeConversation.about.priceRange}
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-500">Timeline:</span>
-                  <span className="font-medium text-slate-800">
-                    {activeConversation.about.timeline}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Property of Interest */}
-            {activeConversation.propertyOfInterest && (
-              <div className="pt-3 border-t border-slate-100 space-y-3">
-                <h4 className="text-xs font-bold text-[#0B244A]">
-                  Property of Interest
-                </h4>
-
-                <div className="flex items-start gap-3">
-                  <div className="relative w-14 h-14 rounded-md overflow-hidden flex-shrink-0 border border-slate-100">
+              {/* User Profile Card */}
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden border border-slate-200 flex-shrink-0">
                     <Image
-                      src={activeConversation.propertyOfInterest.imageUrl}
-                      alt={activeConversation.propertyOfInterest.title}
+                      src={activeConversation.avatar}
+                      alt={activeConversation.name}
                       fill
-                      sizes="56px"
+                      sizes="48px"
                       className="object-cover"
                     />
                   </div>
                   <div className="min-w-0">
-                    <h5 className="text-xs font-bold text-[#0B244A] truncate">
-                      {activeConversation.propertyOfInterest.title}
-                    </h5>
-                    <p className="text-sm font-bold text-[#0B244A] mt-0.5">
-                      {activeConversation.propertyOfInterest.price}
+                    <h4 className="text-sm font-bold text-[#0B244A] truncate">
+                      {activeConversation.name}
+                    </h4>
+                    <p className="text-xs text-slate-500 truncate">
+                      {activeConversation.email}
                     </p>
-                    <p className="text-[11px] text-slate-500 mt-0.5">
-                      {activeConversation.propertyOfInterest.specs}
-                    </p>
-                    <Link
-                      href="/house-detail"
-                      className="text-xs text-blue-600 font-semibold hover:underline block mt-1"
-                    >
-                      View Property
-                    </Link>
+                  </div>
+                </div>
+
+                <div className="space-y-2 pt-1 text-xs text-slate-600">
+                  <div className="flex items-center gap-2.5">
+                    <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    <span>{activeConversation.phone}</span>
+                  </div>
+
+                  <div className="flex items-center gap-2.5">
+                    <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span>{activeConversation.location}</span>
                   </div>
                 </div>
               </div>
-            )}
 
-            {/* Quick Replies */}
-            <div className="pt-3 border-t border-slate-100 space-y-3">
-              <div className="flex items-center justify-between">
+              {/* About Section */}
+              <div className="pt-3 border-t border-slate-100 space-y-3">
+                <h4 className="text-xs font-bold text-[#0B244A]">
+                  About {activeConversation.name.split(" ")[0]}
+                </h4>
+
+                <div className="space-y-2 text-xs">
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-500">Pre-approved:</span>
+                    <span className="px-2 py-0.5 rounded-md bg-[#ecfdf5] text-[#047857] font-semibold text-[11px]">
+                      {activeConversation.about.preApproved}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-500">Looking for:</span>
+                    <span className="font-medium text-slate-800">
+                      {activeConversation.about.lookingFor}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-500">Price Range:</span>
+                    <span className="font-semibold text-slate-800">
+                      {activeConversation.about.priceRange}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-500">Timeline:</span>
+                    <span className="font-medium text-slate-800">
+                      {activeConversation.about.timeline}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Property of Interest */}
+              {activeConversation.propertyOfInterest && (
+                <div className="pt-3 border-t border-slate-100 space-y-3">
+                  <h4 className="text-xs font-bold text-[#0B244A]">
+                    Property of Interest
+                  </h4>
+
+                  <div className="flex items-start gap-3">
+                    <div className="relative w-14 h-14 rounded-md overflow-hidden flex-shrink-0 border border-slate-100">
+                      <Image
+                        src={activeConversation.propertyOfInterest.imageUrl}
+                        alt={activeConversation.propertyOfInterest.title}
+                        fill
+                        sizes="56px"
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="min-w-0">
+                      <h5 className="text-xs font-bold text-[#0B244A] truncate">
+                        {activeConversation.propertyOfInterest.title}
+                      </h5>
+                      <p className="text-sm font-bold text-[#0B244A] mt-0.5">
+                        {activeConversation.propertyOfInterest.price}
+                      </p>
+                      <p className="text-[11px] text-slate-500 mt-0.5">
+                        {activeConversation.propertyOfInterest.specs}
+                      </p>
+                      <Link
+                        href="/house-detail"
+                        className="text-xs text-blue-600 font-semibold hover:underline block mt-1"
+                      >
+                        View Property
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* BOX 2: QUICK REPLIES */}
+            <div className="bg-[#F8FAFC] border border-slate-200/90 rounded-md p-4 shadow-2xs space-y-3.5">
+              <div className="flex items-center justify-between pb-2 border-b border-slate-100">
                 <h4 className="text-xs font-bold text-[#0B244A]">
                   Quick Replies
                 </h4>
@@ -1427,6 +1509,327 @@ export default function MessagesPage() {
           </aside>
         )}
       </main>
+
+      {/* Mobile / Tablet Folders Drawer (< lg) */}
+      {isFolderDrawerOpen && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex z-50 lg:hidden animate-in fade-in duration-150">
+          <div className="w-72 sm:w-80 h-full bg-white shadow-2xl p-5 flex flex-col justify-between overflow-y-auto animate-in slide-in-from-left duration-200">
+            <div className="space-y-6">
+              {/* Header with Close */}
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-bold text-[#0B244A]">Messages</h2>
+                <button
+                  type="button"
+                  onClick={() => setIsFolderDrawerOpen(false)}
+                  className="p-1.5 text-slate-400 hover:text-slate-600 transition cursor-pointer"
+                  title="Close menu"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* New Message Button */}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsFolderDrawerOpen(false);
+                  setIsNewMessageModalOpen(true);
+                }}
+                className="w-full bg-[#0B244A] hover:bg-[#071933] text-white text-sm font-semibold py-2.5 px-4 rounded-md flex items-center justify-center gap-2 shadow-xs transition-colors cursor-pointer"
+              >
+                <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+                <span>New Message</span>
+              </button>
+
+              {/* Folders Nav */}
+              <nav className="space-y-1">
+                {[
+                  { key: "inbox", label: "Inbox", count: "12", icon: "M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" },
+                  { key: "starred", label: "Starred", count: "", icon: "M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" },
+                  { key: "unanswered", label: "Unanswered", count: "3", icon: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" },
+                  { key: "archived", label: "Archived", count: "", icon: "M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" },
+                  { key: "trash", label: "Trash", count: "", icon: "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" },
+                ].map((item) => {
+                  const isSelected = activeFolder === item.key;
+                  return (
+                    <button
+                      key={item.key}
+                      type="button"
+                      onClick={() => {
+                        setActiveFolder(item.key);
+                        if (item.key === "inbox") setActiveCategoryFilter("all");
+                        setIsFolderDrawerOpen(false);
+                      }}
+                      className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-md text-sm transition cursor-pointer ${
+                        isSelected
+                          ? "bg-[#FDF3E7] text-[#0B244A] font-semibold"
+                          : "text-[#0B244A] hover:bg-slate-50 font-medium"
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <svg className="w-5 h-5 text-[#0B244A]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />
+                        </svg>
+                        <span>{item.label}</span>
+                      </div>
+                      {item.count ? (
+                        <span className={`text-xs px-2 py-0.5 rounded-md font-semibold ${
+                          isSelected ? "bg-[#f7dfbe] text-[#8a3e0b]" : "bg-[#FAF0E4] text-[#0B244A]"
+                        }`}>
+                          {item.count}
+                        </span>
+                      ) : null}
+                    </button>
+                  );
+                })}
+              </nav>
+
+              {/* Filters */}
+              <div>
+                <p className="text-[11px] font-bold text-slate-400 tracking-wider uppercase mb-2 px-1">
+                  FILTERS
+                </p>
+                <div className="space-y-1">
+                  {[
+                    { key: "all", label: "All Conversations", count: "12" },
+                    { key: "buyers", label: "Buyers / Renters", count: "9" },
+                    { key: "sellers", label: "Sellers", count: "2" },
+                    { key: "other", label: "Other", count: "1" },
+                  ].map((filter) => {
+                    const isSelected = activeCategoryFilter === filter.key;
+                    return (
+                      <button
+                        key={filter.key}
+                        type="button"
+                        onClick={() => {
+                          setActiveCategoryFilter(filter.key);
+                          if (filter.key === "all") setActiveFolder("inbox");
+                          setIsFolderDrawerOpen(false);
+                        }}
+                        className={`w-full flex items-center justify-between px-3.5 py-2 rounded-md text-sm transition cursor-pointer ${
+                          isSelected
+                            ? "bg-[#F0F4FC] text-[#0B244A] font-semibold"
+                            : "text-[#0B244A] hover:bg-slate-50 font-medium"
+                        }`}
+                      >
+                        <span>{filter.label}</span>
+                        <span className={`text-xs px-2 py-0.5 rounded-md font-semibold ${
+                          isSelected ? "bg-[#DDE7F8] text-[#0B244A]" : "bg-slate-100 text-[#0B244A]"
+                        }`}>
+                          {filter.count}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Card */}
+            <div className="mt-6 pt-4 border-t border-slate-100">
+              <div className="bg-[#FCF9F5] border border-[#F5EBD9] rounded-md p-3.5">
+                <div className="flex items-start gap-2.5">
+                  <div className="w-7 h-7 rounded-md bg-[#FBEEDD] flex items-center justify-center flex-shrink-0 text-[#0B244A]">
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-[#0B244A]">HOMIQ Mobile App</h4>
+                    <p className="text-[10px] text-slate-500 mt-0.5">Real-time alerts on the go</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile / Tablet Details Drawer (< xl) */}
+      {isDetailsDrawerOpen && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex justify-end z-50 xl:hidden animate-in fade-in duration-150">
+          <div className="w-full sm:w-96 max-w-full h-full bg-[#f8fafc] shadow-2xl p-4 overflow-y-auto space-y-4 animate-in slide-in-from-right duration-200">
+            {/* Top Close Bar */}
+            <div className="flex items-center justify-between pb-2 border-b border-slate-200">
+              <h3 className="text-sm font-bold text-[#0B244A]">Conversation Details</h3>
+              <button
+                type="button"
+                onClick={() => setIsDetailsDrawerOpen(false)}
+                className="p-1.5 text-slate-400 hover:text-slate-600 transition cursor-pointer"
+                title="Close panel"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* BOX 1: CONVERSATION DETAILS */}
+            <div className="bg-[#FDFDFD] border border-slate-200/90 rounded-md p-4 shadow-2xs space-y-4">
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden border border-slate-200 flex-shrink-0">
+                    <Image
+                      src={activeConversation.avatar}
+                      alt={activeConversation.name}
+                      fill
+                      sizes="48px"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <h4 className="text-sm font-bold text-[#0B244A] truncate">
+                      {activeConversation.name}
+                    </h4>
+                    <p className="text-xs text-slate-500 truncate">
+                      {activeConversation.email}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-2 pt-1 text-xs text-slate-600">
+                  <div className="flex items-center gap-2.5">
+                    <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    <span>{activeConversation.phone}</span>
+                  </div>
+
+                  <div className="flex items-center gap-2.5">
+                    <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span>{activeConversation.location}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* About Section */}
+              <div className="pt-3 border-t border-slate-100 space-y-3">
+                <h4 className="text-xs font-bold text-[#0B244A]">
+                  About {activeConversation.name.split(" ")[0]}
+                </h4>
+
+                <div className="space-y-2 text-xs">
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-500">Pre-approved:</span>
+                    <span className="px-2 py-0.5 rounded-md bg-[#ecfdf5] text-[#047857] font-semibold text-[11px]">
+                      {activeConversation.about.preApproved}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-500">Looking for:</span>
+                    <span className="font-medium text-slate-800">
+                      {activeConversation.about.lookingFor}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-500">Price Range:</span>
+                    <span className="font-semibold text-slate-800">
+                      {activeConversation.about.priceRange}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-500">Timeline:</span>
+                    <span className="font-medium text-slate-800">
+                      {activeConversation.about.timeline}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Property of Interest */}
+              {activeConversation.propertyOfInterest && (
+                <div className="pt-3 border-t border-slate-100 space-y-3">
+                  <h4 className="text-xs font-bold text-[#0B244A]">
+                    Property of Interest
+                  </h4>
+
+                  <div className="flex items-start gap-3">
+                    <div className="relative w-14 h-14 rounded-md overflow-hidden flex-shrink-0 border border-slate-100">
+                      <Image
+                        src={activeConversation.propertyOfInterest.imageUrl}
+                        alt={activeConversation.propertyOfInterest.title}
+                        fill
+                        sizes="56px"
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="min-w-0">
+                      <h5 className="text-xs font-bold text-[#0B244A] truncate">
+                        {activeConversation.propertyOfInterest.title}
+                      </h5>
+                      <p className="text-sm font-bold text-[#0B244A] mt-0.5">
+                        {activeConversation.propertyOfInterest.price}
+                      </p>
+                      <p className="text-[11px] text-slate-500 mt-0.5">
+                        {activeConversation.propertyOfInterest.specs}
+                      </p>
+                      <Link
+                        href="/house-detail"
+                        className="text-xs text-blue-600 font-semibold hover:underline block mt-1"
+                      >
+                        View Property
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* BOX 2: QUICK REPLIES */}
+            <div className="bg-[#FDFDFD] border border-slate-200/90 rounded-md p-4 shadow-2xs space-y-3.5">
+              <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                <h4 className="text-xs font-bold text-[#0B244A]">
+                  Quick Replies
+                </h4>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMessageInput("Thanks for reaching out! Let me know if you have any questions.");
+                    setIsDetailsDrawerOpen(false);
+                  }}
+                  className="text-slate-400 hover:text-slate-700 transition cursor-pointer"
+                  title="Add quick reply"
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                  </svg>
+                </button>
+              </div>
+
+              <div className="space-y-2">
+                {QUICK_REPLIES.map((reply, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => {
+                      handleQuickReply(reply);
+                      setIsDetailsDrawerOpen(false);
+                    }}
+                    className="w-full text-left p-2.5 rounded-md border border-slate-100 bg-slate-50/70 hover:bg-slate-100/90 transition cursor-pointer flex items-start gap-2.5 group"
+                  >
+                    <svg className="w-4 h-4 text-slate-400 group-hover:text-slate-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                    <span className="text-xs text-slate-700 leading-snug">
+                      {reply}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* New Message Modal */}
       {isNewMessageModalOpen && (
