@@ -92,6 +92,7 @@ export default function ApplicationsPage() {
   const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
   const [uploadSuccessToast, setUploadSuccessToast] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Sidebar navigation items
@@ -258,7 +259,7 @@ export default function ApplicationsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-whtie text-[#0a192f] flex flex-col font-sans selection:bg-slate-200">
+    <div className="min-h-screen bg-[#f8fafc] text-[#0a192f] flex flex-col font-sans selection:bg-slate-200">
       {/* Top Navbar */}
       <Navbar activeTab="Buy" showSearch={true} searchPlaceholder="Search properties, neighborhoods..." />
 
@@ -323,29 +324,43 @@ export default function ApplicationsPage() {
         </aside>
 
         {/* Right Main Content */}
-        <main className="flex-1 min-w-0 p-4 sm:p-6 lg:p-8 space-y-6">
+        <main className="flex-1 min-w-0 p-3.5 sm:p-6 lg:p-8 space-y-6">
           {/* Top Header & Property Summary Card */}
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 sm:gap-5">
             {/* Left Page Title & Back Link */}
             <div className="space-y-2">
-              <Link
-                href="/dashboard"
-                className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700 hover:text-[#0a192f] transition-colors group cursor-pointer"
-              >
-                <svg
-                  className="w-4 h-4 text-slate-600 group-hover:-translate-x-0.5 transition-transform"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
+              <div className="flex items-center gap-2.5">
+                <button
+                  type="button"
+                  onClick={() => setIsMobileSidebarOpen(true)}
+                  className="lg:hidden p-1.5 sm:p-2 rounded-md border border-slate-200 text-[#0D254E] hover:bg-slate-100 transition cursor-pointer flex items-center justify-center shrink-0"
+                  aria-label="Open sidebar menu"
+                  title="Menu"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                <span>Back to Applications</span>
-              </Link>
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                </button>
+
+                <Link
+                  href="/dashboard"
+                  className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700 hover:text-[#0a192f] transition-colors group cursor-pointer"
+                >
+                  <svg
+                    className="w-4 h-4 text-slate-600 group-hover:-translate-x-0.5 transition-transform"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                  </svg>
+                  <span>Back to Applications</span>
+                </Link>
+              </div>
 
               <div>
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0a192f] tracking-tight">
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#0a192f] tracking-tight">
                   Application / Document Center
                 </h1>
                 <p className="text-xs sm:text-sm text-slate-500 mt-1">
@@ -355,8 +370,8 @@ export default function ApplicationsPage() {
             </div>
 
             {/* Right Property Thumbnail Card */}
-            <div className="bg-white border border-slate-200 rounded-md p-3 sm:p-3.5 flex items-center gap-3.5 shadow-2xs hover:shadow-xs transition duration-150">
-              <div className="relative w-24 sm:w-28 h-20 rounded-md overflow-hidden flex-shrink-0 bg-slate-100">
+            <div className="w-full lg:w-auto bg-white border border-slate-200 rounded-md p-3 sm:p-3.5 flex items-center gap-3 sm:gap-3.5 shadow-2xs hover:shadow-xs transition duration-150">
+              <div className="relative w-20 sm:w-28 h-18 sm:h-20 rounded-md overflow-hidden flex-shrink-0 bg-slate-100">
                 <Image
                   src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&auto=format&fit=crop&q=80"
                   alt="310 Bowie St, #2205"
@@ -367,18 +382,18 @@ export default function ApplicationsPage() {
                 />
               </div>
 
-              <div className="space-y-1">
-                <h3 className="text-sm sm:text-base font-bold text-[#0a192f] leading-tight">
+              <div className="space-y-1 min-w-0">
+                <h3 className="text-xs sm:text-base font-bold text-[#0a192f] leading-tight truncate">
                   310 Bowie St, #2205
                 </h3>
-                <p className="text-xs text-slate-500">Austin, TX 78703</p>
-                <p className="text-xs font-medium text-slate-600">
-                  <span className="font-semibold text-slate-800">$2,600</span> / month &nbsp;•&nbsp; 2 bd &nbsp;•&nbsp; 2 ba &nbsp;•&nbsp; 1,145 sqft
+                <p className="text-[11px] sm:text-xs text-slate-500">Austin, TX 78703</p>
+                <p className="text-[11px] sm:text-xs font-medium text-slate-600">
+                  <span className="font-semibold text-slate-800">$2,600</span> / mo &nbsp;•&nbsp; 2 bd &nbsp;•&nbsp; 2 ba
                 </p>
-                <div className="pt-1">
+                <div className="pt-0.5">
                   <Link
                     href="/house-detail"
-                    className="inline-block bg-white hover:bg-slate-50 border border-slate-300 text-[#0a192f] text-[11px] font-semibold py-1 px-3 rounded-md shadow-2xs transition duration-150"
+                    className="inline-block bg-white hover:bg-slate-50 border border-slate-300 text-[#0a192f] text-[10px] sm:text-[11px] font-semibold py-1 px-2.5 sm:px-3 rounded-md shadow-2xs transition duration-150"
                   >
                     View Property
                   </Link>
@@ -1077,6 +1092,96 @@ export default function ApplicationsPage() {
             ✓
           </span>
           <span>{uploadSuccessToast}</span>
+        </div>
+      )}
+
+      {/* Mobile & Tablet Slide-Over Sidebar Drawer (< lg) */}
+      {isMobileSidebarOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden flex">
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity animate-in fade-in duration-200"
+            onClick={() => setIsMobileSidebarOpen(false)}
+          />
+
+          {/* Drawer Panel */}
+          <div className="relative w-72 max-w-[85vw] bg-[#FBFBFB] h-full shadow-2xl flex flex-col justify-between p-4 sm:p-5 z-10 animate-in slide-in-from-left duration-200 overflow-y-auto">
+            <div className="space-y-4">
+              {/* Drawer Header with Close Button */}
+              <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+                <span className="text-base font-bold text-[#0D254E]">Navigation</span>
+                <button
+                  type="button"
+                  onClick={() => setIsMobileSidebarOpen(false)}
+                  className="p-1.5 text-slate-500 hover:text-slate-800 rounded-md hover:bg-slate-200 transition cursor-pointer"
+                  aria-label="Close sidebar"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Navigation Items */}
+              <div className="space-y-1">
+                {sidebarItems.map((item) => {
+                  const isActive = item.isActive;
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      onClick={() => setIsMobileSidebarOpen(false)}
+                      className={`flex items-center justify-between px-3.5 py-2.5 rounded-md text-sm font-medium transition-all duration-150 group cursor-pointer ${
+                        isActive
+                          ? "bg-[#0D254E] text-white shadow-xs font-semibold"
+                          : "text-[#0D254E] hover:bg-slate-200/60"
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div
+                          className={`w-5 h-5 flex-shrink-0 ${
+                            isActive ? "text-white" : "text-[#0D254E]"
+                          }`}
+                        >
+                          {item.icon}
+                        </div>
+                        <span className="truncate">{item.name}</span>
+                      </div>
+
+                      {item.badge !== undefined && (
+                        <span className="text-[11px] font-bold min-w-[20px] h-5 px-1.5 rounded-full bg-[#FDF3E7] text-[#8C531B] inline-flex items-center justify-center shrink-0">
+                          {item.badge}
+                        </span>
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Need help box */}
+            <div className="mt-8 pt-4">
+              <div className="bg-[#FBF9F6] border border-slate-200/80 rounded-md p-4 text-left">
+                <h4 className="text-sm font-bold text-[#0D254E]">Need help?</h4>
+                <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                  Our team is here to help you complete your application.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsMobileSidebarOpen(false);
+                    setIsSupportModalOpen(true);
+                  }}
+                  className="mt-3.5 w-full bg-white hover:bg-slate-50 border border-slate-300 text-[#0D254E] text-xs font-semibold py-2.5 px-3 rounded-md shadow-2xs transition duration-150 cursor-pointer flex items-center justify-center gap-2"
+                >
+                  <svg className="w-4 h-4 text-[#0D254E]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 14h3a2 2 0 012 2v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-7a9 9 0 0118 0v7a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3" />
+                  </svg>
+                  <span>Contact Support</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
