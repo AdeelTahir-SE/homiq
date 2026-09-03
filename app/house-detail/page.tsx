@@ -90,16 +90,34 @@ const GALLERY_IMAGES = [
 ];
 
 const AMENITIES_LIST = [
-  { name: "Open Floor Plan", icon: "/icons/house-detail/open-floor-plan-icon.png" },
-  { name: "Chef's Kitchen", icon: "/icons/house-detail/chef's-kitchen-icon.png" },
+  {
+    name: "Open Floor Plan",
+    icon: "/icons/house-detail/open-floor-plan-icon.png",
+  },
+  {
+    name: "Chef's Kitchen",
+    icon: "/icons/house-detail/chef's-kitchen-icon.png",
+  },
   { name: "Smart Home", icon: "/icons/house-detail/smart-home-icon.png" },
   { name: "Primary Suite", icon: "/icons/house-detail/primary-suite-icon.png" },
-  { name: "Private Backyard", icon: "/icons/house-detail/private-backyard-icon.png" },
+  {
+    name: "Private Backyard",
+    icon: "/icons/house-detail/private-backyard-icon.png",
+  },
   { name: "2-Car Garage", icon: "/icons/house-detail/car-garbage-icon.png" },
   { name: "Walk-in Closets", icon: "/icons/house-detail/closets-icon.png" },
-  { name: "Energy Efficient", icon: "/icons/house-detail/energy-efficient-icon.png" },
-  { name: "Washer & Dryer", icon: "/icons/house-detail/washer-and-dryer-icon.png" },
-  { name: "High-Speed Internet", icon: "/icons/house-detail/high-speed-internet-icon.png" },
+  {
+    name: "Energy Efficient",
+    icon: "/icons/house-detail/energy-efficient-icon.png",
+  },
+  {
+    name: "Washer & Dryer",
+    icon: "/icons/house-detail/washer-and-dryer-icon.png",
+  },
+  {
+    name: "High-Speed Internet",
+    icon: "/icons/house-detail/high-speed-internet-icon.png",
+  },
 ];
 
 const HIGHLIGHTS = [
@@ -129,17 +147,13 @@ export default function HouseDetailPage() {
 
   const prevImage = () => {
     setCurrentImageIndex(
-      (prev) => (prev - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length
+      (prev) => (prev - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length,
     );
   };
 
-  const tabs: Array<"Overview" | "Details" | "Amenities" | "Neighborhood" | "Floor Plan"> = [
-    "Overview",
-    "Details",
-    "Amenities",
-    "Neighborhood",
-    "Floor Plan",
-  ];
+  const tabs: Array<
+    "Overview" | "Details" | "Amenities" | "Neighborhood" | "Floor Plan"
+  > = ["Overview", "Details", "Amenities", "Neighborhood", "Floor Plan"];
 
   const handleShare = () => {
     if (navigator.clipboard) {
@@ -214,12 +228,16 @@ export default function HouseDetailPage() {
                   type="button"
                   onClick={() => setIsSaved(!isSaved)}
                   className={`flex items-center gap-2 text-sm font-medium transition cursor-pointer ${
-                    isSaved ? "text-red-500 font-semibold" : "text-slate-700 hover:text-[#0a192f]"
+                    isSaved
+                      ? "text-red-500 font-semibold"
+                      : "text-slate-700 hover:text-[#0a192f]"
                   }`}
                 >
                   <svg
                     className={`w-4 h-4 transition-colors ${
-                      isSaved ? "fill-red-500 stroke-red-500" : "stroke-slate-700 fill-none"
+                      isSaved
+                        ? "fill-red-500 stroke-red-500"
+                        : "stroke-slate-700 fill-none"
                     }`}
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -349,7 +367,12 @@ export default function HouseDetailPage() {
                     <div className="space-y-8">
                       {/* Property Description */}
                       <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                        Modern design meets Hill Country charm in this stunning 4-bedroom, 3.5-bath home in one of Austin&apos;s most desirable neighborhoods. With an open-concept layout, high-end finishes, and a private outdoor space, this home is perfect for both entertaining and everyday living.
+                        Modern design meets Hill Country charm in this stunning
+                        4-bedroom, 3.5-bath home in one of Austin&apos;s most
+                        desirable neighborhoods. With an open-concept layout,
+                        high-end finishes, and a private outdoor space, this
+                        home is perfect for both entertaining and everyday
+                        living.
                       </p>
 
                       {/* Amenities Section */}
@@ -420,38 +443,56 @@ export default function HouseDetailPage() {
                         <div className="space-y-3">
                           <div className="flex justify-between text-sm py-1 border-b border-slate-100">
                             <span className="text-slate-500">Heating</span>
-                            <span className="font-semibold text-slate-800">Central, Heat Pump</span>
+                            <span className="font-semibold text-slate-800">
+                              Central, Heat Pump
+                            </span>
                           </div>
                           <div className="flex justify-between text-sm py-1 border-b border-slate-100">
                             <span className="text-slate-500">Cooling</span>
-                            <span className="font-semibold text-slate-800">Central Air, Dual Zone</span>
+                            <span className="font-semibold text-slate-800">
+                              Central Air, Dual Zone
+                            </span>
                           </div>
                           <div className="flex justify-between text-sm py-1 border-b border-slate-100">
                             <span className="text-slate-500">Foundation</span>
-                            <span className="font-semibold text-slate-800">Slab</span>
+                            <span className="font-semibold text-slate-800">
+                              Slab
+                            </span>
                           </div>
                           <div className="flex justify-between text-sm py-1 border-b border-slate-100">
                             <span className="text-slate-500">Roof</span>
-                            <span className="font-semibold text-slate-800">Architectural Shingle</span>
+                            <span className="font-semibold text-slate-800">
+                              Architectural Shingle
+                            </span>
                           </div>
                         </div>
 
                         <div className="space-y-3">
                           <div className="flex justify-between text-sm py-1 border-b border-slate-100">
                             <span className="text-slate-500">Stories</span>
-                            <span className="font-semibold text-slate-800">2 Levels</span>
+                            <span className="font-semibold text-slate-800">
+                              2 Levels
+                            </span>
                           </div>
                           <div className="flex justify-between text-sm py-1 border-b border-slate-100">
                             <span className="text-slate-500">Annual Taxes</span>
-                            <span className="font-semibold text-slate-800">$10,420 (2025)</span>
+                            <span className="font-semibold text-slate-800">
+                              $10,420 (2025)
+                            </span>
                           </div>
                           <div className="flex justify-between text-sm py-1 border-b border-slate-100">
-                            <span className="text-slate-500">School District</span>
-                            <span className="font-semibold text-slate-800">Eanes ISD</span>
+                            <span className="text-slate-500">
+                              School District
+                            </span>
+                            <span className="font-semibold text-slate-800">
+                              Eanes ISD
+                            </span>
                           </div>
                           <div className="flex justify-between text-sm py-1 border-b border-slate-100">
                             <span className="text-slate-500">Security</span>
-                            <span className="font-semibold text-slate-800">Smart Cameras & Ring</span>
+                            <span className="font-semibold text-slate-800">
+                              Smart Cameras & Ring
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -466,11 +507,42 @@ export default function HouseDetailPage() {
                       </h3>
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         {[
-                          { category: "Interior", items: ["Open Floor Plan", "Chef's Kitchen", "Quartz Countertops", "Walk-in Closets", "Wine Cellar", "Custom Cabinetry"] },
-                          { category: "Exterior", items: ["Private Backyard", "Covered Patio", "Outdoor Grill Hookup", "Lush Landscaping", "Automatic Sprinklers"] },
-                          { category: "Utilities & Tech", items: ["Smart Home Automation", "Energy Efficient HVAC", "EV Charger In Garage", "High-Speed Fiber Ready", "Keyless Entry"] },
+                          {
+                            category: "Interior",
+                            items: [
+                              "Open Floor Plan",
+                              "Chef's Kitchen",
+                              "Quartz Countertops",
+                              "Walk-in Closets",
+                              "Wine Cellar",
+                              "Custom Cabinetry",
+                            ],
+                          },
+                          {
+                            category: "Exterior",
+                            items: [
+                              "Private Backyard",
+                              "Covered Patio",
+                              "Outdoor Grill Hookup",
+                              "Lush Landscaping",
+                              "Automatic Sprinklers",
+                            ],
+                          },
+                          {
+                            category: "Utilities & Tech",
+                            items: [
+                              "Smart Home Automation",
+                              "Energy Efficient HVAC",
+                              "EV Charger In Garage",
+                              "High-Speed Fiber Ready",
+                              "Keyless Entry",
+                            ],
+                          },
                         ].map((group) => (
-                          <div key={group.category} className="bg-white border border-slate-200 rounded-2xl p-5 space-y-3">
+                          <div
+                            key={group.category}
+                            className="bg-white border border-slate-200 rounded-2xl p-5 space-y-3"
+                          >
                             <h4 className="font-bold text-sm text-[#0a192f] border-b border-slate-100 pb-2">
                               {group.category}
                             </h4>
@@ -496,16 +568,28 @@ export default function HouseDetailPage() {
                       </h3>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div className="bg-white border border-slate-200 rounded-2xl p-4 text-center">
-                          <span className="text-3xl font-extrabold text-[#0a192f]">88/100</span>
-                          <p className="text-xs font-semibold text-slate-500 mt-1">Walk Score (Very Walkable)</p>
+                          <span className="text-3xl font-extrabold text-[#0a192f]">
+                            88/100
+                          </span>
+                          <p className="text-xs font-semibold text-slate-500 mt-1">
+                            Walk Score (Very Walkable)
+                          </p>
                         </div>
                         <div className="bg-white border border-slate-200 rounded-2xl p-4 text-center">
-                          <span className="text-3xl font-extrabold text-[#0a192f]">9/10</span>
-                          <p className="text-xs font-semibold text-slate-500 mt-1">Top Rated School Rating</p>
+                          <span className="text-3xl font-extrabold text-[#0a192f]">
+                            9/10
+                          </span>
+                          <p className="text-xs font-semibold text-slate-500 mt-1">
+                            Top Rated School Rating
+                          </p>
                         </div>
                         <div className="bg-white border border-slate-200 rounded-2xl p-4 text-center">
-                          <span className="text-3xl font-extrabold text-[#0a192f]">12 min</span>
-                          <p className="text-xs font-semibold text-slate-500 mt-1">Drive to Downtown Austin</p>
+                          <span className="text-3xl font-extrabold text-[#0a192f]">
+                            12 min
+                          </span>
+                          <p className="text-xs font-semibold text-slate-500 mt-1">
+                            Drive to Downtown Austin
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -528,9 +612,13 @@ export default function HouseDetailPage() {
                               className="object-contain"
                             />
                           </div>
-                          <h4 className="font-bold text-slate-800">2,850 Sq Ft – 2 Story Configuration</h4>
+                          <h4 className="font-bold text-slate-800">
+                            2,850 Sq Ft – 2 Story Configuration
+                          </h4>
                           <p className="text-xs text-slate-500 max-w-md">
-                            Main floor features open living, kitchen, dining, and primary suite. Upper level hosts 3 bedrooms, 2 bathrooms, and a media loft.
+                            Main floor features open living, kitchen, dining,
+                            and primary suite. Upper level hosts 3 bedrooms, 2
+                            bathrooms, and a media loft.
                           </p>
                         </div>
                       </div>
@@ -555,25 +643,41 @@ export default function HouseDetailPage() {
                         className="text-xs font-medium text-slate-500 hover:text-slate-800 transition inline-flex items-center gap-1 cursor-pointer"
                       >
                         <span>Est. $4,862/mo</span>
-                        <svg className="w-3.5 h-3.5 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                        <svg
+                          className="w-3.5 h-3.5 text-slate-400"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                            clipRule="evenodd"
+                          />
                         </svg>
                       </button>
 
                       {/* Mortgage Breakdown Tooltip */}
                       {showEstBreakdown && (
                         <div className="absolute right-0 sm:left-0 mt-2 w-64 bg-slate-900 text-white rounded-xl p-3.5 shadow-xl text-xs z-30 space-y-2">
-                          <p className="font-bold border-b border-slate-700 pb-1">Payment Breakdown</p>
+                          <p className="font-bold border-b border-slate-700 pb-1">
+                            Payment Breakdown
+                          </p>
                           <div className="flex justify-between">
-                            <span className="text-slate-300">Principal & Interest:</span>
+                            <span className="text-slate-300">
+                              Principal & Interest:
+                            </span>
                             <span className="font-medium">$3,840</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-slate-300">Property Taxes:</span>
+                            <span className="text-slate-300">
+                              Property Taxes:
+                            </span>
                             <span className="font-medium">$690</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-slate-300">Home Insurance:</span>
+                            <span className="text-slate-300">
+                              Home Insurance:
+                            </span>
                             <span className="font-medium">$247</span>
                           </div>
                           <div className="flex justify-between">
@@ -590,46 +694,102 @@ export default function HouseDetailPage() {
                     {/* Beds */}
                     <div className="flex flex-col items-center">
                       <div className="flex items-center gap-1.5">
-                        <svg className="w-4 h-4 text-[#0a192f]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 11V7a1 1 0 011-1h6a1 1 0 011 1v4M11 11V7a1 1 0 011-1h6a1 1 0 011 1v4M2 11h20M2 11v7M22 11v7M2 15h20" />
+                        <svg
+                          className="w-4 h-4 text-[#0a192f]"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={1.8}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3 11V7a1 1 0 011-1h6a1 1 0 011 1v4M11 11V7a1 1 0 011-1h6a1 1 0 011 1v4M2 11h20M2 11v7M22 11v7M2 15h20"
+                          />
                         </svg>
-                        <span className="text-sm font-bold text-[#0a192f]">4</span>
+                        <span className="text-sm font-bold text-[#0a192f]">
+                          4
+                        </span>
                       </div>
-                      <span className="text-[11px] text-slate-500 font-medium mt-0.5">Beds</span>
+                      <span className="text-[11px] text-slate-500 font-medium mt-0.5">
+                        Beds
+                      </span>
                     </div>
 
                     {/* Baths */}
                     <div className="flex flex-col items-center">
                       <div className="flex items-center gap-1.5">
-                        <svg className="w-4 h-4 text-[#0a192f]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M4 12h16a1 1 0 011 1v1a5 5 0 01-5 5H8a5 5 0 01-5-5v-1a1 1 0 011-1zm3-7a2 2 0 012 2v5H5V7a2 2 0 012-2z" />
+                        <svg
+                          className="w-4 h-4 text-[#0a192f]"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={1.8}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M4 12h16a1 1 0 011 1v1a5 5 0 01-5 5H8a5 5 0 01-5-5v-1a1 1 0 011-1zm3-7a2 2 0 012 2v5H5V7a2 2 0 012-2z"
+                          />
                         </svg>
-                        <span className="text-sm font-bold text-[#0a192f]">3.5</span>
+                        <span className="text-sm font-bold text-[#0a192f]">
+                          3.5
+                        </span>
                       </div>
-                      <span className="text-[11px] text-slate-500 font-medium mt-0.5">Baths</span>
+                      <span className="text-[11px] text-slate-500 font-medium mt-0.5">
+                        Baths
+                      </span>
                     </div>
 
                     {/* Sq Ft */}
                     <div className="flex flex-col items-center">
                       <div className="flex items-center gap-1.5">
-                        <svg className="w-4 h-4 text-[#0a192f]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
+                        <svg
+                          className="w-4 h-4 text-[#0a192f]"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={1.8}
+                        >
                           <rect x="3" y="3" width="18" height="18" rx="2" />
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 15l6-6m0 0h-4m4 0v4" />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M9 15l6-6m0 0h-4m4 0v4"
+                          />
                         </svg>
-                        <span className="text-sm font-bold text-[#0a192f]">2,850</span>
+                        <span className="text-sm font-bold text-[#0a192f]">
+                          2,850
+                        </span>
                       </div>
-                      <span className="text-[11px] text-slate-500 font-medium mt-0.5">Sq Ft</span>
+                      <span className="text-[11px] text-slate-500 font-medium mt-0.5">
+                        Sq Ft
+                      </span>
                     </div>
 
                     {/* Acres */}
                     <div className="flex flex-col items-center">
                       <div className="flex items-center gap-1.5">
-                        <svg className="w-4 h-4 text-[#0a192f]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 21h18M4 10h16v11H4V10zM3 10l9-7 9 7" />
+                        <svg
+                          className="w-4 h-4 text-[#0a192f]"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={1.8}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3 21h18M4 10h16v11H4V10zM3 10l9-7 9 7"
+                          />
                         </svg>
-                        <span className="text-sm font-bold text-[#0a192f]">0.24</span>
+                        <span className="text-sm font-bold text-[#0a192f]">
+                          0.24
+                        </span>
                       </div>
-                      <span className="text-[11px] text-slate-500 font-medium mt-0.5">Acres</span>
+                      <span className="text-[11px] text-slate-500 font-medium mt-0.5">
+                        Acres
+                      </span>
                     </div>
                   </div>
 
@@ -641,11 +801,15 @@ export default function HouseDetailPage() {
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-slate-500">Property Type</span>
-                      <span className="font-bold text-[#0a192f]">Single Family Home</span>
+                      <span className="font-bold text-[#0a192f]">
+                        Single Family Home
+                      </span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-slate-500">MLS ID</span>
-                      <span className="font-bold text-[#0a192f]">ATX-7845123</span>
+                      <span className="font-bold text-[#0a192f]">
+                        ATX-7845123
+                      </span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-slate-500">HOA</span>
@@ -688,13 +852,19 @@ export default function HouseDetailPage() {
                       className="flex items-center gap-3 text-slate-700 hover:text-[#0a192f] transition cursor-pointer"
                     >
                       <div className="relative w-4 h-4 flex-shrink-0">
-                        <Image
-                          src="/icons/house-detail/phone-icon.png"
-                          alt="Phone"
-                          fill
-                          sizes="16px"
-                          className="object-contain"
-                        />
+                        <svg
+                          className="w-3.5 h-3.5 text-slate-500"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                          />
+                        </svg>
                       </div>
                       <span>(512) 555-0198</span>
                     </a>
@@ -704,13 +874,19 @@ export default function HouseDetailPage() {
                       className="flex items-center gap-3 text-slate-700 hover:text-[#0a192f] transition cursor-pointer truncate"
                     >
                       <div className="relative w-4 h-4 flex-shrink-0">
-                        <Image
-                          src="/icons/house-detail/mail-icon.png"
-                          alt="Email"
-                          fill
-                          sizes="16px"
-                          className="object-contain"
-                        />
+                        <svg
+                          className="w-3.5 h-3.5 text-slate-500"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                          />
+                        </svg>
                       </div>
                       <span className="truncate">emma.clark@homiq.com</span>
                     </a>
@@ -744,7 +920,8 @@ export default function HouseDetailPage() {
             {/* Bottom Disclaimer Footer */}
             <div className="pt-10 pb-6 text-center border-t border-slate-200/60 mt-8">
               <p className="text-xs text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                All information is deemed reliable but not guaranteed. Verify all details with a licensed real estate professional.
+                All information is deemed reliable but not guaranteed. Verify
+                all details with a licensed real estate professional.
               </p>
             </div>
           </div>
@@ -777,8 +954,18 @@ export default function HouseDetailPage() {
       {/* Share Toast Modal */}
       {isShareModalOpen && (
         <div className="fixed bottom-6 right-6 bg-[#0a192f] text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 z-50 text-sm font-medium animate-fade-in">
-          <svg className="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          <svg
+            className="w-5 h-5 text-emerald-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
           </svg>
           <span>Link copied to clipboard!</span>
         </div>
@@ -796,16 +983,30 @@ export default function HouseDetailPage() {
               }}
               className="absolute right-4 top-4 text-slate-400 hover:text-slate-700 cursor-pointer p-1"
             >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
 
             {!tourBooked ? (
               <>
                 <div>
-                  <h3 className="text-lg font-bold text-[#0a192f]">Schedule a Private Tour</h3>
-                  <p className="text-xs text-slate-500 mt-1">1234 Maple Ridge Drive • Host: Emma Clark</p>
+                  <h3 className="text-lg font-bold text-[#0a192f]">
+                    Schedule a Private Tour
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-1">
+                    1234 Maple Ridge Drive • Host: Emma Clark
+                  </p>
                 </div>
 
                 <div className="space-y-3.5 text-sm">
@@ -875,14 +1076,27 @@ export default function HouseDetailPage() {
             ) : (
               <div className="text-center py-4 space-y-4">
                 <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5 13l4 4L19 7"
+                    />
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-base font-bold text-[#0a192f]">Tour Request Confirmed!</h4>
+                  <h4 className="text-base font-bold text-[#0a192f]">
+                    Tour Request Confirmed!
+                  </h4>
                   <p className="text-xs text-slate-500 mt-1">
-                    Emma Clark has been notified for {tourDate} at {tourTime}. You will receive a calendar invitation shortly.
+                    Emma Clark has been notified for {tourDate} at {tourTime}.
+                    You will receive a calendar invitation shortly.
                   </p>
                 </div>
                 <button
