@@ -185,17 +185,13 @@ export default function AgentSidebar({
 
       {/* HOMIQ Pro Card */}
       <div className="mt-8 pt-4">
-        <div className="bg-[#F8F5F2] border border-[#eddcd0] rounded-2xl p-4 text-left relative overflow-hidden shadow-2xs">
+        <div className="bg-[#F8F5F2] border border-[#eddcd0] rounded-md p-4 text-left relative overflow-hidden shadow-2xs">
           <div className="flex items-center gap-2">
-            <div className="relative w-4 h-4 flex-shrink-0">
-              <Image
-                src="/icons/agent-sidebar-icons/homiq-pro- icon.png"
-                alt="HOMIQ Pro"
-                fill
-                sizes="16px"
-                className="object-contain"
-              />
-            </div>
+             <div className="text-[#d99738] flex-shrink-0">
+                <svg className="w-4.5 h-4.5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z" />
+                </svg>
+              </div>
             <h4 className="text-xs font-bold text-[#0D2449]">HOMIQ Pro</h4>
           </div>
 
@@ -210,7 +206,7 @@ export default function AgentSidebar({
                 ? onUpgradePro
                 : () => alert("HOMIQ Pro upgrade modal opened!")
             }
-            className="mt-3 w-full bg-white hover:bg-[#fefaf4] border border-[#d99738]/60 text-[#b45309] text-xs font-bold py-2 px-3 rounded-xl shadow-2xs transition duration-150 cursor-pointer text-center"
+            className="mt-3 w-full bg-white hover:bg-[#fefaf4] border border-[#d99738]/60 text-[#b45309] text-xs font-bold py-2 px-3 rounded-md shadow-2xs transition duration-150 cursor-pointer text-center"
           >
             Upgrade Now
           </button>
