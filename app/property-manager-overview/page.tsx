@@ -126,6 +126,7 @@ export default function PropertyManagerOverviewPage() {
   const [selectedDate, setSelectedDate] = useState("May 13, 2024");
   const [activeMaintenanceTab, setActiveMaintenanceTab] = useState<"all" | "open" | "in_progress" | "closed">("open");
   const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [taskTitle, setTaskTitle] = useState("");
   const [taskProperty, setTaskProperty] = useState("Maple Ridge Apartments");
   const [taskDate, setTaskDate] = useState("2024-05-14");
@@ -150,34 +151,51 @@ export default function PropertyManagerOverviewPage() {
 
   return (
     <div className="min-h-screen bg-white text-[#0a192f] flex font-sans">
-      {/* Property Manager Sidebar */}
-      <PropertyManagerSidebar activeItem="Overview" />
+      {/* Property Manager Sidebar (Desktop + Mobile Drawer) */}
+      <PropertyManagerSidebar
+        activeItem="Overview"
+        mobileOpen={isMobileMenuOpen}
+        onMobileClose={() => setIsMobileMenuOpen(false)}
+      />
 
       {/* Main Content Workspace */}
       <div className="flex-1 flex flex-col min-w-0 bg-white">
         {/* Top Header Bar */}
-        <header className="h-16 bg-white border-b border-slate-200/90 px-4 sm:px-6 lg:px-8 flex items-center justify-end gap-3 sm:gap-6 sticky top-0 z-40">
-          <div className="flex items-center justify-end gap-3 sm:gap-6 flex-1 max-w-full">
+        <header className="h-16 bg-white border-b border-slate-200/90 px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2.5 sm:gap-6 sticky top-0 z-40">
+          {/* Mobile Hamburger Menu Button */}
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="lg:hidden p-1.5 text-slate-700 hover:text-[#0a192f] hover:bg-slate-100 rounded-md transition cursor-pointer shrink-0"
+            aria-label="Open navigation menu"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+
+          {/* Right-aligned Header Elements */}
+          <div className="flex items-center justify-end gap-2.5 sm:gap-6 flex-1 max-w-full">
             {/* Search Input (Aligned to Right) */}
-            <div className="relative w-full max-w-[170px] sm:max-w-xs md:max-w-sm">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+            <div className="relative w-full max-w-[150px] xs:max-w-[190px] sm:max-w-xs md:max-w-sm">
+              <div className="absolute inset-y-0 left-0 pl-2.5 sm:pl-3.5 flex items-center pointer-events-none text-slate-400">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
               <input
                 type="text"
-                placeholder="Search properties, tenants, leases..."
+                placeholder="Search properties..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-1.5 sm:py-2 bg-white border border-slate-200 rounded-md text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-hidden focus:border-slate-300 focus:ring-1 focus:ring-slate-200 transition"
+                className="w-full pl-8 sm:pl-10 pr-2.5 sm:pr-4 py-1.5 sm:py-2 bg-white border border-slate-200 rounded-md text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-hidden focus:border-slate-300 focus:ring-1 focus:ring-slate-200 transition"
               />
             </div>
 
             {/* Bell Notification */}
             <button
               type="button"
-              className="relative p-1.5 text-slate-600 hover:text-[#0a192f] transition cursor-pointer flex-shrink-0"
+              className="relative p-1.5 text-slate-600 hover:text-[#0a192f] transition cursor-pointer shrink-0"
               aria-label="Notifications"
             >
               <svg className="w-5.5 h-5.5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6}>
@@ -191,7 +209,7 @@ export default function PropertyManagerOverviewPage() {
             {/* Mail Icon */}
             <button
               type="button"
-              className="p-1.5 text-slate-600 hover:text-[#0a192f] transition cursor-pointer flex-shrink-0"
+              className="p-1.5 text-slate-600 hover:text-[#0a192f] transition cursor-pointer shrink-0"
               aria-label="Messages"
             >
               <svg className="w-5.5 h-5.5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6}>
@@ -200,8 +218,8 @@ export default function PropertyManagerOverviewPage() {
             </button>
 
             {/* Profile */}
-            <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0 pl-1">
-              <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-slate-200 flex-shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0 pl-1">
+              <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-slate-200 shrink-0">
                 <Image
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80"
                   alt="Daniel Carter"
@@ -224,30 +242,30 @@ export default function PropertyManagerOverviewPage() {
         </header>
 
         {/* Scrollable Main Body */}
-        <main className="p-4 sm:p-5 lg:p-6 space-y-4 sm:space-y-5 overflow-y-auto bg-white">
+        <main className="p-3.5 sm:p-5 lg:p-6 space-y-4 sm:space-y-5 overflow-y-auto bg-white">
           {/* Welcome Header with Actions */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0a192f] tracking-tight">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#0a192f] tracking-tight">
                 Welcome back, Daniel 👋
               </h1>
-              <p className="text-sm text-slate-500 mt-0.5">
+              <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
                 Here&apos;s what&apos;s happening with your portfolio today.
               </p>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5 sm:gap-3">
               {/* Date Filter */}
               <div className="relative">
                 <button
                   type="button"
                   className="bg-white hover:bg-slate-50 border border-slate-200 rounded-md px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs font-semibold text-slate-700 flex items-center gap-2 shadow-2xs transition cursor-pointer"
                 >
-                  <svg className="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <svg className="w-4 h-4 text-slate-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  <span>{selectedDate}</span>
-                  <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <span className="truncate">{selectedDate}</span>
+                  <svg className="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
@@ -257,7 +275,7 @@ export default function PropertyManagerOverviewPage() {
               <button
                 type="button"
                 onClick={() => setIsAddTaskModalOpen(true)}
-                className="bg-[#13233c] hover:bg-[#0c1728] text-white text-xs font-semibold px-3.5 py-2 sm:px-4 sm:py-2 rounded-md flex items-center gap-1.5 shadow-xs transition cursor-pointer"
+                className="bg-[#13233c] hover:bg-[#0c1728] text-white text-xs font-semibold px-3 py-1.5 sm:px-4 sm:py-2 rounded-md flex items-center gap-1.5 shadow-xs transition cursor-pointer shrink-0"
               >
                 <span className="text-sm leading-none font-bold">+</span>
                 <span>Add Task</span>
@@ -269,7 +287,7 @@ export default function PropertyManagerOverviewPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-3.5">
             {/* Total Properties */}
             <div className="bg-white rounded-md border border-slate-200 p-3.5 sm:p-4 shadow-2xs flex items-center gap-3 min-w-0">
-              <div className="relative w-9 h-9 sm:w-10 sm:h-10 flex-shrink-0">
+              <div className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0">
                 <Image
                   src="/icons/property-manager-overview-icons/total-properties.png"
                   alt="Total Properties"
@@ -289,7 +307,7 @@ export default function PropertyManagerOverviewPage() {
 
             {/* Total Units */}
             <div className="bg-white rounded-md border border-slate-200 p-3.5 sm:p-4 shadow-2xs flex items-center gap-3 min-w-0">
-              <div className="relative w-9 h-9 sm:w-10 sm:h-10 flex-shrink-0">
+              <div className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0">
                 <Image
                   src="/icons/property-manager-overview-icons/total-units.png"
                   alt="Total Units"
@@ -309,7 +327,7 @@ export default function PropertyManagerOverviewPage() {
 
             {/* Occupied Units */}
             <div className="bg-white rounded-md border border-slate-200 p-3.5 sm:p-4 shadow-2xs flex items-center gap-3 min-w-0">
-              <div className="relative w-9 h-9 sm:w-10 sm:h-10 flex-shrink-0">
+              <div className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0">
                 <Image
                   src="/icons/property-manager-overview-icons/occupied-units.png"
                   alt="Occupied Units"
@@ -331,7 +349,7 @@ export default function PropertyManagerOverviewPage() {
 
             {/* Rent Collected (May) */}
             <div className="bg-white rounded-md border border-slate-200 p-3.5 sm:p-4 shadow-2xs flex items-center gap-3 min-w-0">
-              <div className="relative w-9 h-9 sm:w-10 sm:h-10 flex-shrink-0">
+              <div className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0">
                 <Image
                   src="/icons/property-manager-overview-icons/rent-collection.png"
                   alt="Rent Collected"
@@ -351,7 +369,7 @@ export default function PropertyManagerOverviewPage() {
 
             {/* Outstanding Rent */}
             <div className="bg-white rounded-md border border-slate-200 p-3.5 sm:p-4 shadow-2xs flex items-center gap-3 min-w-0">
-              <div className="relative w-9 h-9 sm:w-10 sm:h-10 flex-shrink-0">
+              <div className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0">
                 <Image
                   src="/icons/property-manager-overview-icons/outstanding-rent.png"
                   alt="Outstanding Rent"
@@ -372,9 +390,9 @@ export default function PropertyManagerOverviewPage() {
 
           {/* 2. MAIN 2-COLUMN SECTION AFTER TOP 5 KPIS */}
           <div className="flex flex-col lg:flex-row gap-4 sm:gap-5 items-start">
-            {/* FIRST MAIN COLUMN (FLEX-1 EXPANDED WIDTH) */}
+            {/* FIRST MAIN COLUMN (FLEX-1 EXPANDED WIDTH ON DESKTOP, FULL WIDTH ON MOBILE/TABLET) */}
             <div className="flex-1 min-w-0 w-full space-y-4 sm:space-y-5">
-              {/* SUB-GRID: TWO COLUMNS */}
+              {/* SUB-GRID: TWO COLUMNS (SIDE-BY-SIDE ON TABLET/DESKTOP, STACKED ON MOBILE) */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                 {/* SUB-COLUMN 1: Unit Occupancy Overview & Rent Collection by Property */}
                 <div className="space-y-4 sm:space-y-5 min-w-0">
@@ -396,7 +414,7 @@ export default function PropertyManagerOverviewPage() {
                             {/* Background circle */}
                             <circle cx="50" cy="50" r="38" fill="transparent" stroke="#f1f5f9" strokeWidth="14" />
                             
-                            {/* Occupied: 83% (circumference ~ 238.76) */}
+                            {/* Occupied: 83% */}
                             <circle
                               cx="50"
                               cy="50"
@@ -449,7 +467,7 @@ export default function PropertyManagerOverviewPage() {
                           </div>
                         </div>
 
-                        {/* Legend breakdown with strict no-wrap values */}
+                        {/* Legend breakdown */}
                         <div className="space-y-1.5 flex-1 min-w-0 text-xs">
                           <div className="flex items-center justify-between gap-1.5">
                             <div className="flex items-center gap-1.5 min-w-0">
@@ -658,7 +676,7 @@ export default function PropertyManagerOverviewPage() {
                           </div>
                         </div>
 
-                        {/* Legend & Inset Box with strict no-wrap */}
+                        {/* Legend & Inset Box */}
                         <div className="space-y-2 flex-1 min-w-0 text-xs">
                           <div className="space-y-1.5">
                             <div className="flex items-center justify-between gap-1.5">
@@ -818,7 +836,7 @@ export default function PropertyManagerOverviewPage() {
                             src={unit.image}
                             alt={`${unit.property} - ${unit.unit}`}
                             fill
-                            sizes="(max-width: 768px) 100vw, 33vw"
+                            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                             className="object-cover group-hover:scale-105 transition-transform duration-300"
                           />
                         </div>
@@ -1022,7 +1040,7 @@ export default function PropertyManagerOverviewPage() {
       {/* Add Task Modal */}
       {isAddTaskModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-md max-w-md w-full p-6 shadow-xl border border-slate-200 space-y-4">
+          <div className="bg-white rounded-md max-w-md w-full p-5 sm:p-6 shadow-xl border border-slate-200 space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-base font-bold text-[#0a192f]">Add Property Task</h3>
               <button

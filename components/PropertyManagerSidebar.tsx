@@ -7,6 +7,8 @@ import Link from "next/link";
 interface PropertyManagerSidebarProps {
   activeItem?: string;
   className?: string;
+  mobileOpen?: boolean;
+  onMobileClose?: () => void;
 }
 
 interface SidebarItem {
@@ -124,26 +126,44 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
 export default function PropertyManagerSidebar({
   activeItem = "Overview",
   className = "",
+  mobileOpen = false,
+  onMobileClose,
 }: PropertyManagerSidebarProps) {
-  return (
-    <aside className={`w-64 flex-shrink-0 bg-[#FDFBFB] border-r border-[#ece5de] min-h-screen flex flex-col justify-between p-4 select-none ${className}`}>
+  const sidebarContent = (
+    <div className="flex flex-col justify-between h-full">
       {/* Brand Header & Navigation */}
       <div className="space-y-6">
-        <Link href="/property-manager-overview" className="flex items-center gap-2.5 px-3 py-1 group">
-          <div className="relative w-8 h-8 flex-shrink-0">
-            <Image
-              src="/logo.png"
-              alt="HOMIQ Logo"
-              fill
-              sizes="32px"
-              className="object-contain"
-              priority
-            />
-          </div>
-          <span className="text-xl font-bold tracking-wider text-[#0D254F]">
-            HOMIQ
-          </span>
-        </Link>
+        <div className="flex items-center justify-between px-3 py-1">
+          <Link href="/property-manager-overview" className="flex items-center gap-2.5 group">
+            <div className="relative w-8 h-8 flex-shrink-0">
+              <Image
+                src="/logo.png"
+                alt="HOMIQ Logo"
+                fill
+                sizes="32px"
+                className="object-contain"
+                priority
+              />
+            </div>
+            <span className="text-xl font-bold tracking-wider text-[#0D254F]">
+              HOMIQ
+            </span>
+          </Link>
+
+          {/* Close button for mobile */}
+          {onMobileClose && (
+            <button
+              type="button"
+              onClick={onMobileClose}
+              className="lg:hidden p-1.5 text-slate-500 hover:text-[#0D254F] rounded-md transition cursor-pointer"
+              aria-label="Close menu"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          )}
+        </div>
 
         {/* Navigation List */}
         <nav className="space-y-1">
@@ -155,6 +175,7 @@ export default function PropertyManagerSidebar({
               <Link
                 key={item.name}
                 href={item.href}
+                onClick={onMobileClose}
                 className={`flex items-center justify-between px-3.5 py-2.5 rounded-md text-sm font-semibold transition-all duration-150 group cursor-pointer ${
                   isActive
                     ? "bg-[#0D254F] text-white shadow-xs"
@@ -246,6 +267,31 @@ export default function PropertyManagerSidebar({
           </div>
         </div>
       </div>
-    </aside>
+    </div>
+  );
+
+  return (
+    <>
+      {/* Desktop Fixed Sidebar */}
+      <aside className={`hidden lg:flex w-64 flex-shrink-0 bg-[#FDFBFB] border-r border-[#ece5de] min-h-screen flex-col justify-between p-4 select-none ${className}`}>
+        {sidebarContent}
+      </aside>
+
+      {/* Mobile/Tablet Drawer Slide-out */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden flex">
+          {/* Backdrop overlay */}
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity"
+            onClick={onMobileClose}
+          />
+
+          {/* Drawer Panel */}
+          <aside className="relative w-72 max-w-[80vw] bg-[#FDFBFB] border-r border-[#ece5de] h-full flex flex-col justify-between p-4 overflow-y-auto shadow-2xl z-10 select-none">
+            {sidebarContent}
+          </aside>
+        </div>
+      )}
+    </>
   );
 }
