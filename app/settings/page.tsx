@@ -93,6 +93,7 @@ export default function SettingsPage() {
   const [newCardNumber, setNewCardNumber] = useState("");
   const [newCardExpiry, setNewCardExpiry] = useState("");
   const [newCardType, setNewCardType] = useState<"visa" | "mastercard" | "amex">("visa");
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   // Save changes handler
   const handleSaveChanges = (e: React.FormEvent) => {
@@ -136,14 +137,291 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-[#0a192f] flex flex-col font-sans">
+    <div className="min-h-screen bg-white text-[#0a192f] flex flex-col font-sans">
       {/* Top Navbar with Search, Notifications, Heart, and Olivia Avatar */}
       <Navbar activeTab="Resources" showSearch={true} />
 
+      {/* MOBILE / TABLET SIDEBAR DRAWER (< lg) */}
+      {isMobileSidebarOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden flex">
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
+            onClick={() => setIsMobileSidebarOpen(false)}
+            aria-hidden="true"
+          />
+
+          {/* Drawer Content */}
+          <div className="relative w-72 max-w-[85vw] bg-white h-full shadow-2xl flex flex-col justify-between p-5 z-10 overflow-y-auto animate-fade-in">
+            <div className="space-y-6">
+              {/* Header with Close Button */}
+              <div className="flex items-center justify-between px-3 pt-1 border-b border-slate-100 pb-3">
+                <span className="text-[11px] font-extrabold tracking-wider text-slate-400 uppercase">
+                  SETTINGS
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setIsMobileSidebarOpen(false)}
+                  className="p-1 rounded-md text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition cursor-pointer"
+                  aria-label="Close sidebar"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Menu Items List */}
+              <nav className="space-y-1">
+                {/* 1. Account Settings */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveTab("account");
+                    setIsMobileSidebarOpen(false);
+                  }}
+                  className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-md text-sm font-semibold transition-all duration-150 cursor-pointer text-left ${
+                    activeTab === "account"
+                      ? "bg-[#0E2551] text-white shadow-xs font-semibold"
+                      : "text-[#0E2551] hover:bg-slate-50"
+                  }`}
+                >
+                  <svg
+                    className={`w-5 h-5 flex-shrink-0 ${
+                      activeTab === "account" ? "text-white" : "text-[#0E2551]"
+                    }`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
+                  </svg>
+                  <span>Account Settings</span>
+                </button>
+
+                {/* 2. Notifications */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveTab("notifications");
+                    setIsMobileSidebarOpen(false);
+                  }}
+                  className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-md text-sm transition-all duration-150 cursor-pointer text-left ${
+                    activeTab === "notifications"
+                      ? "bg-[#0E2551] text-white font-semibold shadow-xs"
+                      : "text-[#0E2551] hover:bg-slate-50"
+                  }`}
+                >
+                  <svg
+                    className={`w-5 h-5 flex-shrink-0 ${
+                      activeTab === "notifications" ? "text-white" : "text-[#0E2551]"
+                    }`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={1.9}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                    />
+                  </svg>
+                  <span>Notifications</span>
+                </button>
+
+                {/* 3. Saved Searches & Alerts */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveTab("searches");
+                    setIsMobileSidebarOpen(false);
+                  }}
+                  className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-md text-sm transition-all duration-150 cursor-pointer text-left ${
+                    activeTab === "searches"
+                      ? "bg-[#0E2551] text-white font-semibold shadow-xs"
+                      : "text-[#0E2551] hover:bg-slate-50"
+                  }`}
+                >
+                  <svg
+                    className={`w-5 h-5 flex-shrink-0 ${
+                      activeTab === "searches" ? "text-white" : "text-[#0E2551]"
+                    }`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={1.9}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
+                  <span>Saved Searches & Alerts</span>
+                </button>
+
+                {/* 4. Privacy & Security */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveTab("privacy");
+                    setIsMobileSidebarOpen(false);
+                  }}
+                  className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-md text-sm transition-all duration-150 cursor-pointer text-left ${
+                    activeTab === "privacy"
+                      ? "bg-[#0E2551] text-white font-semibold shadow-xs"
+                      : "text-[#0E2551] hover:bg-slate-50"
+                  }`}
+                >
+                  <svg
+                    className={`w-5 h-5 flex-shrink-0 ${
+                      activeTab === "privacy" ? "text-white" : "text-[#0E2551]"
+                    }`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={1.9}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    />
+                  </svg>
+                  <span>Privacy & Security</span>
+                </button>
+
+                {/* 5. Payment & Billing */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveTab("billing");
+                    setIsMobileSidebarOpen(false);
+                  }}
+                  className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-md text-sm transition-all duration-150 cursor-pointer text-left ${
+                    activeTab === "billing"
+                      ? "bg-[#0E2551] text-white font-semibold shadow-xs"
+                      : "text-[#0E2551] hover:bg-slate-50"
+                  }`}
+                >
+                  <svg
+                    className={`w-5 h-5 flex-shrink-0 ${
+                      activeTab === "billing" ? "text-white" : "text-[#0E2551]"
+                    }`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={1.9}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                    />
+                  </svg>
+                  <span>Payment & Billing</span>
+                </button>
+
+                {/* 6. Manage Devices */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveTab("devices");
+                    setIsMobileSidebarOpen(false);
+                  }}
+                  className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-md text-sm transition-all duration-150 cursor-pointer text-left ${
+                    activeTab === "devices"
+                      ? "bg-[#0E2551] text-white font-semibold shadow-xs"
+                      : "text-[#0E2551] hover:bg-slate-50"
+                  }`}
+                >
+                  <svg
+                    className={`w-5 h-5 flex-shrink-0 ${
+                      activeTab === "devices" ? "text-white" : "text-[#0E2551]"
+                    }`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={1.9}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
+                  </svg>
+                  <span>Manage Devices</span>
+                </button>
+
+                {/* 7. Close Account */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveTab("close");
+                    setIsMobileSidebarOpen(false);
+                  }}
+                  className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-md text-sm transition-all duration-150 cursor-pointer text-left ${
+                    activeTab === "close"
+                      ? "bg-[#0E2551] text-white font-semibold shadow-xs"
+                      : "text-[#0E2551] hover:bg-slate-50"
+                  }`}
+                >
+                  <svg
+                    className={`w-5 h-5 flex-shrink-0 ${
+                      activeTab === "close" ? "text-white" : "text-[#0E2551]"
+                    }`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={1.9}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13 7a4 4 0 11-8 0 4 4 0 018 0zM9 14a6 6 0 00-6 6v1h12v-1a6 6 0 00-6-6zM18 10l4 4m0-4l-4 4"
+                    />
+                  </svg>
+                  <span>Close Account</span>
+                </button>
+              </nav>
+            </div>
+
+            {/* Bottom Need Help Box */}
+            <div className="mt-8 pt-4 border-t border-slate-100">
+              <div className="bg-[#FBF9F6] border border-slate-200/80 rounded-md p-4 text-left">
+                <h4 className="text-sm font-bold text-[#0E2551]">Need help?</h4>
+                <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                  Our support team is here to help you with any questions.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsMobileSidebarOpen(false);
+                    alert("Our support team is available 24/7. Chat initiated!");
+                  }}
+                  className="mt-3.5 w-full bg-white hover:bg-slate-50 border border-slate-300 text-[#0E2551] text-xs font-semibold py-2.5 px-3 rounded-md shadow-2xs transition duration-150 cursor-pointer flex items-center justify-center gap-2"
+                >
+                  <svg className="w-4 h-4 text-[#0E2551]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 14h3a2 2 0 012 2v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-7a9 9 0 0118 0v7a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3" />
+                  </svg>
+                  <span>Contact Support</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Main Layout Body: Left Sidebar + Content */}
       <div className="flex-1 flex flex-col lg:flex-row max-w-[1920px] w-full mx-auto">
-        {/* LEFT SIDEBAR: Settings Menu */}
-        <aside className="w-full lg:w-64 flex-shrink-0 bg-white border-r border-slate-200 p-5 flex flex-col justify-between select-none">
+        {/* LEFT SIDEBAR: Settings Menu (Desktop >= lg) */}
+        <aside className="hidden lg:flex w-64 flex-shrink-0 bg-white border-r border-slate-200 p-5 flex-col justify-between select-none">
           <div className="space-y-6">
             {/* Header label */}
             <div className="px-3 pt-1">
@@ -158,14 +436,16 @@ export default function SettingsPage() {
               <button
                 type="button"
                 onClick={() => setActiveTab("account")}
-                className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-150 cursor-pointer text-left ${
+                className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-md text-sm font-semibold transition-all duration-150 cursor-pointer text-left ${
                   activeTab === "account"
-                    ? "bg-[#0a192f] text-white shadow-sm"
-                    : "text-slate-600 hover:text-[#0a192f] hover:bg-slate-50"
+                    ? "bg-[#0E2551] text-white shadow-xs font-semibold"
+                    : "text-[#0E2551] hover:bg-slate-50"
                 }`}
               >
                 <svg
-                  className="w-5 h-5 flex-shrink-0"
+                  className={`w-5 h-5 flex-shrink-0 ${
+                    activeTab === "account" ? "text-white" : "text-[#0E2551]"
+                  }`}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -184,14 +464,16 @@ export default function SettingsPage() {
               <button
                 type="button"
                 onClick={() => setActiveTab("notifications")}
-                className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-150 cursor-pointer text-left ${
+                className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-md text-sm transition-all duration-150 cursor-pointer text-left ${
                   activeTab === "notifications"
-                    ? "bg-[#0a192f] text-white font-semibold shadow-sm"
-                    : "text-slate-600 hover:text-[#0a192f] hover:bg-slate-50"
+                    ? "bg-[#0E2551] text-white font-semibold shadow-xs"
+                    : "text-[#0E2551] hover:bg-slate-50"
                 }`}
               >
                 <svg
-                  className="w-5 h-5 flex-shrink-0"
+                  className={`w-5 h-5 flex-shrink-0 ${
+                    activeTab === "notifications" ? "text-white" : "text-[#0E2551]"
+                  }`}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -210,14 +492,16 @@ export default function SettingsPage() {
               <button
                 type="button"
                 onClick={() => setActiveTab("searches")}
-                className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-150 cursor-pointer text-left ${
+                className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-md text-sm transition-all duration-150 cursor-pointer text-left ${
                   activeTab === "searches"
-                    ? "bg-[#0a192f] text-white font-semibold shadow-sm"
-                    : "text-slate-600 hover:text-[#0a192f] hover:bg-slate-50"
+                    ? "bg-[#0E2551] text-white font-semibold shadow-xs"
+                    : "text-[#0E2551] hover:bg-slate-50"
                 }`}
               >
                 <svg
-                  className="w-5 h-5 flex-shrink-0"
+                  className={`w-5 h-5 flex-shrink-0 ${
+                    activeTab === "searches" ? "text-white" : "text-[#0E2551]"
+                  }`}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -236,14 +520,16 @@ export default function SettingsPage() {
               <button
                 type="button"
                 onClick={() => setActiveTab("privacy")}
-                className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-150 cursor-pointer text-left ${
+                className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-md text-sm transition-all duration-150 cursor-pointer text-left ${
                   activeTab === "privacy"
-                    ? "bg-[#0a192f] text-white font-semibold shadow-sm"
-                    : "text-slate-600 hover:text-[#0a192f] hover:bg-slate-50"
+                    ? "bg-[#0E2551] text-white font-semibold shadow-xs"
+                    : "text-[#0E2551] hover:bg-slate-50"
                 }`}
               >
                 <svg
-                  className="w-5 h-5 flex-shrink-0"
+                  className={`w-5 h-5 flex-shrink-0 ${
+                    activeTab === "privacy" ? "text-white" : "text-[#0E2551]"
+                  }`}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -262,14 +548,16 @@ export default function SettingsPage() {
               <button
                 type="button"
                 onClick={() => setActiveTab("billing")}
-                className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-150 cursor-pointer text-left ${
+                className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-md text-sm transition-all duration-150 cursor-pointer text-left ${
                   activeTab === "billing"
-                    ? "bg-[#0a192f] text-white font-semibold shadow-sm"
-                    : "text-slate-600 hover:text-[#0a192f] hover:bg-slate-50"
+                    ? "bg-[#0E2551] text-white font-semibold shadow-xs"
+                    : "text-[#0E2551] hover:bg-slate-50"
                 }`}
               >
                 <svg
-                  className="w-5 h-5 flex-shrink-0"
+                  className={`w-5 h-5 flex-shrink-0 ${
+                    activeTab === "billing" ? "text-white" : "text-[#0E2551]"
+                  }`}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -288,14 +576,16 @@ export default function SettingsPage() {
               <button
                 type="button"
                 onClick={() => setActiveTab("devices")}
-                className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-150 cursor-pointer text-left ${
+                className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-md text-sm transition-all duration-150 cursor-pointer text-left ${
                   activeTab === "devices"
-                    ? "bg-[#0a192f] text-white font-semibold shadow-sm"
-                    : "text-slate-600 hover:text-[#0a192f] hover:bg-slate-50"
+                    ? "bg-[#0E2551] text-white font-semibold shadow-xs"
+                    : "text-[#0E2551] hover:bg-slate-50"
                 }`}
               >
                 <svg
-                  className="w-5 h-5 flex-shrink-0"
+                  className={`w-5 h-5 flex-shrink-0 ${
+                    activeTab === "devices" ? "text-white" : "text-[#0E2551]"
+                  }`}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -314,14 +604,16 @@ export default function SettingsPage() {
               <button
                 type="button"
                 onClick={() => setActiveTab("close")}
-                className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-150 cursor-pointer text-left ${
+                className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-md text-sm transition-all duration-150 cursor-pointer text-left ${
                   activeTab === "close"
-                    ? "bg-[#0a192f] text-white font-semibold shadow-sm"
-                    : "text-slate-600 hover:text-[#0a192f] hover:bg-slate-50"
+                    ? "bg-[#0E2551] text-white font-semibold shadow-xs"
+                    : "text-[#0E2551] hover:bg-slate-50"
                 }`}
               >
                 <svg
-                  className="w-5 h-5 flex-shrink-0"
+                  className={`w-5 h-5 flex-shrink-0 ${
+                    activeTab === "close" ? "text-white" : "text-[#0E2551]"
+                  }`}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -339,29 +631,19 @@ export default function SettingsPage() {
           </div>
 
           {/* Bottom Need Help Box */}
-          <div className="mt-8 pt-6">
-            <div className="bg-[#fcf8f2] border border-[#f5ebd9] rounded-2xl p-4 text-left">
-              <h4 className="text-sm font-bold text-[#0a192f]">Need help?</h4>
+          <div className="mt-8 pt-4">
+            <div className="bg-[#FBF9F6] border border-slate-200/80 rounded-md p-4 text-left">
+              <h4 className="text-sm font-bold text-[#0E2551]">Need help?</h4>
               <p className="text-xs text-slate-500 mt-1 leading-relaxed">
                 Our support team is here to help you with any questions.
               </p>
               <button
                 type="button"
                 onClick={() => alert("Our support team is available 24/7. Chat initiated!")}
-                className="mt-3.5 w-full bg-white hover:bg-slate-50 border border-slate-300/80 text-slate-800 text-xs font-semibold py-2.5 px-3 rounded-xl shadow-2xs transition duration-150 cursor-pointer flex items-center justify-center gap-2"
+                className="mt-3.5 w-full bg-white hover:bg-slate-50 border border-slate-300 text-[#0E2551] text-xs font-semibold py-2.5 px-3 rounded-md shadow-2xs transition duration-150 cursor-pointer flex items-center justify-center gap-2"
               >
-                <svg
-                  className="w-4 h-4 text-slate-600"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.829m-4.243 4.243a9 9 0 01-12.728 0m0 0l2.829-2.829m-2.829 2.829L3 21M8.464 8.464a5 5 0 000 7.072m0 0l2.829-2.829"
-                  />
+                <svg className="w-4 h-4 text-[#0E2551]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 14h3a2 2 0 012 2v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-7a9 9 0 0118 0v7a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3" />
                 </svg>
                 <span>Contact Support</span>
               </button>
@@ -370,34 +652,41 @@ export default function SettingsPage() {
         </aside>
 
         {/* RIGHT MAIN CONTENT AREA */}
-        <main className="flex-1 p-5 sm:p-7 lg:p-9 space-y-6 overflow-x-hidden">
+        <main className="flex-1 p-4 sm:p-7 lg:p-9 space-y-6 overflow-x-hidden">
           {/* Top Title & Security Header Card */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0a192f] tracking-tight">
-                Settings & Preferences
-              </h1>
-              <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                Manage your account, notifications, and payment preferences.
-              </p>
+            <div className="flex items-start sm:items-center gap-3">
+              {/* Mobile Sidebar Menu Button (< lg) */}
+              <button
+                type="button"
+                onClick={() => setIsMobileSidebarOpen(true)}
+                className="lg:hidden p-2 rounded-md border border-slate-200 text-[#0E2551] hover:bg-slate-50 transition cursor-pointer flex items-center justify-center flex-shrink-0 mt-0.5 sm:mt-0"
+                aria-label="Open settings navigation"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+              <div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0a192f] tracking-tight">
+                  Settings & Preferences
+                </h1>
+                <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                  Manage your account, notifications, and payment preferences.
+                </p>
+              </div>
             </div>
 
-            {/* Green Security Card */}
-            <div className="bg-white border border-slate-200/90 rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 shadow-2xs flex items-center gap-3.5 max-w-sm">
-              <div className="w-9 h-9 rounded-full bg-[#10b981] flex items-center justify-center flex-shrink-0 text-white shadow-xs">
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2.5}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                  />
-                </svg>
+            {/* Security Card */}
+            <div className="bg-white border border-slate-200/90 rounded-md px-4 py-3 sm:px-5 sm:py-3.5 shadow-2xs flex items-center gap-3.5 max-w-sm">
+              <div className="relative w-9 h-9 rounded-full overflow-hidden flex items-center justify-center flex-shrink-0 shadow-xs">
+                <Image
+                  src="/icons/settings-page-icons/secure-information.png"
+                  alt="Secure Information"
+                  fill
+                  sizes="36px"
+                  className="object-contain"
+                />
               </div>
               <div>
                 <h4 className="text-xs font-bold text-[#0a192f]">
@@ -410,12 +699,38 @@ export default function SettingsPage() {
             </div>
           </div>
 
+          {/* HORIZONTAL TAB NAVIGATION ON MOBILE & TABLET (< lg) */}
+          <div className="lg:hidden flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none -mx-4 px-4 sm:-mx-7 sm:px-7">
+            {[
+              { id: "account", label: "Account" },
+              { id: "notifications", label: "Notifications" },
+              { id: "searches", label: "Searches & Alerts" },
+              { id: "privacy", label: "Privacy" },
+              { id: "billing", label: "Payment & Billing" },
+              { id: "devices", label: "Devices" },
+              { id: "close", label: "Close Account" },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveTab(tab.id as any)}
+                className={`px-3.5 py-2 rounded-md text-xs font-semibold whitespace-nowrap transition cursor-pointer flex-shrink-0 border ${
+                  activeTab === tab.id
+                    ? "bg-[#0E2551] text-white border-[#0E2551] shadow-2xs"
+                    : "bg-white text-[#0E2551] border-slate-200 hover:bg-slate-50"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
           {/* 3 COLUMN MAIN GRID */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* ======================================================== */}
             {/* COLUMN 1: ACCOUNT & PROFILE */}
             {/* ======================================================== */}
-            <div className="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-2xs flex flex-col justify-between space-y-6">
+            <div className="bg-white rounded-md border border-slate-200/90 p-6 shadow-2xs flex flex-col justify-between space-y-6">
               <form onSubmit={handleSaveChanges} className="space-y-5">
                 {/* Section Header */}
                 <div>
@@ -484,7 +799,7 @@ export default function SettingsPage() {
                     type="text"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20 focus:border-slate-400 transition"
+                    className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-md text-xs sm:text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20 focus:border-slate-400 transition"
                   />
                 </div>
 
@@ -497,7 +812,7 @@ export default function SettingsPage() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20 focus:border-slate-400 transition"
+                    className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-md text-xs sm:text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20 focus:border-slate-400 transition"
                   />
                 </div>
 
@@ -510,7 +825,7 @@ export default function SettingsPage() {
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20 focus:border-slate-400 transition"
+                    className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-md text-xs sm:text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20 focus:border-slate-400 transition"
                   />
                 </div>
 
@@ -523,7 +838,7 @@ export default function SettingsPage() {
                     <select
                       value={location}
                       onChange={(e) => setLocation(e.target.value)}
-                      className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20 focus:border-slate-400 appearance-none cursor-pointer transition pr-8"
+                      className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-md text-xs sm:text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20 focus:border-slate-400 appearance-none cursor-pointer transition pr-8"
                     >
                       <option value="Austin, TX">Austin, TX</option>
                       <option value="Dallas, TX">Dallas, TX</option>
@@ -556,7 +871,7 @@ export default function SettingsPage() {
                     <button
                       type="button"
                       onClick={() => setRole("buyer")}
-                      className={`relative p-3 rounded-xl border text-center flex flex-col items-center justify-center gap-2 transition cursor-pointer ${
+                      className={`relative p-3 rounded-md border text-center flex flex-col items-center justify-center gap-2 transition cursor-pointer ${
                         role === "buyer"
                           ? "border-[#d99738] bg-[#fdfaf4]"
                           : "border-slate-200 bg-white hover:border-slate-300"
@@ -595,7 +910,7 @@ export default function SettingsPage() {
                     <button
                       type="button"
                       onClick={() => setRole("agent")}
-                      className={`relative p-3 rounded-xl border text-center flex flex-col items-center justify-center gap-2 transition cursor-pointer ${
+                      className={`relative p-3 rounded-md border text-center flex flex-col items-center justify-center gap-2 transition cursor-pointer ${
                         role === "agent"
                           ? "border-[#d99738] bg-[#fdfaf4]"
                           : "border-slate-200 bg-white hover:border-slate-300"
@@ -634,7 +949,7 @@ export default function SettingsPage() {
                     <button
                       type="button"
                       onClick={() => setRole("manager")}
-                      className={`relative p-3 rounded-xl border text-center flex flex-col items-center justify-center gap-2 transition cursor-pointer ${
+                      className={`relative p-3 rounded-md border text-center flex flex-col items-center justify-center gap-2 transition cursor-pointer ${
                         role === "manager"
                           ? "border-[#d99738] bg-[#fdfaf4]"
                           : "border-slate-200 bg-white hover:border-slate-300"
@@ -675,14 +990,14 @@ export default function SettingsPage() {
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full bg-[#0a192f] hover:bg-[#071325] text-white font-semibold py-3 px-4 rounded-xl text-sm shadow-xs transition duration-150 cursor-pointer"
+                    className="w-full bg-[#0a192f] hover:bg-[#071325] text-white font-semibold py-3 px-4 rounded-md text-sm shadow-xs transition duration-150 cursor-pointer"
                   >
                     Save Changes
                   </button>
                 </div>
 
                 {isSavedToast && (
-                  <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold rounded-xl text-center animate-fade-in">
+                  <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold rounded-md text-center animate-fade-in">
                     ✓ Profile preferences saved successfully!
                   </div>
                 )}
@@ -692,7 +1007,7 @@ export default function SettingsPage() {
             {/* ======================================================== */}
             {/* COLUMN 2: NOTIFICATION PREFERENCES */}
             {/* ======================================================== */}
-            <div className="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-2xs flex flex-col justify-between space-y-6">
+            <div className="bg-white rounded-md border border-slate-200/90 p-6 shadow-2xs flex flex-col justify-between space-y-6">
               <div className="space-y-5">
                 {/* Section Header */}
                 <div>
@@ -705,7 +1020,7 @@ export default function SettingsPage() {
                 </div>
 
                 {/* 1. EMAIL NOTIFICATIONS SUB-SECTION */}
-                <div className="space-y-4 pt-1">
+                <div className="space-y-4 pt-1 pb-4">
                   <div className="flex items-center justify-between pb-1 border-b border-slate-100">
                     <div className="flex items-center gap-2">
                       <svg
@@ -891,7 +1206,7 @@ export default function SettingsPage() {
                 </div>
 
                 {/* 2. PUSH NOTIFICATIONS SUB-SECTION */}
-                <div className="space-y-4 pt-4 border-t border-slate-100">
+                <div className="space-y-4 pt-5 pb-3 border-t border-slate-100">
                   <div className="flex items-center justify-between pb-1 border-b border-slate-100">
                     <div className="flex items-center gap-2">
                       <svg
@@ -1003,7 +1318,7 @@ export default function SettingsPage() {
             {/* ======================================================== */}
             {/* COLUMN 3: PAYMENT & BILLING */}
             {/* ======================================================== */}
-            <div className="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-2xs flex flex-col justify-between space-y-6">
+            <div className="bg-white rounded-md border border-slate-200/90 p-6 shadow-2xs flex flex-col justify-between space-y-6">
               <div className="space-y-6">
                 {/* Section Header */}
                 <div>
@@ -1024,7 +1339,7 @@ export default function SettingsPage() {
                     <button
                       type="button"
                       onClick={() => setIsAddPaymentModalOpen(true)}
-                      className="px-2.5 py-1 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 transition cursor-pointer flex items-center gap-1"
+                      className="px-2.5 py-1 bg-white hover:bg-slate-50 border border-slate-200 rounded-md text-xs font-semibold text-slate-700 transition cursor-pointer flex items-center gap-1"
                     >
                       <span className="text-sm leading-none">+</span>
                       <span>Add Payment Method</span>
@@ -1036,26 +1351,37 @@ export default function SettingsPage() {
                     {paymentMethods.map((pm) => (
                       <div
                         key={pm.id}
-                        className="flex items-center justify-between p-3 rounded-xl border border-slate-200/90 hover:border-slate-300 bg-white transition"
+                        className="flex items-center justify-between p-3 rounded-md border border-slate-200/90 hover:border-slate-300 bg-white transition"
                       >
                         <div className="flex items-center gap-3">
                           {/* Card Badge Logo */}
-                          <div className="w-11 h-7 rounded-md bg-slate-100 border border-slate-200/60 flex items-center justify-center flex-shrink-0">
+                          <div className="relative w-10 h-7 flex items-center justify-center flex-shrink-0">
                             {pm.type === "visa" && (
-                              <span className="text-[11px] font-black italic tracking-tighter text-[#1434cb]">
-                                VISA
-                              </span>
+                              <Image
+                                src="/icons/settings-page-icons/visa-icon.png"
+                                alt="Visa"
+                                fill
+                                sizes="40px"
+                                className="object-contain"
+                              />
                             )}
                             {pm.type === "mastercard" && (
-                              <div className="flex items-center -space-x-1.5">
-                                <span className="w-3.5 h-3.5 rounded-full bg-[#eb001b] inline-block opacity-90" />
-                                <span className="w-3.5 h-3.5 rounded-full bg-[#f79e1b] inline-block opacity-90" />
-                              </div>
+                              <Image
+                                src="/icons/settings-page-icons/master-icon.png"
+                                alt="Mastercard"
+                                fill
+                                sizes="40px"
+                                className="object-contain"
+                              />
                             )}
                             {pm.type === "amex" && (
-                              <span className="text-[9px] font-black text-[#006fcf] tracking-tighter px-0.5 bg-[#e0f2fe] rounded">
-                                AMEX
-                              </span>
+                              <Image
+                                src="/icons/settings-page-icons/amex-icon.png"
+                                alt="American Express"
+                                fill
+                                sizes="40px"
+                                className="object-contain"
+                              />
                             )}
                           </div>
 
@@ -1105,7 +1431,7 @@ export default function SettingsPage() {
                     <button
                       type="button"
                       onClick={() => setIsEditAddressModalOpen(true)}
-                      className="px-3 py-1 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 transition cursor-pointer"
+                      className="px-3 py-1 bg-white hover:bg-slate-50 border border-slate-200 rounded-md text-xs font-semibold text-slate-700 transition cursor-pointer"
                     >
                       Edit
                     </button>
@@ -1126,15 +1452,15 @@ export default function SettingsPage() {
                   </h3>
 
                   {/* Active Plan Box */}
-                  <div className="flex items-center justify-between p-3.5 rounded-xl border border-slate-200/90 bg-[#fdfaf4]">
+                  <div className="flex items-center justify-between p-3.5 rounded-md border border-slate-200/90 bg-[#fdfaf4]">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-[#fef3e2] flex items-center justify-center flex-shrink-0 text-[#d97706]">
+                      <div className="w-8 h-8 rounded-md bg-[#FEF3E2] border border-[#F6DEBA] flex items-center justify-center flex-shrink-0 text-[#D97706] shadow-2xs">
                         <svg
-                          className="w-4 h-4"
+                          className="w-4.5 h-4.5 text-[#D97706]"
                           viewBox="0 0 24 24"
                           fill="currentColor"
                         >
-                          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                          <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z" />
                         </svg>
                       </div>
                       <div>
@@ -1178,21 +1504,21 @@ export default function SettingsPage() {
 
                     <div className="space-y-2 text-xs">
                       {/* Row 1 */}
-                      <div className="flex items-center justify-between text-slate-600">
-                        <span className="text-slate-500">May 13, 2024</span>
-                        <span className="text-slate-700 font-medium">
+                      <div className="flex items-center justify-between text-slate-600 gap-2 text-[11px] sm:text-xs">
+                        <span className="text-slate-500 whitespace-nowrap">May 13, 2024</span>
+                        <span className="text-slate-700 font-medium truncate">
                           HOMIQ Premium – Monthly
                         </span>
-                        <span className="font-bold text-[#0a192f]">$9.99</span>
+                        <span className="font-bold text-[#0a192f] whitespace-nowrap">$9.99</span>
                       </div>
 
                       {/* Row 2 */}
-                      <div className="flex items-center justify-between text-slate-600">
-                        <span className="text-slate-500">Apr 13, 2024</span>
-                        <span className="text-slate-700 font-medium">
+                      <div className="flex items-center justify-between text-slate-600 gap-2 text-[11px] sm:text-xs">
+                        <span className="text-slate-500 whitespace-nowrap">Apr 13, 2024</span>
+                        <span className="text-slate-700 font-medium truncate">
                           HOMIQ Premium – Monthly
                         </span>
-                        <span className="font-bold text-[#0a192f]">$9.99</span>
+                        <span className="font-bold text-[#0a192f] whitespace-nowrap">$9.99</span>
                       </div>
                     </div>
                   </div>
@@ -1204,22 +1530,20 @@ export default function SettingsPage() {
           {/* ======================================================== */}
           {/* BOTTOM BANNER: PRIVACY & SECURITY STATEMENT */}
           {/* ======================================================== */}
-          <div className="w-full bg-[#fdfaf4] border border-[#f5ebd9] rounded-2xl p-4 sm:p-5 flex items-center gap-4">
-            <div className="w-9 h-9 rounded-xl bg-white border border-[#ebdcc4] flex items-center justify-center flex-shrink-0 text-slate-700 shadow-2xs">
-              <svg
-                className="w-5 h-5 text-slate-700"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.8}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                />
-              </svg>
-            </div>
+          <div className="w-full bg-[#fdfaf4] border border-[#f5ebd9] rounded-md p-4 sm:p-5 flex items-center gap-3.5">
+            <svg
+              className="w-5 h-5 text-slate-600 flex-shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1.8}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+              />
+            </svg>
             <div className="text-xs text-slate-600 leading-relaxed">
               <p className="font-medium text-slate-700">
                 We respect your privacy and will never share your personal information.
@@ -1249,7 +1573,7 @@ export default function SettingsPage() {
       {/* MODAL: ADD PAYMENT METHOD */}
       {isAddPaymentModalOpen && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200 animate-fade-in space-y-5">
+          <div className="bg-white rounded-md max-w-md w-full p-6 shadow-xl border border-slate-200 animate-fade-in space-y-5">
             <div className="flex items-center justify-between">
               <h3 className="text-base font-bold text-[#0a192f]">
                 Add Payment Method
@@ -1269,20 +1593,36 @@ export default function SettingsPage() {
                   Card Type
                 </label>
                 <div className="grid grid-cols-3 gap-2">
-                  {(["visa", "mastercard", "amex"] as const).map((type) => (
-                    <button
-                      key={type}
-                      type="button"
-                      onClick={() => setNewCardType(type)}
-                      className={`py-2 px-3 rounded-xl border text-xs font-bold uppercase transition cursor-pointer ${
-                        newCardType === type
-                          ? "border-[#0a192f] bg-[#0a192f] text-white"
-                          : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
-                      }`}
-                    >
-                      {type}
-                    </button>
-                  ))}
+                  {(["visa", "mastercard", "amex"] as const).map((type) => {
+                    const iconMap = {
+                      visa: "/icons/settings-page-icons/visa-icon.png",
+                      mastercard: "/icons/settings-page-icons/master-icon.png",
+                      amex: "/icons/settings-page-icons/amex-icon.png",
+                    };
+                    return (
+                      <button
+                        key={type}
+                        type="button"
+                        onClick={() => setNewCardType(type)}
+                        className={`py-2 px-2.5 rounded-md border text-xs font-bold uppercase transition cursor-pointer flex items-center justify-center gap-1.5 ${
+                          newCardType === type
+                            ? "border-[#0a192f] bg-[#0a192f] text-white"
+                            : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                        }`}
+                      >
+                        <div className="relative w-5 h-3.5 flex-shrink-0">
+                          <Image
+                            src={iconMap[type]}
+                            alt={type}
+                            fill
+                            sizes="20px"
+                            className="object-contain"
+                          />
+                        </div>
+                        <span className="truncate">{type === "mastercard" ? "Master" : type}</span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -1295,7 +1635,7 @@ export default function SettingsPage() {
                   placeholder="•••• •••• •••• 4242"
                   value={newCardNumber}
                   onChange={(e) => setNewCardNumber(e.target.value)}
-                  className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20"
+                  className="w-full px-3.5 py-2.5 border border-slate-200 rounded-md text-sm focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20"
                   required
                 />
               </div>
@@ -1310,7 +1650,7 @@ export default function SettingsPage() {
                     placeholder="MM/YY"
                     value={newCardExpiry}
                     onChange={(e) => setNewCardExpiry(e.target.value)}
-                    className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 rounded-md text-sm focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20"
                   />
                 </div>
                 <div>
@@ -1320,7 +1660,7 @@ export default function SettingsPage() {
                   <input
                     type="text"
                     placeholder="123"
-                    className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 rounded-md text-sm focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20"
                   />
                 </div>
               </div>
@@ -1329,13 +1669,13 @@ export default function SettingsPage() {
                 <button
                   type="button"
                   onClick={() => setIsAddPaymentModalOpen(false)}
-                  className="flex-1 py-2.5 border border-slate-200 text-slate-600 rounded-xl text-xs font-semibold hover:bg-slate-50 cursor-pointer"
+                  className="flex-1 py-2.5 border border-slate-200 text-slate-600 rounded-md text-xs font-semibold hover:bg-slate-50 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 py-2.5 bg-[#0a192f] text-white rounded-xl text-xs font-semibold hover:bg-[#071325] cursor-pointer"
+                  className="flex-1 py-2.5 bg-[#0a192f] text-white rounded-md text-xs font-semibold hover:bg-[#071325] cursor-pointer"
                 >
                   Save Card
                 </button>
@@ -1348,7 +1688,7 @@ export default function SettingsPage() {
       {/* MODAL: EDIT BILLING ADDRESS */}
       {isEditAddressModalOpen && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200 animate-fade-in space-y-5">
+          <div className="bg-white rounded-md max-w-md w-full p-6 shadow-xl border border-slate-200 animate-fade-in space-y-5">
             <div className="flex items-center justify-between">
               <h3 className="text-base font-bold text-[#0a192f]">
                 Edit Billing Address
@@ -1379,7 +1719,7 @@ export default function SettingsPage() {
                   onChange={(e) =>
                     setBillingAddress({ ...billingAddress, name: e.target.value })
                   }
-                  className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20"
+                  className="w-full px-3.5 py-2.5 border border-slate-200 rounded-md text-sm focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20"
                 />
               </div>
 
@@ -1393,7 +1733,7 @@ export default function SettingsPage() {
                   onChange={(e) =>
                     setBillingAddress({ ...billingAddress, street: e.target.value })
                   }
-                  className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20"
+                  className="w-full px-3.5 py-2.5 border border-slate-200 rounded-md text-sm focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20"
                 />
               </div>
 
@@ -1411,7 +1751,7 @@ export default function SettingsPage() {
                         cityStateZip: e.target.value,
                       })
                     }
-                    className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 rounded-md text-sm focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20"
                   />
                 </div>
                 <div>
@@ -1427,7 +1767,7 @@ export default function SettingsPage() {
                         country: e.target.value,
                       })
                     }
-                    className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 rounded-md text-sm focus:outline-hidden focus:ring-2 focus:ring-[#0a192f]/20"
                   />
                 </div>
               </div>
@@ -1436,13 +1776,13 @@ export default function SettingsPage() {
                 <button
                   type="button"
                   onClick={() => setIsEditAddressModalOpen(false)}
-                  className="flex-1 py-2.5 border border-slate-200 text-slate-600 rounded-xl text-xs font-semibold hover:bg-slate-50 cursor-pointer"
+                  className="flex-1 py-2.5 border border-slate-200 text-slate-600 rounded-md text-xs font-semibold hover:bg-slate-50 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 py-2.5 bg-[#0a192f] text-white rounded-xl text-xs font-semibold hover:bg-[#071325] cursor-pointer"
+                  className="flex-1 py-2.5 bg-[#0a192f] text-white rounded-md text-xs font-semibold hover:bg-[#071325] cursor-pointer"
                 >
                   Save Address
                 </button>

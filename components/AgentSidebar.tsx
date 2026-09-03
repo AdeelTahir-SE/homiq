@@ -153,9 +153,9 @@ export default function AgentSidebar({
               priority
             />
           </div>
-       <span className="text-xl sm:text-2xl font-semibold tracking-wide text-[#0a192f]">
-              HOMIQ
-            </span>
+       <span className="text-2xl sm:text-[26px] font-semibold tracking-wide text-[#0a192f]">
+                HOMIQ
+              </span>
         </Link>
 
         {/* Navigation List */}
