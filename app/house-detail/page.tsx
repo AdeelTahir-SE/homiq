@@ -733,9 +733,8 @@ export default function HouseDetailPage() {
 
                   {/* Schedule a Tour CTA Button */}
                   <div className="pt-2">
-                    <button
-                      type="button"
-                      onClick={() => setIsTourModalOpen(true)}
+                    <Link
+                      href="/schedule-tour"
                       className="w-full bg-[#0a192f] hover:bg-[#071325] text-white text-sm font-semibold py-3 px-4 rounded-xl flex items-center justify-center gap-2.5 shadow-sm transition duration-150 cursor-pointer active:scale-[0.99]"
                     >
                       <div className="relative w-4 h-4 flex-shrink-0 brightness-0 invert">
@@ -748,7 +747,7 @@ export default function HouseDetailPage() {
                         />
                       </div>
                       <span>Schedule a Tour</span>
-                    </button>
+                    </Link>
                     <p className="text-center text-xs text-slate-400 mt-2.5">
                       Usually responds in 1 hour
                     </p>

@@ -6,13 +6,16 @@ import Link from "next/link";
 
 interface NavbarProps {
   activeTab?: string;
+  showSearch?: boolean;
 }
 
-export default function Navbar({ activeTab = "Buy" }: NavbarProps) {
+export default function Navbar({ activeTab = "Buy", showSearch = false }: NavbarProps) {
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-  const navItems = ["Buy", "Rent", "Sell", "Invest", "Resources"];
+  const navItems = showSearch 
+    ? ["Buy", "Rent", "Sell", "Resources"] 
+    : ["Buy", "Rent", "Sell", "Invest", "Resources"];
 
   return (
     <header className="w-full bg-white border-b border-slate-200 sticky top-0 z-50">
@@ -37,7 +40,7 @@ export default function Navbar({ activeTab = "Buy" }: NavbarProps) {
           </Link>
 
           {/* Navigation Links moved more to the right */}
-          <nav className="hidden md:flex items-center gap-7 lg:gap-9 ml-12 lg:ml-16">
+          <nav className="hidden md:flex items-center gap-7 lg:gap-8 ml-10 lg:ml-12">
             {navItems.map((item) => {
               const isActive = activeTab === item;
               if (item === "Resources") {
@@ -46,7 +49,7 @@ export default function Navbar({ activeTab = "Buy" }: NavbarProps) {
                     <button
                       type="button"
                       onClick={() => setIsResourcesOpen(!isResourcesOpen)}
-                      className={`flex items-center gap-2 text-sm font-medium transition-colors cursor-pointer ${
+                      className={`flex items-center gap-1.5 text-sm font-medium transition-colors cursor-pointer ${
                         isActive
                           ? "text-[#0a192f] font-semibold"
                           : "text-slate-600 hover:text-[#0a192f]"
@@ -54,7 +57,7 @@ export default function Navbar({ activeTab = "Buy" }: NavbarProps) {
                     >
                       <span>{item}</span>
                       <svg
-                        className={`w-4 h-4 text-slate-500 transition-transform duration-150 ${
+                        className={`w-3.5 h-3.5 text-slate-500 transition-transform duration-150 ${
                           isResourcesOpen ? "rotate-180" : ""
                         }`}
                         fill="none"
@@ -113,8 +116,22 @@ export default function Navbar({ activeTab = "Buy" }: NavbarProps) {
           </nav>
         </div>
 
-        {/* Right Section: Notifications, Favorites & User Profile */}
+        {/* Right Section: Optional Search, Notifications, Favorites & User Profile */}
         <div className="flex items-center gap-3 sm:gap-5">
+          {showSearch && (
+            <div className="hidden lg:flex items-center relative w-72 xl:w-80">
+              <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+              <input
+                type="text"
+                placeholder="Search properties, neighborhoods..."
+                className="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg text-xs xl:text-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 transition"
+              />
+            </div>
+          )}
           {/* Notification Bell */}
           <button
             type="button"
